@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'base',
-    'registration'
+    'registration',
+    'event'
 ]
 
 MIDDLEWARE = [
