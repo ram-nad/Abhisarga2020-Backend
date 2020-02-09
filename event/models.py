@@ -21,6 +21,9 @@ class Event(models.Model):
                                      on_delete=models.SET_NULL)
     prizes = models.TextField(max_length=300)
     rules = models.TextField(max_length=1000)
+    extra_param_1_name = models.CharField(max_length=40, default="")
+    extra_param_2_name = models.CharField(max_length=40, default="")
+    extra_param_3_name = models.CharField(max_length=40, default="")
 
     def __str__(self):
         return self.name
