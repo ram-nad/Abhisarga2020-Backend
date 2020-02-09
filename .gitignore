@@ -11,3 +11,5 @@ media/profilepics/*
 
 Pipfile
 Pipfile.lock
+
+/.env
