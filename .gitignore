@@ -1,0 +1,13 @@
+db.sqlite3
+
+__pycache__
+
+.idea
+.vscode
+
+media/profilepics/*
+
+!media/profilepics/default_profile_pic.jpg
+
+Pipfile
+Pipfile.lock
