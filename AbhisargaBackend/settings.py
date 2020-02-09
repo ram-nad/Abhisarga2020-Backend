@@ -32,7 +32,7 @@ SECRET_KEY = 'g@x_&qztk87(r*2wfyb(b8em^yi#8nrrclgmsdcbsy7gwl__)*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else []
 
 # Application definition
 
@@ -134,3 +134,9 @@ AUTH_USER_MODEL = "registration.User"
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# MailGun Settings (API)
+
+MAILGUN_API_KEY = os.getenv('MAILGUN_API_KEY')
+MAILGUN_BASE_URL = os.getenv('MAILGUN_BASE_URL')
+MAILGUN_HOST_USER = os.getenv('MAILGUN_HOST_USER')
