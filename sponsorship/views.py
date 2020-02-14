@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import Sponsor
 
-# Create your views here.
+
+def sponsors_view(request):
+    s = Sponsor.objects.all().order_by('category__priority')
+    return render(request, 'sponsorship/sponsors.html', context={'sponsors': s})

@@ -5,7 +5,7 @@ __pycache__
 .idea
 .vscode
 
-media/profilepics/*
+media/
 
 !media/profilepics/default_profile_pic.jpg
 

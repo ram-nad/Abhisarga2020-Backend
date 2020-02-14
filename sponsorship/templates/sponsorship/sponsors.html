@@ -5,6 +5,13 @@
     <title>Sponsors @ Abhisarga 2020</title>
 </head>
 <body>
+{% for s in sponsors %}
+    <div>
+        <h1>{{ s.name }}</h1>
+        <h2>{{ s.category }}</h2>
+        <a href="{{ s.website }}"><img src="{{ s.logo.url }}" alt="{{ s.name }}"></a>
+    </div>
+{% endfor %}
 
 </body>
 </html>
