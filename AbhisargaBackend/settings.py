@@ -43,9 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'custom_admin',
     'base',
     'registration',
-    'event'
+    'event',
+    'payment',
+    'sponsorship',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +138,14 @@ AUTH_USER_MODEL = "registration.User"
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Paytm Settings
+
+PAYTM_MERCHANT_ID = os.getenv('PAYTM_MERCHANT_ID')
+PAYTM_SECRET_KEY = os.getenv('PAYTM_SECRET_KEY')
+PAYTM_WEBSITE = os.getenv('PAYTM_WEBSITE')
+PAYTM_CHANNEL_ID = os.getenv('PAYTM_CHANNEL_ID')
+PAYTM_INDUSTRY_TYPE_ID = os.getenv('PAYTM_INDUSTRY_TYPE_ID')
 
 # MailGun Settings (API)
 
