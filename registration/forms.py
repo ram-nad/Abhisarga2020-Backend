@@ -27,6 +27,8 @@ class ProfileForm(forms.Form):
             user.save()
             self.cleaned_data.pop('email')
             self.cleaned_data.pop('password')
+            if self.cleaned_data.get('profile_pic') is None:
+                self.cleaned_data.pop('profile_pic')
             profile = Profile(user=user, **self.cleaned_data)
             profile.full_clean()
             profile.save()
