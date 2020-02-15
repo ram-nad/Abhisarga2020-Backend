@@ -18,11 +18,12 @@ class ProfileForm(forms.Form):
 
     def save(self, commit=True):
         if self.is_valid():
-            user = User(email=self.email)
-            user.set_password(self.password)
+            print(self.errors)
+            user = User(email=self.cleaned_data.get('email'))
+            user.set_password(self.cleaned_data.get('password'))
             user.full_clean()
             user.save()
-            profile = Profile(user=user, **dict(self.cleaned_data.values()))
+            profile = Profile(user=user, **self.cleaned_data)
             profile.full_clean()
             profile.save()
             return profile

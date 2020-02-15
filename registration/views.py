@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import User, Profile
-from .forms import ProfileEditForm, ProfileForm
+
+from .forms import ProfileForm
 
 
 class ProfileCreateView(View):
@@ -14,5 +14,5 @@ class ProfileCreateView(View):
             form.save()
             return redirect('home')
         except:
-            print(form.errors)
-            return render(request, 'registration/signup.html', context={'form': ProfileForm(request.body).as_p()})
+            return render(request, 'registration/signup.html',
+                          context={'form': ProfileForm().as_p(), 'errors': form.errors})
