@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello World</title>
+    <script>
+        function init() {
+            gapi.load('auth2', function () {
+                auth2 = gapi.auth2.init({
+                    client_id: '{{ google_client_id }}',
+                    ux_mode: 'popup'
+                });
+                auth2.attachClickHandler(document.getElementById('google-sign-in-button'), {}, googleSignIn, signInFailed);
+            });
+        }
+
+        function googleSignIn(googleUser) {
+            let profile = googleUser.getBasicProfile();
+            console.log(profile.getName());
+            console.log(profile.getFamilyName());
+            console.log(profile.getEmail());
+            let form = document.getElementById('google-sign-in-submit-form');
+            form.getElementsByTagName('input')[1].value = googleUser.getAuthResponse().id_token;
+            form.submit();
+        }
+
+        function signInFailed(error) {
+            console.log(error);
+        }
+    </script>
+</head>
+<body>
+<button id="google-sign-in-button">Button</button>
+<form style="display: none" id="google-sign-in-submit-form" method="post" action="{% url 'google_log_in' %}">
+    {% csrf_token %}
+    <input type="hidden" value="" name="google-id-token">
+</form>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>
