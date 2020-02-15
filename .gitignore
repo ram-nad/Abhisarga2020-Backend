@@ -5,11 +5,11 @@ __pycache__
 .idea
 .vscode
 
-media/
+media/profilepics/*
 
 !media/profilepics/default_profile_pic.jpg
 
 Pipfile
 Pipfile.lock
 
-env
+.env

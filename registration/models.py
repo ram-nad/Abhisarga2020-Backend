@@ -79,7 +79,6 @@ class Profile(models.Model):
 class Volunteer(models.Model):
     profile = models.OneToOneField(to=Profile, related_name="volunteer", on_delete=models.CASCADE)
     role = models.CharField(max_length=50)
-    description = models.TextField(max_length=100)
     fb = models.URLField(verbose_name="Facebook Profile", blank=True)
     linkedin = models.URLField(verbose_name="LinkedIn Profile", blank=True)
     insta = models.URLField(verbose_name="Instagram Profile", blank=True)
