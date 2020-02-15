@@ -10,7 +10,7 @@ class Category(models.Model):
 
 
 class Sponsor(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='sponsors')
     website = models.URLField()
     category = models.ForeignKey(Category, related_name='sponsors', on_delete=models.SET_NULL, null=True, blank=True)
