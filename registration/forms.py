@@ -27,6 +27,7 @@ class ProfileForm(forms.Form):
             profile.save()
             return profile
         else:
+            print(self.errors)
             raise ValueError("Could not save data.")
 
 

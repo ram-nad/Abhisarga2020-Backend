@@ -9,12 +9,10 @@ class ProfileCreateView(View):
         return render(request, 'registration/signup.html', context={'form': ProfileForm().as_p()})
 
     def post(self, request):
-        form = ProfileForm(request.body)
-        if form.is_valid():
+        form = ProfileForm(request.POST, request.FILES)
+        try:
             form.save()
-            return redirect('home_page')
-        else:
+            return redirect('home')
+        except:
             print(form.errors)
-            return render(request, 'registration/signup.html', context={})
-
-
+            return render(request, 'registration/signup.html', context={'form': ProfileForm(request.body).as_p()})
