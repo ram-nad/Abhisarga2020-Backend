@@ -1,4 +1,5 @@
 from django import forms
+from django.db import transaction
 from django.forms.utils import ErrorList
 
 from base.models import College
@@ -16,6 +17,7 @@ class ProfileForm(forms.Form):
     gender = forms.ChoiceField(choices=gender_choices)
     profile_pic = forms.ImageField(required=False)
 
+    @transaction.atomic()
     def save(self, commit=True):
         if self.is_valid():
             print(self.errors)
@@ -23,12 +25,13 @@ class ProfileForm(forms.Form):
             user.set_password(self.cleaned_data.get('password'))
             user.full_clean()
             user.save()
+            self.cleaned_data.pop('email')
+            self.cleaned_data.pop('password')
             profile = Profile(user=user, **self.cleaned_data)
             profile.full_clean()
             profile.save()
             return profile
         else:
-            print(self.errors)
             raise ValueError("Could not save data.")
 
 

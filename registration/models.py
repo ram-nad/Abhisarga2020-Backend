@@ -62,7 +62,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50, blank=True)
     college = models.ForeignKey(to=College, related_name='students', on_delete=models.SET_NULL, null=True)
     phone_number = models.CharField(max_length=13, blank=True, validators=[validate_phone], unique=True)
-    profile_pic = models.ImageField(upload_to="profilepics", default="profilepics/default_profile_pic.jpg")
+    profile_pic = models.ImageField(upload_to="profilepics", default="profilepics/default_profile_pic.jpg", blank=True)
     gender = models.CharField(max_length=1, choices=gender_choices)
 
     def __str__(self):
