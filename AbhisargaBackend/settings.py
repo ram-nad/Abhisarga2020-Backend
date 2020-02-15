@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'base',
     'registration',
     'event',
+    'event_registration',
     'payment',
     'sponsorship',
+
 ]
 
 MIDDLEWARE = [

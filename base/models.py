@@ -18,3 +18,6 @@ class EventCategory(models.Model):
 
     def __str__(self):
         return "Event Category: " + self.name
+
+    class Meta:
+        verbose_name_plural = "Event Categories"
