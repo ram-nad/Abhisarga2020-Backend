@@ -7,3 +7,7 @@ def home(request):
 
 def contact(request):
     return render(request, 'home/contact.html')
+
+
+def not_found(request):
+    return render(request, 'base/not_found.html')
