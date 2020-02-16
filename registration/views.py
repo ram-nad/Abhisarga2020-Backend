@@ -3,7 +3,7 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.views import View
 
-from AbhisargaBackend.settings import GOOGLE_CLIEND_ID, NEXT_PARAMETER
+from AbhisargaBackend.settings import GOOGLE_CLIENT_ID, NEXT_PARAMETER
 from .forms import *
 from .token import registration_token_generator, get_user_google
 
@@ -69,7 +69,7 @@ def login_and_redirect(request, user):
 
 class UserLoginView(View):
     def get(self, request):
-        return render(request, 'registration/login.html', context={'google_client_id': GOOGLE_CLIEND_ID})
+        return render(request, 'registration/login.html', context={'google_client_id': GOOGLE_CLIENT_ID})
 
     def post(self, request):
         if 'google-id-token' in request.POST:
@@ -84,7 +84,7 @@ class UserLoginView(View):
                     return login_and_redirect(request, u)
             except ValueError:
                 return render(request, 'registration/login.html',
-                              context={'error': 'Invalid Login Attempt', 'google_client_id': GOOGLE_CLIEND_ID})
+                              context={'error': 'Invalid Login Attempt', 'google_client_id': GOOGLE_CLIENT_ID})
         else:
             form = LoginForm(request.POST)
             if form.is_valid():
@@ -97,4 +97,4 @@ class UserLoginView(View):
                                            'google_client_id': GOOGLE_CLIEND_ID})
                 return login_and_redirect(request, u)
             return render(request, 'registration/login.html',
-                          context={'error': form.errors, 'google_client_id': GOOGLE_CLIEND_ID})
+                          context={'error': form.errors, 'google_client_id': GOOGLE_CLIENT_ID})
