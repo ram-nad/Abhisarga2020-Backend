@@ -27,3 +27,6 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_extra_params(self):
+        return [f for f in [self.extra_param_1_name, self.extra_param_2_name, self.extra_param_3_name] if f]

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Registration</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {% for field in fields %}
+        <label for="{{ field }}">{{ field }}</label><input type="text" id="{{ field }}" value="" required>
+    {% endfor %}
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>
