@@ -32,7 +32,7 @@ SECRET_KEY = 'g@x_&qztk87(r*2wfyb(b8em^yi#8nrrclgmsdcbsy7gwl__)*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else ['*']
 
 # Application definition
 
@@ -161,3 +161,6 @@ GOOGLE_CLIEND_ID = os.getenv('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 
 NEXT_PARAMETER = 'next'
+
+REGISTRATION_RESET_TIMEOUT = 60 * 60
+PASSWORD_RESET_TIMEOUT = 30 * 60

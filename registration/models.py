@@ -16,7 +16,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(blank=False, unique=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     def has_perm(self, perm, obj=None):
         if self.is_superuser:
@@ -40,8 +40,12 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
+    @property
     def is_volunteer(self):
-        return hasattr(self.profile, "volunteer")
+        if hasattr(self, 'profile'):
+            return hasattr(self.profile, "volunteer")
+        else:
+            return False
 
     @property
     def name(self):
@@ -72,6 +76,7 @@ class Profile(models.Model):
     def name(self):
         return self.first_name + " " + self.last_name
 
+    @property
     def is_volunteer(self):
         return hasattr(self, 'volunteer')
 

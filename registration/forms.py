@@ -23,6 +23,7 @@ class ProfileForm(forms.Form):
             print(self.errors)
             user = User(email=self.cleaned_data.get('email'))
             user.set_password(self.cleaned_data.get('password'))
+            user.is_active = True
             user.full_clean()
             user.save()
             self.cleaned_data.pop('email')

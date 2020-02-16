@@ -42,9 +42,6 @@
     <input type="submit" value="Submit">
 </form>
 <button id="google-sign-in-button">Login with Google</button>
-{% if error %}
-    {{ error }}
-{% endif %}
 <form style="display: none" id="google-sign-in-submit-form" method="post">
     {% csrf_token %}
     <input type="hidden" value="" name="google-id-token">
