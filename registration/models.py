@@ -19,14 +19,16 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
 
     def has_perm(self, perm, obj=None):
-        if self.is_superuser:
+        if self.is_superuser or self.is_staff:
             return True
+            # return self.profile.volunteer.is_administrator
         else:
             return False
 
     def has_module_perms(self, app_label):
-        if self.is_superuser:
+        if self.is_superuser or self.is_staff:
             return True
+            # return self.profile.volunteer.is_administrator
         else:
             return False
 
@@ -86,7 +88,7 @@ class Volunteer(models.Model):
     fb = models.URLField(verbose_name="Facebook Profile", blank=True)
     linkedin = models.URLField(verbose_name="LinkedIn Profile", blank=True)
     insta = models.URLField(verbose_name="Instagram Profile", blank=True)
-    is_administrator = models.BooleanField(default=False, blank=True)
+    is_administrator = models.BooleanField(default=False)
 
     @property
     def email(self):

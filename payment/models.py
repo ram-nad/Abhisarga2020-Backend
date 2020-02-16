@@ -8,6 +8,7 @@ class Transaction(models.Model):
     amount = models.IntegerField()
     order_id = models.CharField(unique=True, max_length=100, null=True, blank=True)
     checksum = models.CharField(max_length=100, null=True, blank=True)
+    completed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if self.order_id is None and self.made_on and self.id:

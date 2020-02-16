@@ -5,7 +5,7 @@ from django.views import View
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token
 
-from AbhisargaBackend.settings import GOOGLE_CLIEND_ID, NEXT_PARAMETER
+from AbhisargaBackend.settings import GOOGLE_CLIENT_ID, NEXT_PARAMETER
 from .forms import *
 
 
@@ -28,19 +28,19 @@ class ProfileCreateView(View):
 
 class UserLoginView(View):
     def get(self, request):
-        return render(request, 'registration/login.html', context={'google_client_id': GOOGLE_CLIEND_ID})
+        return render(request, 'registration/login.html', context={'google_client_id': GOOGLE_CLIENT_ID})
 
     def post(self, request):
         if 'google-id-token' in request.POST:
             try:
                 token = request.POST['google-id-token']
-                user = id_token.verify_token(token, google_requests.Request(), GOOGLE_CLIEND_ID)
+                user = id_token.verify_token(token, google_requests.Request(), GOOGLE_CLIENT_ID)
                 if user['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
                     raise ValueError('Wrong issuer.')
                 u = User.objects.get(email=user['email'])
                 if u is None:
                     return render(request, 'registration/login.html',
-                                  context={'error': 'User does not exist', 'google_client_id': GOOGLE_CLIEND_ID})
+                                  context={'error': 'User does not exist', 'google_client_id': GOOGLE_CLIENT_ID})
                 else:
                     auth_login(request, u)
                     if NEXT_PARAMETER in request.GET:
@@ -49,7 +49,7 @@ class UserLoginView(View):
                         return redirect('home')
             except ValueError:
                 return render(request, 'registration/login.html',
-                              context={'error': 'Invalid Login Attempt', 'google_client_id': GOOGLE_CLIEND_ID})
+                              context={'error': 'Invalid Login Attempt', 'google_client_id': GOOGLE_CLIENT_ID})
         else:
             form = LoginForm(request.POST)
             if form.is_valid():
@@ -58,11 +58,11 @@ class UserLoginView(View):
                 u = authenticate(request, email=email, password=password)
                 if u is None:
                     return render(request, 'registration/login.html',
-                                  context={'error': 'Wrong Email or Password', 'google_client_id': GOOGLE_CLIEND_ID})
+                                  context={'error': 'Wrong Email or Password', 'google_client_id': GOOGLE_CLIENT_ID})
                 auth_login(request, u)
                 if NEXT_PARAMETER in request.GET:
                     return redirect(request.GET[NEXT_PARAMETER])
                 else:
                     return redirect('home')
             return render(request, 'registration/login.html',
-                          context={'error': form.errors, 'google_client_id': GOOGLE_CLIEND_ID})
+                          context={'error': form.errors, 'google_client_id': GOOGLE_CLIENT_ID})

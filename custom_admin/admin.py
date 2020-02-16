@@ -5,11 +5,15 @@ from django.utils.translation import gettext_lazy
 class CustomAdminSite(AdminSite):
     site_title = gettext_lazy('Admin | Abhisarga 2020')
 
-    # Text to put in each page's <h1>.
-    site_header = gettext_lazy('Admin Dashboard')
+    index_title = gettext_lazy('Admin | Abhisarga 2020')
 
-    # Text to put at the top of the admin index page.
-    index_title = gettext_lazy('Admin Dashboard')
+    site_header = gettext_lazy('Abhisarga Dashboard')
+
+    def has_permission(self, request):
+        if request.user.is_anonymous:
+            return False
+        else:
+            return request.user.is_active and request.user.is_staff
 
 
 custom_admin_site = CustomAdminSite(name='custom_admin')
