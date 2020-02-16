@@ -1,6 +1,7 @@
 from django.contrib.auth.views import auth_logout
 from django.urls import path
-from .views import *
+
+from .views import ProfileCreateView, UserLoginView
 
 urlpatterns = [
     path('create', ProfileCreateView.as_view(), name='signup'),
