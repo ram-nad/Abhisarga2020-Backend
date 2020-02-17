@@ -2,76 +2,58 @@ import requests
 from django.conf import settings
 
 
-def send_mail(subject, body, to, sender=settings.MAILGUN_HOST_USER, fail_silently=True, body_type='html'):
+def send_mail(subject, message, html_message, recipient_list, from_email=settings.MAILGUN_HOST_USER,
+              fail_silently=True):
     """
-    Send a Single mail to one or more users
-
-    Parameters:  \n
-        subject (str): Subject of the email
-        body (str): Body of the email
-        to (list(str)): List of Recipients email address
-        from (str): (optional) The Address from which the mail is sent
-        body_type(str): (optional) choose if the mail will be text or HTML
     Returns:
-        returns a response object
+        Response Object or None if failed
     """
     try:
         response = requests.post(
             settings.MAILGUN_BASE_URL,
             auth=('api', settings.MAILGUN_API_KEY),
-            data={'from': sender,
-                  'to': to,
+            data={'from': from_email,
+                  'to': recipient_list,
                   'subject': subject,
-                  body_type: body
+                  'text': message,
+                  'html': html_message
                   })
+        if not fail_silently and response.status_code != 200:
+            print("Unable to send Mailgun Mail.")
+
+        return response
     except:
         if not fail_silently:
             print('Unable to Send Post Request')
             return None
-    if not fail_silently and response.status_code != 200:
-        print("Unable to Send Mail")
-
-    return response
 
 
-def send_mass_mail(data_tuples, fail_silently=True, body_type='html'):
+def send_mass_mail(data_tuples, fail_silently=True):
     """
-    Send a Collection of mails
-
-    Parameters:\n
-        data_tuples (tuple): A tuple of tuples having the following parameters in order
-
-    Format of data_tuple element:\n
-        subject (str): Subject of the email
-        body (str): Body of the email
-        to (list(str)): List of Recipients email address
-        from (str): (optional) The Address from which the mail is sent
-        body_type(str): (optional) choose if the mail will be text or HTML
-
     Returns:
-        returns a response object
+        Response Object or None if failed
     """
-
     with requests.Session() as my_session:
         my_session.auth = ('api', settings.MAILGUN_API_KEY)
         for mail in data_tuples:
             if len(mail) == 3:
-                subject, body, to = mail
-                sender = settings.MAILGUN_HOST_USER
+                subject, message, html_message, recipient_list = mail
+                from_email = settings.MAILGUN_HOST_USER
             elif len(mail) == 4:
-                subject, body, to, sender = mail
+                subject, message, html_message, recipient_list, from_email = mail
             else:
-                print("Mail Not Sent: Incomplete Arguments")
+                print("Mailgun Mail Not Sent: Incomplete Arguments")
                 continue
             try:
                 response = my_session.post(
                     settings.MAILGUN_BASE_URL,
-                    data={'from': sender,
-                          'to': to,
+                    data={'from': from_email,
+                          'to': recipient_list,
                           'subject': subject,
-                          body_type: body})
+                          'text': message,
+                          'html': html_message})
                 if not fail_silently and response.status_code != 200:
-                    print('Cannot send mail.')
+                    print('Cannot send Mailgun Mail.')
             except:
                 if not fail_silently:
                     print('Unable to Send Post Request')
