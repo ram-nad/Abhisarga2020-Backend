@@ -21,10 +21,7 @@ def initiate_payment(request, order_id):
     try:
         transaction = Transaction.objects.get(order_id=order_id)
     except Transaction.DoesNotExist:
-        return HttpResponseBadRequest("No such order found.")
-
-    transaction.save()
-    merchant_key = settings.PAYTM_SECRET_KEY
+        return HttpResponseBadRequest()
 
     params = (
         ('MID', settings.PAYTM_MERCHANT_ID),
@@ -41,7 +38,7 @@ def initiate_payment(request, order_id):
     )
 
     paytm_params = dict(params)
-    checksum = generate_checksum(paytm_params, merchant_key)
+    checksum = generate_checksum(paytm_params, settings.PAYTM_SECRET_KEY)
 
     transaction.checksum = checksum
     transaction.save()
@@ -69,3 +66,4 @@ def callback(request):
         else:
             received_data['message'] = "Checksum Mismatched"
             return render(request, 'payment/callback.html', context=received_data)
+

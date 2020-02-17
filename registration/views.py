@@ -22,7 +22,7 @@ def create_user_return_token(email):
 
 class ProfileMakeView(View):
     def get(self, request):
-        return render(request, 'registration/signup.html', context={'google_client_id': GOOGLE_CLIEND_ID})
+        return render(request, 'registration/signup.html', context={'google_client_id': GOOGLE_CLIENT_ID})
 
     def post(self, request):
         try:
@@ -38,25 +38,26 @@ class ProfileMakeView(View):
                     else:
                         return render(request, 'registration/signup.html',
                                       context={'error': 'User already registered',
-                                               'google_client_id': GOOGLE_CLIEND_ID})
+                                               'google_client_id': GOOGLE_CLIENT_ID})
             else:
                 email = request.POST['email']
                 # token = create_user_return_token(email)
         except (KeyError, ValueError):
             return render(request, 'registration/signup.html',
-                          context={'error': 'Invalid Request', 'google_client_id': GOOGLE_CLIEND_ID})
+                          context={'error': 'Invalid Request', 'google_client_id': GOOGLE_CLIENT_ID})
 
-    class ProfileCreateView(View):
-        def get(self, request, email, token):
-            u = User.objects.get_or_none(email=email)
-            if u is None or u.is_active:
-                return HttpResponseBadRequest()
-            elif not registration_token_generator.check_token(u, token):
-                return HttpResponseBadRequest()
-            else:
-                return render(request, 'registration/signup.html', context={'email': email, 'token': token})
 
-        # def post(self, request):
+class ProfileCreateView(View):
+    def get(self, request, email, token):
+        u = User.objects.get_or_none(email=email)
+        if u is None or u.is_active:
+            return HttpResponseBadRequest()
+        elif not registration_token_generator.check_token(u, token):
+            return HttpResponseBadRequest()
+        else:
+            return render(request, 'registration/signup.html', context={'email': email, 'token': token})
+
+    # def post(self, request):
 
 
 def login_and_redirect(request, user):
@@ -79,7 +80,7 @@ class UserLoginView(View):
                 if u is None:
                     return render(request, 'registration/login.html',
                                   context={'error': 'User does not exist',
-                                           'google_client_id': GOOGLE_CLIEND_ID})
+                                           'google_client_id': GOOGLE_CLIENT_ID})
                 else:
                     return login_and_redirect(request, u)
             except ValueError:
@@ -94,7 +95,7 @@ class UserLoginView(View):
                 if u is None:
                     return render(request, 'registration/login.html',
                                   context={'error': 'Wrong Email or Password',
-                                           'google_client_id': GOOGLE_CLIEND_ID})
+                                           'google_client_id': GOOGLE_CLIENT_ID})
                 return login_and_redirect(request, u)
             return render(request, 'registration/login.html',
                           context={'error': form.errors, 'google_client_id': GOOGLE_CLIENT_ID})
