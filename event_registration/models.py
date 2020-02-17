@@ -9,8 +9,3 @@ class EventRegistration(models.Model):
     extra_param_3_value = models.CharField(max_length=160, default="")
     transaction = models.OneToOneField(to='payment.Transaction', null=True, blank=True, on_delete=models.SET_NULL)
 
-    def status(self):
-        if self.transaction:
-            return self.transaction.completed
-        else:
-            return "Payment Pending"

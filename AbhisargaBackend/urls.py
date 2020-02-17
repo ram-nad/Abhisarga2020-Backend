@@ -10,6 +10,7 @@ urlpatterns = [
                   path('', include('base.urls')),
                   path('admin/', admin.site.urls),
                   path('staff/', custom_admin_site.urls),
+                  path('payments/', include('payment.urls')),
                   path('sponsors/', include('sponsorship.urls')),
                   path('profile/', include('registration.urls')),
                   path('event/<int:pk>/', include('event_registration.urls')),

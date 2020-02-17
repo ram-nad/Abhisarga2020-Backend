@@ -4,40 +4,32 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Transaction
 from .paytm import generate_checksum, verify_checksum
+from django.http import HttpResponseBadRequest
 
 
-def initiate_payment(request):
+def initiate_payment(request, order_id):
     try:
-        username = request.POST['username']
-        password = request.POST['password']
-        amount = int(request.POST['amount'])
-        user = authenticate(request, username=username, password=password)
-        if user is None:
-            raise ValueError
-        auth_login(request=request, user=user)
-    except:
-        return render(request, 'base/error.html', context={'error': 'Wrong Account Details or amount'})
-
-    transaction = Transaction.objects.create(made_by=user, amount=20000)
-    transaction.save()
-    merchant_key = settings.PAYTM_SECRET_KEY
+        transaction = Transaction.objects.get(order_id=order_id)
+    except Transaction.DoesNotExist:
+        print('3')
+        return HttpResponseBadRequest()
 
     params = (
         ('MID', settings.PAYTM_MERCHANT_ID),
         ('ORDER_ID', str(transaction.order_id)),
-        ('CUST_ID', str(transaction.made_by.email)),
+        ('CUST_ID', str(transaction.made_by.user.email)),
         ('TXN_AMOUNT', str(transaction.amount)),
         ('CHANNEL_ID', settings.PAYTM_CHANNEL_ID),
         ('WEBSITE', settings.PAYTM_WEBSITE),
         # ('EMAIL', request.user.email),
         # ('MOBILE_N0', '9911223388'),
         ('INDUSTRY_TYPE_ID', settings.PAYTM_INDUSTRY_TYPE_ID),
-        ('CALLBACK_URL', 'http://127.0.0.1:8000/callback/'),
+        ('CALLBACK_URL', 'http://127.0.0.1:8000/payments/callback'),
         # ('PAYMENT_MODE_ONLY', 'NO'),
     )
 
     paytm_params = dict(params)
-    checksum = generate_checksum(paytm_params, merchant_key)
+    checksum = generate_checksum(paytm_params, settings.PAYTM_SECRET_KEY)
 
     transaction.checksum = checksum
     transaction.save()
@@ -58,10 +50,18 @@ def callback(request):
                 paytm_checksum = value[0]
             else:
                 paytm_params[key] = str(value[0])
+        print(paytm_params)
         # Verify checksum
         is_valid_checksum = verify_checksum(paytm_params, settings.PAYTM_SECRET_KEY, str(paytm_checksum))
+        try:
+            transaction = Transaction.objects.get(order_id=paytm_params['ORDERID'])
+        except Transaction.DoesNotExist:
+            return HttpResponseBadRequest
+        transaction.paytm_checksum = paytm_checksum
+        transaction.save()
         if is_valid_checksum:
             received_data['message'] = "Checksum Matched"
         else:
             received_data['message'] = "Checksum Mismatched"
-            return render(request, 'payment/callback.html', context=received_data)
+        return render(request, 'payment/callback.html', context=paytm_params)
+

@@ -6,6 +6,7 @@ from registration.models import Volunteer
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
+    amount = models.IntegerField(default=0)
     category = models.ForeignKey(to=EventCategory, related_name="events", on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=500)
     team_event = models.BooleanField(default=False)
@@ -21,9 +22,9 @@ class Event(models.Model):
                                      on_delete=models.SET_NULL)
     prizes = models.TextField(max_length=300)
     rules = models.TextField(max_length=1000)
-    extra_param_1_name = models.CharField(max_length=40, default="")
-    extra_param_2_name = models.CharField(max_length=40, default="")
-    extra_param_3_name = models.CharField(max_length=40, default="")
+    extra_param_1_name = models.CharField(max_length=40, blank=True, default="")
+    extra_param_2_name = models.CharField(max_length=40, blank=True, default="")
+    extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
 
     def __str__(self):
         return self.name
