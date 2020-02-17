@@ -1,29 +1,70 @@
 from django.contrib.auth import authenticate, login as auth_login
-from django.core.exceptions import ValidationError
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.views import View
-from google.auth.transport import requests as google_requests
-from google.oauth2 import id_token
 
 from AbhisargaBackend.settings import GOOGLE_CLIENT_ID, NEXT_PARAMETER
 from .forms import *
+from .token import registration_token_generator, get_user_google
 
 
-class ProfileCreateView(View):
+def create_user_return_token(email):
+    u = User.objects.get_or_none(email=email)
+    if u is None or not u.is_active:
+        new_user = User.objects.create(email=email)
+        new_user.set_password(None)
+        new_user.save()
+        user_token = registration_token_generator.make_token(new_user)
+        return user_token
+    else:
+        return None
+
+
+class ProfileMakeView(View):
     def get(self, request):
-        return render(request, 'registration/signup.html', context={'form': ProfileForm().as_p()})
+        return render(request, 'registration/signup.html', context={'google_client_id': GOOGLE_CLIEND_ID})
 
     def post(self, request):
-        form = ProfileForm(request.POST, request.FILES)
         try:
-            form.save()
-            return redirect('home')
-        except ValidationError as E:
+            if 'google-id-token' in request.POST:
+                user = get_user_google(request.POST['google-id-token'])
+                if user is None:
+                    raise ValueError()
+                else:
+                    email = user['email']
+                    token = create_user_return_token(email)
+                    if token is not None:
+                        return redirect('profile_create', email=email, token=token)
+                    else:
+                        return render(request, 'registration/signup.html',
+                                      context={'error': 'User already registered',
+                                               'google_client_id': GOOGLE_CLIEND_ID})
+            else:
+                email = request.POST['email']
+                # token = create_user_return_token(email)
+        except (KeyError, ValueError):
             return render(request, 'registration/signup.html',
-                          context={'form': ProfileForm(request.POST).as_p(), 'errors': E.message_dict})
-        except ValueError:
-            return render(request, 'registration/signup.html',
-                          context={'form': ProfileForm(request.POST).as_p(), 'errors': form.errors})
+                          context={'error': 'Invalid Request', 'google_client_id': GOOGLE_CLIEND_ID})
+
+    class ProfileCreateView(View):
+        def get(self, request, email, token):
+            u = User.objects.get_or_none(email=email)
+            if u is None or u.is_active:
+                return HttpResponseBadRequest()
+            elif not registration_token_generator.check_token(u, token):
+                return HttpResponseBadRequest()
+            else:
+                return render(request, 'registration/signup.html', context={'email': email, 'token': token})
+
+        # def post(self, request):
+
+
+def login_and_redirect(request, user):
+    auth_login(request, user)
+    if NEXT_PARAMETER in request.GET:
+        return redirect(request.GET[NEXT_PARAMETER])
+    else:
+        return redirect('home')
 
 
 class UserLoginView(View):
@@ -33,20 +74,14 @@ class UserLoginView(View):
     def post(self, request):
         if 'google-id-token' in request.POST:
             try:
-                token = request.POST['google-id-token']
-                user = id_token.verify_token(token, google_requests.Request(), GOOGLE_CLIENT_ID)
-                if user['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-                    raise ValueError('Wrong issuer.')
-                u = User.objects.get(email=user['email'])
+                user = get_user_google(request.POST['google-id-token'])
+                u = User.objects.get_or_none(email=user['email'])
                 if u is None:
                     return render(request, 'registration/login.html',
-                                  context={'error': 'User does not exist', 'google_client_id': GOOGLE_CLIENT_ID})
+                                  context={'error': 'User does not exist',
+                                           'google_client_id': GOOGLE_CLIEND_ID})
                 else:
-                    auth_login(request, u)
-                    if NEXT_PARAMETER in request.GET:
-                        return redirect(request.GET[NEXT_PARAMETER])
-                    else:
-                        return redirect('home')
+                    return login_and_redirect(request, u)
             except ValueError:
                 return render(request, 'registration/login.html',
                               context={'error': 'Invalid Login Attempt', 'google_client_id': GOOGLE_CLIENT_ID})
@@ -58,11 +93,8 @@ class UserLoginView(View):
                 u = authenticate(request, email=email, password=password)
                 if u is None:
                     return render(request, 'registration/login.html',
-                                  context={'error': 'Wrong Email or Password', 'google_client_id': GOOGLE_CLIENT_ID})
-                auth_login(request, u)
-                if NEXT_PARAMETER in request.GET:
-                    return redirect(request.GET[NEXT_PARAMETER])
-                else:
-                    return redirect('home')
+                                  context={'error': 'Wrong Email or Password',
+                                           'google_client_id': GOOGLE_CLIEND_ID})
+                return login_and_redirect(request, u)
             return render(request, 'registration/login.html',
                           context={'error': form.errors, 'google_client_id': GOOGLE_CLIENT_ID})

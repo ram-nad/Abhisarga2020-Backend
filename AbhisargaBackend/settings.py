@@ -27,12 +27,12 @@ else:
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g@x_&qztk87(r*2wfyb(b8em^yi#8nrrclgmsdcbsy7gwl__)*'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else ['*']
 
 # Application definition
 
@@ -143,6 +143,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/profile/login'
 
+INLINECSS_CSS_LOADER = 'django_inlinecss.css_loaders.StaticfilesFinderCSSLoader'
+
 # Paytm Settings
 
 PAYTM_MERCHANT_ID = os.getenv('PAYTM_MERCHANT_ID')
@@ -165,8 +167,8 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = (os.getenv('EMAIL_USE_TLS') == 'True')
-# EMAIL_USE_SSL = (os.getenv('EMAIL_USE_SSL') == 'True')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_TIMEOUT = 300
 
 # Google SignIN
 
@@ -174,3 +176,10 @@ GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 
 NEXT_PARAMETER = 'next'
+
+REGISTRATION_RESET_TIMEOUT = 60 * 60
+PASSWORD_RESET_TIMEOUT = 30 * 60
+
+# Use Mailgun/SMTP
+
+USE_MAILGUN = os.getenv('USE_MAILGUN')
