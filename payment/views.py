@@ -4,9 +4,10 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Transaction
 from .paytm import generate_checksum, verify_checksum
+from django.http import HttpResponseBadRequest
 
 
-def initiate_payment(request):
+def initiate_payment(request, order_id):
     try:
         username = request.POST['username']
         password = request.POST['password']
@@ -17,8 +18,11 @@ def initiate_payment(request):
         auth_login(request=request, user=user)
     except:
         return render(request, 'base/error.html', context={'error': 'Wrong Account Details or amount'})
+    try:
+        transaction = Transaction.objects.get(order_id=order_id)
+    except Transaction.DoesNotExist:
+        return HttpResponseBadRequest("No such order found.")
 
-    transaction = Transaction.objects.create(made_by=user, amount=20000)
     transaction.save()
     merchant_key = settings.PAYTM_SECRET_KEY
 

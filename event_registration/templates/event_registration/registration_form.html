@@ -7,8 +7,13 @@
 <body>
 <form method="post">
     {% csrf_token %}
+    {% if no_extra_fields %}
+        <p>Do you wish to confirm your registration?</p>
+    {% endif %}
+
     {% for field in fields %}
-        <label for="{{ field }}">{{ field }}</label><input type="text" id="{{ field }}" value="" required>
+        <label for="{{ field }}">{{ field }}</label>
+        <input type="text" name="{{ field }}" id="{{ field }}" value="" required>
     {% endfor %}
     <input type="submit" value="Register">
 </form>

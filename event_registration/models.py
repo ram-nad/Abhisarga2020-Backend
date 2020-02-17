@@ -11,6 +11,6 @@ class EventRegistration(models.Model):
 
     def status(self):
         if self.transaction:
-            return self.transaction.completed
+            return self.transaction.get_status_display()
         else:
-            return "Payment Pending"
+            return "No Transaction"
