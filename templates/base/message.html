@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+<p>
+    {{ message }}
+</p>
+{% if next %}
+    <a href="{{ next.url }}">{{ next.name }}</a>
+{% endif %}
+</body>
+</html>

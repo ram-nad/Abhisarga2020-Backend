@@ -20,11 +20,10 @@ class ProfileForm(forms.Form):
     @transaction.atomic()
     def save(self, commit=True):
         if self.is_valid():
-            print(self.errors)
-            user = User(email=self.cleaned_data.get('email'))
+            user = User.objects.get(email=self.cleaned_data.get('email'))
             user.set_password(self.cleaned_data.get('password'))
             user.is_active = True
-            user.full_clean()
+            user.full_clean(validate_unique=False)
             user.save()
             self.cleaned_data.pop('email')
             self.cleaned_data.pop('password')

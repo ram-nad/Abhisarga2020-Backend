@@ -1,6 +1,6 @@
 from smtplib import SMTPException
 
-from django.core.mail import send_mail, get_connection, EmailMultiAlternatives
+from django.core.mail import send_mail as django_smtp_send_mail, get_connection, EmailMultiAlternatives
 
 from AbhisargaBackend.settings import EMAIL_HOST_USER, USE_MAILGUN, MAILGUN_HOST_USER
 from .mailgun import send_mail as mailgun_send_mail, send_mass_mail as mailgun_send_mass_mail
@@ -12,7 +12,8 @@ def smtp_send_mail(subject, message, html_message, recipient_list, from_email=EM
         Number of mail sent successfully or None if failed
     """
     try:
-        return send_mail(subject, message, from_email, recipient_list, fail_silently, None, None, None, html_message)
+        return django_smtp_send_mail(subject, message, from_email, recipient_list, False, None, None, None,
+                                     html_message)
     except SMTPException:
         if not fail_silently:
             print("Unable to send SMTP Mail.")

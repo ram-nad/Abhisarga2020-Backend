@@ -1,0 +1,17 @@
+{% extends 'email/base.html' %}
+
+{% block body %}
+Thank You for registering for Abhisarga 2020. Please click on the button below to confirm your email.
+{% endblock %}
+
+{% block subbody %}
+    <em>This link is only valid for <strong>60 minutes</strong>.</em>
+    <br>
+    If you haven't registered for Abhisarga 2020, you can safely ignore this email.
+{% endblock %}
+
+{% block endbody %}
+    If the above button does not work, please follow the link given below.
+    <br>
+    <a href="{{ action.href }}" target="_blank">{{ action.href }}</a>
+{% endblock %}

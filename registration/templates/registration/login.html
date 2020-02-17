@@ -1,30 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="GOOGLE_CLIENT_ID" content="{{ google_client_id }}">
     <title>Login | Abhisarga 2020</title>
-    <script>
-        function init() {
-            gapi.load('auth2', function () {
-                auth2 = gapi.auth2.init({
-                    client_id: '{{ google_client_id }}',
-                    ux_mode: 'popup'
-                });
-                auth2.attachClickHandler(document.getElementById('google-sign-in-button'), {}, googleSignIn, signInFailed);
-            });
-        }
-
-        function googleSignIn(googleUser) {
-            let form = document.getElementById('google-sign-in-submit-form');
-            alert(googleUser.getBasicProfile().getFamilyName());
-            form.getElementsByTagName('input')[1].value = googleUser.getAuthResponse().id_token;
-            form.submit();
-        }
-
-        function signInFailed(error) {
-            alert(`Google Login Failed. (${error.error})`)
-        }
-    </script>
+    <script src="{% static 'js/google-signin.js' %}"></script>
 </head>
 <body>
 <form method="post">

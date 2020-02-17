@@ -180,4 +180,6 @@ PASSWORD_RESET_TIMEOUT = 30 * 60
 
 # Use Mailgun/SMTP
 
-USE_MAILGUN = os.getenv('USE_MAILGUN')
+USE_MAILGUN = os.getenv('USE_MAILGUN') == 'True'
+
+URL = "http://localhost:8000" if DEBUG else "https://abhisarga.iiits.in"

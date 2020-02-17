@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
     def get_or_none(self, *args, **kwargs):
         try:
-            u = self.get(args, kwargs)
+            u = self.get(*args, **kwargs)
             return u
         except ObjectDoesNotExist:
             return None
