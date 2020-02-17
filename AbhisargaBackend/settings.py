@@ -141,6 +141,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+INLINECSS_CSS_LOADER = 'django_inlinecss.css_loaders.StaticfilesFinderCSSLoader'
+
 # Paytm Settings
 
 PAYTM_MERCHANT_ID = os.getenv('PAYTM_MERCHANT_ID')
@@ -175,5 +177,7 @@ NEXT_PARAMETER = 'next'
 
 REGISTRATION_RESET_TIMEOUT = 60 * 60
 PASSWORD_RESET_TIMEOUT = 30 * 60
+
+# Use Mailgun/SMTP
 
 USE_MAILGUN = os.getenv('USE_MAILGUN')
