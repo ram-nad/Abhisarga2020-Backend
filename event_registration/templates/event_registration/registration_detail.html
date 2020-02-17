@@ -16,7 +16,9 @@ Event {{ registration.event.name }} <br>
 {{ registration.event.extra_param_3_name }} {{ registration.extra_param_3_value }} <br>
 
 {% if registration.event.amount is not 0 and registration.transaction.status is not 'S' %}
-    <button formaction="">Complete Payment</button>
+    <a href="{% url 'paytm_initiate_payment' order_id=registration.transaction.order_id %}">
+        Complete Payment {{ registration.event.amount }}
+    </a>
 {% endif %}
 </body>
 </html>

@@ -39,7 +39,7 @@ class EventRegisterView(LoginRequiredMixin, View):
         registration = EventRegistration()
         registration.event = event
         registration.user = request.user.profile
-        transaction = Transaction.objects.create(made_by=request.user, amount=event.amount)
+        transaction = Transaction.objects.create(made_by=request.user.profile, amount=event.amount)
         transaction.save()
         registration.transaction = transaction
 

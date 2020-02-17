@@ -7,13 +7,14 @@ from base.views import permission_denied, internal_server_error, not_found, bad_
 from custom_admin.admin import custom_admin_site
 
 urlpatterns = [
-  path('', include('base.urls')),
-  path('admin/', admin.site.urls),
-  path('staff/', custom_admin_site.urls),
-  path('sponsors/', include('sponsorship.urls')),
-  path('profile/', include('registration.urls')),
-  path('event/<int:pk>/', include('event_registration.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('', include('base.urls')),
+                  path('admin/', admin.site.urls),
+                  path('staff/', custom_admin_site.urls),
+                  path('payments/', include('payment.urls')),
+                  path('sponsors/', include('sponsorship.urls')),
+                  path('profile/', include('registration.urls')),
+                  path('event/<int:pk>/', include('event_registration.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler403 = permission_denied
 handler500 = internal_server_error

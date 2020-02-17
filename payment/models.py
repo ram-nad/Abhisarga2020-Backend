@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from paytmpg import PaymentStatusDetailBuilder
 import requests
 import json
 from payment import paytm
@@ -14,6 +13,7 @@ class Transaction(models.Model):
     order_id = models.CharField(unique=True, max_length=100, null=True, blank=True)
     checksum = models.CharField(max_length=100, null=True, blank=True)
     reason = models.CharField(max_length=256, default='not specified')
+    paytm_checksum = models.CharField(max_length=100, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if self.order_id is None and self.made_on and self.id:
@@ -42,7 +42,7 @@ class Transaction(models.Model):
         paytmParams["head"] = {
 
             # put generated checksum value here
-            "signature": self.checksum
+            "signature": checksum
         }
 
         # prepare JSON string for request
@@ -56,8 +56,7 @@ class Transaction(models.Model):
 
         response = requests.post(url, data=post_data, headers={"Content-type": "application/json"}).json()
         print(response)
-        print(dict(response))
-        return response["body"]["resultCode"] == '01'
+        return response["body"]
 
 #
 # class Order(models.Model):
