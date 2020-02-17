@@ -6,4 +6,3 @@ pytz==2019.3
 sqlparse==0.3.0
 google-auth==1.11.2
 requests==2.22.0
-django-inlinecss==0.30
