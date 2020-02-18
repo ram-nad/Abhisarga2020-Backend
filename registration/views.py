@@ -120,7 +120,7 @@ def profile_create_post(request):
                 return render(request, 'registration/signup_full.html',
                               context={'email': email, 'token': token, 'colleges': College.objects.all(),
                                        'gender': gender_choices,
-                                       'error': e.error_dict})
+                                       'error': e.message_dict})
         else:
             return render(request, 'registration/signup_full.html',
                           context={'email': email, 'token': token, 'colleges': College.objects.all(),
