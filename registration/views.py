@@ -1,9 +1,11 @@
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.http import urlsafe_base64_encode as b64_encode, urlsafe_base64_decode as b64_decode
 from django.views import View
 
 from AbhisargaBackend.settings import GOOGLE_CLIENT_ID, NEXT_PARAMETER
@@ -12,7 +14,7 @@ from base.models import College
 from mail import send_mail
 from .forms import ProfileForm, LoginForm, gender_choices
 from .models import User
-from .token import registration_token_generator, get_user_google
+from .token import registration_token_generator, get_user_google, password_token_generator
 
 
 def create_user_return_token(email):
@@ -26,7 +28,8 @@ def create_user_return_token(email):
         return user_token
     elif not u.is_active:
         user_token = registration_token_generator.make_token(u)
-        return user_token
+        b64id = b64_encode(bytes(str(u.pk).encode()))
+        return [user_token, b64id]
     else:
         return None
 
@@ -43,18 +46,18 @@ class ProfileMakeView(View):
                     raise ValueError()
                 else:
                     email = user['email']
-                    token = create_user_return_token(email)
-                    if token is not None:
-                        return redirect('profile_create', email=email, token=token)
+                    tokens = create_user_return_token(email)
+                    if tokens is not None:
+                        return redirect('profile_create', b64id=tokens[1], token=tokens[0])
                     else:
                         return render(request, 'registration/signup.html',
                                       context={'error': 'User already registered',
                                                'google_client_id': GOOGLE_CLIENT_ID})
             else:
                 email = request.POST['email']
-                token = create_user_return_token(email)
-                if token is not None:
-                    url = URL + reverse('profile_create', args=[email, token])
+                tokens = create_user_return_token(email)
+                if tokens is not None:
+                    url = URL + reverse('profile_create', args=[tokens[1], tokens[0]])
                     html = render_to_string('email/account_generation.html', context={'title': "Email Confirmation",
                                                                                       'head': "Email Verification",
                                                                                       'name': "User",
@@ -66,7 +69,7 @@ class ProfileMakeView(View):
                            "\nRegards,\nAbhisarga 2020 Team"
                     if send_mail("Email Verification for Abhisarga 2020", text, html, [email]) is not None:
                         return render(request, 'base/message.html',
-                                      context={'title': "Verification Link sent.",
+                                      context={'title': "Verification Link sent",
                                                'message': 'Email Verification link sent, please check your email. '
                                                           'The link is valid for next 1 hour.',
                                                'next': {'url': reverse('home'), 'name': "Go Back Home"}})
@@ -85,6 +88,8 @@ class ProfileMakeView(View):
 
 
 def login_and_redirect(request, user):
+    if not user.is_active:
+        return HttpResponseBadRequest()
     auth_login(request, user)
     if NEXT_PARAMETER in request.GET:
         return redirect(request.GET[NEXT_PARAMETER])
@@ -92,15 +97,16 @@ def login_and_redirect(request, user):
         return redirect('home')
 
 
-def profile_create_get(request, email, token):
-    u = User.objects.get_or_none(email=email)
+def profile_create_get(request, b64id, token):
+    pk = b64_decode(b64id).decode()
+    u = User.objects.get_or_none(pk=pk)
     if u is None or u.is_active:
         return HttpResponseBadRequest()
     elif not registration_token_generator.check_token(u, token):
         return HttpResponseBadRequest()
     else:
         return render(request, 'registration/signup_full.html',
-                      context={'email': email, 'token': token, 'colleges': College.objects.all(),
+                      context={'email': u.email, 'token': token, 'colleges': College.objects.all(),
                                'gender': gender_choices})
 
 
@@ -159,3 +165,128 @@ class UserLoginView(View):
                 return login_and_redirect(request, u)
             return render(request, 'registration/login.html',
                           context={'error': form.errors, 'google_client_id': GOOGLE_CLIENT_ID})
+
+
+class LogoutView(View):
+    def get(self, request):
+        auth_logout(request)
+        return redirect(to='home')
+
+
+class PasswordChangeView(LoginRequiredMixin, View):
+    login_url = reverse('login')
+    redirect_field_name = NEXT_PARAMETER
+
+    def get(self, request):
+        return render(request, 'registration/change_password.html')
+
+    def post(self, request):
+        try:
+            old_pass, new_pass, conf_new_pass = request.POST[
+                                                    'old'], request.POST['password1'], request.POST['password2']
+        except KeyError:
+            return render(request, 'registration/change_password.html', context={'error': 'Some fields are missing.'})
+        if request.user.check_password(old_pass):
+            if new_pass == conf_new_pass:
+                request.user.set_password(new_pass)
+                return redirect(to="password_change_done")
+            else:
+                error = "New passwords do not match."
+                return render(request, 'registration/change_password.html', context={'error': error})
+        else:
+            error = "Old password is wrong."
+            return render(request, 'registration/change_password.html', context={'error': error})
+
+
+class PasswordChangeDoneView(LoginRequiredMixin, View):
+    login_url = reverse('login')
+    redirect_field_name = NEXT_PARAMETER
+
+    def get(self, request):
+        context = {"title": "Password Updated",
+                   "message": "Password Changed Successful",
+                   "next": {"url": reverse('home'), "name": 'Go back to home'}}
+        return render(request, 'base/message.html',
+                      context=context)
+
+
+class PasswordResetView(View):
+    def get(self, request):
+        return render(request, 'registration/forgot_password.html')
+
+
+class PasswordResetDoneView(View):
+    def post(self, request):
+        dtg = password_token_generator
+        try:
+            email = request.POST['email']
+            user = User.objects.get_or_none(email=email)
+            if user is None or not user.is_active:
+                error = 'No account found with that Email-id.'
+                return render(request, 'registration/forgot_password.html', context={'error': error})
+        except KeyError:
+            error = 'Please enter your Email.'
+            return render(request, 'registration/forgot_password.html', context={'error': error})
+        token = dtg.make_token(user)
+        idb64 = b64_encode(bytes(str(user.pk).encode()))
+        url = URL + reverse('password_reset_confirm', args=[idb64, token])
+        html = render_to_string('email/account_generation.html', context={'title': "Reset Password",
+                                                                          'head': "Reset Password",
+                                                                          'name': user.name,
+                                                                          'action': {
+                                                                              'name': "Reset my Password",
+                                                                              'href': url}})
+        text = "Please open the link given below to reset password for your Abhisarga 2020 account. \n" + url + \
+               "\nIf you did not request password reset then please ignore this email." + \
+               "\nRegards,\nAbhisarga 2020 Team"
+        if send_mail("Email Verification for Abhisarga 2020", text, html, [email]) is not None:
+            message = {"title": "Password Reset Confirmation",
+                       "message": "An mail has been sent to your registered email with further link to reset"
+                                  " your password.",
+                       "next": {"url": reverse('login'), "name": 'Return to Login Page'}}
+            return render(request, 'base/message.html', context=message)
+        else:
+            return render(request, 'registration/forgot_password.html',
+                          context={'error': 'Temporary error. Please try again.'})
+
+
+class PasswordResetConfirmView(View):
+    def get(self, request, idb64, token):
+        print(token)
+        dtg = password_token_generator
+        user = User.objects.get_or_none(pk=b64_decode(idb64).decode())
+        if user is None:
+            return HttpResponseBadRequest()
+        if dtg.check_token(user, token):
+            return render(request, 'registration/reset_password.html', context={'idb64': idb64, 'token': token})
+        return HttpResponseBadRequest()
+
+
+class PasswordResetCompleteView(View):
+    def post(self, request):
+        try:
+            idb64 = request.POST['idb64']
+            token = request.POST['token']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            user = User.objects.get(pk=b64_decode(idb64).decode())
+            if password1 != password2:
+                raise ValueError
+            dtg = password_token_generator
+            if not dtg.check_token(user, token):
+                raise AssertionError
+        except KeyError:
+            return HttpResponseBadRequest()
+        except ValueError:
+            return HttpResponseBadRequest()
+        except User.DoesNotExist:
+            return HttpResponseBadRequest()
+        except AssertionError:
+            return HttpResponseBadRequest()
+
+        user.set_password(password1)
+        user.save()
+        message = {"title": "Password reset successful",
+                   "message": "Your password has been updated successfully.",
+                   "next": {"url": reverse('login'), "name": 'Return to Login Page'}}
+        return render(request, 'base/message.html', context=message)

@@ -10,8 +10,8 @@
     {% csrf_token %}
     Email: {{ email }}
     <br>
-    <input type="hidden" name="email" id="user_email" value="{{ email }}">
-    <input type="hidden" name="token" id="user_token" value="{{ token }}">
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="hidden" name="token" value="{{ token }}">
     <label for="user_fname">First Name:</label><input type="text" name="first_name" id="user_fname">
     <br>
     <label for="user_lname">Last Name:</label><input type="text" name="last_name" id="user_lname">
