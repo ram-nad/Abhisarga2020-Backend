@@ -38,10 +38,11 @@ body {
 .sponsor-category {
     font-size: 3.6vw;
     width: 100%;
-    margin: 0.2em 0;
+    padding: 0.4em 0;
 }
 
 .sponsor-category h1 {
+    position: relative;
     text-align: center;
     font-family: "avenir-next";
     text-transform: uppercase;
@@ -49,7 +50,18 @@ body {
     font-weight: 600;
     color: #454545;
     padding: 0;
-    margin: 0.4em 0;
+    margin: 0.1em 0 0.2em;
+}
+
+.sponsor-category h1::after{
+    position: absolute;
+    bottom: 0;
+    content: "";
+    left: 50%;
+    width: 5em;
+    transform: translateX(-50%);
+    height: 0.05em;
+    background: #172130;
 }
 
 .sponsors {

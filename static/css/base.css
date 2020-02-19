@@ -35,12 +35,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
     background: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.5) 40%,
-            rgba(0, 0, 0, 0.6) 80%,
-            rgba(0, 0, 0, 0.8)
+            rgba(0, 0, 0, 0.6) 60%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 0.9)
     );
     box-shadow: 0 0.01em 0.5em #000;
 }
@@ -67,7 +67,6 @@ body {
 }
 
 #hamburger {
-    z-index: 2;
     background-color: #fff;
     color: #f00;
     font-size: 1.3em;
@@ -86,7 +85,6 @@ body {
 }
 
 #register {
-    z-index: 2;
     color: #fff;
     font-size: 0.8em;
     background: transparent;
@@ -100,6 +98,7 @@ body {
 }
 
 #side-nav {
+    font-size: 2vw;
     position: fixed;
     height: 100%;
     width: 12em;
@@ -172,6 +171,10 @@ body {
         font-size: 2.3vw;
     }
 
+    #side-nav {
+        font-size: 2.3vw;
+    }
+
     #footer {
         font-size: 2.3vw;
     }
@@ -182,6 +185,10 @@ body {
         font-size: 3vw;
     }
 
+    #side-nav {
+        font-size: 3vw;
+    }
+
     #footer {
         font-size: 3vw;
     }
@@ -189,6 +196,10 @@ body {
 
 @media (min-width: 481px) and (max-width: 767px) {
     #navbar {
+        font-size: 3.6vw;
+    }
+
+    #side-nav {
         font-size: 3.6vw;
     }
 
@@ -206,6 +217,10 @@ body {
         font-size: 4.3vw;
     }
 
+    #side-nav {
+        font-size: 4.3vw;
+    }
+
     #footer #address {
         text-align: center;
     }
@@ -213,6 +228,10 @@ body {
 
 @media (max-width: 320px) {
     #navbar {
+        font-size: 4.8vw;
+    }
+
+    #side-nav {
         font-size: 4.8vw;
     }
 

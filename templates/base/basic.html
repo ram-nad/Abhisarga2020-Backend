@@ -13,23 +13,24 @@
           content="Abhisarga 2020: 20th - 22nd March. Abhisarga is the annual techno-cultural fest of the Indian Institute of Information Technology, Sri City. Celebrating Creativity and Innovation."/>
     <meta name="theme-color" content="#1a002a"/>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="32x32" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
     {% block head %}
     {% endblock %}
 </head>
 
 <body>
-<nav id="navbar">
-    <div id="side-nav">
-        <div class="hoverid">
-            <a href="{% url 'home' %}#about">About</a>
-            <a href="#">Events</a>
-            <a href="#">Registration</a>
-            <a href="{% url 'sponsors' %}">Sponsors</a>
-            <a href="#">Accommodation</a>
-            <a href="{% url 'home' %}#test">Contact</a>
-        </div>
+<div id="side-nav">
+    <div class="hoverid">
+        <a href="{% url 'home' %}#about">About</a>
+        <a href="#">Events</a>
+        <a href="#">Registration</a>
+        <a href="{% url 'sponsors' %}">Sponsors</a>
+        <a href="#">Accommodation</a>
+        <a href="{% url 'home' %}#test">Contact</a>
     </div>
+</div>
+<nav id="navbar">
     <a href="{% url 'home' %}#" id="logoimg">
         <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
     </a>
@@ -70,6 +71,7 @@
 
 <script>
     let a = document.getElementById("hamburger");
+    let b = document.getElementById("side-nav");
     a.setAttribute("value", "\u2630");
     a.addEventListener("click", () => {
         toggleNav();
@@ -81,12 +83,13 @@
     });
 
     function toggleNav() {
-        document.getElementById("side-nav").classList.toggle("active");
+        b.classList.toggle("active");
     }
 
     document.body.addEventListener('click', function (e) {
-        if (!(document.getElementById("side-nav").contains(e.target) || a.contains(e.target))) {
-            document.getElementById("side-nav").classList.remove("active");
+        if (!(b.contains(e.target) || a.contains(e.target)) && b.classList.contains("active")) {
+            b.classList.remove("active");
+            a.setAttribute("value", "\u2630");
         }
     });
 </script>
