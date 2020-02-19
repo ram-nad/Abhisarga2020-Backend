@@ -83,6 +83,12 @@
     function toggleNav() {
         document.getElementById("side-nav").classList.toggle("active");
     }
+
+    document.body.addEventListener('click', function (e) {
+        if (!(document.getElementById("side-nav").contains(e.target) || a.contains(e.target))) {
+            document.getElementById("side-nav").classList.remove("active");
+        }
+    });
 </script>
 {% block script %}
 {% endblock %}
