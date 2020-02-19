@@ -2,7 +2,7 @@ a {
   color: unset;
 }
 
-a:hover {
+.sponsors :hover {
   text-decoration: underline;
 }
 
