@@ -1,16 +1,16 @@
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.http import urlsafe_base64_encode as b64_encode, urlsafe_base64_decode as b64_decode
 from django.views import View
 
 from AbhisargaBackend.settings import GOOGLE_CLIENT_ID, NEXT_PARAMETER
 from AbhisargaBackend.settings import URL
 from base.models import College
+from base.views import bad_request
 from mail import send_mail
 from .forms import ProfileForm, LoginForm, gender_choices
 from .models import User
@@ -89,7 +89,7 @@ class ProfileMakeView(View):
 
 def login_and_redirect(request, user):
     if not user.is_active:
-        return HttpResponseBadRequest()
+        return bad_request(request, None)
     auth_login(request, user)
     if NEXT_PARAMETER in request.GET:
         return redirect(request.GET[NEXT_PARAMETER])
@@ -101,9 +101,9 @@ def profile_create_get(request, b64id, token):
     pk = b64_decode(b64id).decode()
     u = User.objects.get_or_none(pk=pk)
     if u is None or u.is_active:
-        return HttpResponseBadRequest()
+        return bad_request(request, None)
     elif not registration_token_generator.check_token(u, token):
-        return HttpResponseBadRequest()
+        return bad_request(request, None)
     else:
         return render(request, 'registration/signup_full.html',
                       context={'email': u.email, 'token': token, 'colleges': College.objects.all(),
@@ -115,7 +115,7 @@ def profile_create_post(request):
     token = request.POST['token']
     u = User.objects.get_or_none(email=email)
     if u is None or u.is_active or not registration_token_generator.check_token(u, token):
-        return HttpResponseBadRequest()
+        return bad_request(request, None)
     else:
         pf = ProfileForm(request.POST, request.FILES)
         if pf.is_valid():
@@ -136,6 +136,8 @@ def profile_create_post(request):
 
 class UserLoginView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(to='home')
         return render(request, 'registration/login.html', context={'google_client_id': GOOGLE_CLIENT_ID})
 
     def post(self, request):
@@ -174,7 +176,7 @@ class LogoutView(View):
 
 
 class PasswordChangeView(LoginRequiredMixin, View):
-    login_url = reverse('login')
+    login_url = reverse_lazy('login')
     redirect_field_name = NEXT_PARAMETER
 
     def get(self, request):
@@ -199,7 +201,7 @@ class PasswordChangeView(LoginRequiredMixin, View):
 
 
 class PasswordChangeDoneView(LoginRequiredMixin, View):
-    login_url = reverse('login')
+    login_url = reverse_lazy('login')
     redirect_field_name = NEXT_PARAMETER
 
     def get(self, request):
@@ -256,10 +258,10 @@ class PasswordResetConfirmView(View):
         dtg = password_token_generator
         user = User.objects.get_or_none(pk=b64_decode(idb64).decode())
         if user is None:
-            return HttpResponseBadRequest()
+            return bad_request(request, None)
         if dtg.check_token(user, token):
             return render(request, 'registration/reset_password.html', context={'idb64': idb64, 'token': token})
-        return HttpResponseBadRequest()
+        return bad_request(request, None)
 
 
 class PasswordResetCompleteView(View):
@@ -276,13 +278,13 @@ class PasswordResetCompleteView(View):
             if not dtg.check_token(user, token):
                 raise AssertionError
         except KeyError:
-            return HttpResponseBadRequest()
+            return bad_request(request, None)
         except ValueError:
-            return HttpResponseBadRequest()
+            return bad_request(request, None)
         except User.DoesNotExist:
-            return HttpResponseBadRequest()
+            return bad_request(request, None)
         except AssertionError:
-            return HttpResponseBadRequest()
+            return bad_request(request, None)
 
         user.set_password(password1)
         user.save()

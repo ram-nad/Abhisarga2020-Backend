@@ -1,0 +1,25 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% block title %}Sponsors | Abhisarga 2020{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sponsors.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="sponsor-container">
+        <div id="sponsor-scrollable">
+            {% for c in category %}
+                <div class="sponsor-category">
+                    <h1>{{ c.name }}</h1>
+                    <div class="sponsors">
+                        {% for s in c.sponsors.all %}
+                            <div>
+                                <img src="{{ s.logo.url }}" alt="{{ s.name }}">
+                                <a href="{{ s.website }}">{{ s.name }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

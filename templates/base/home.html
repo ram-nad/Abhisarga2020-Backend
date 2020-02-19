@@ -1,0 +1,111 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% block title %}Home | Abhisarga 2020{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="main">
+        <div id="text">
+            <img src="{% static 'images/text/A1.svg' %}" alt="A" id="A1"/>
+            <img src="{% static 'images/text/B.svg' %}" alt="B" id="B"/>
+            <img src="{% static 'images/text/H.svg' %}" alt="H" id="H"/>
+            <img src="{% static 'images/text/I.svg' %}" alt="I" id="I"/>
+            <img src="{% static 'images/text/S.svg' %}" alt="S" id="S"/>
+            <img src="{% static 'images/text/A2.svg' %}" alt="A" id="A2"/>
+            <img src="{% static 'images/text/R.svg' %}" alt="R" id="R"/>
+            <img src="{% static 'images/text/G.svg' %}" alt="G" id="G"/>
+            <img src="{% static 'images/text/A3.svg' %}" alt="A" id="A3"/>
+        </div>
+        <img id="character" src="{% static 'images/char.svg' %}" alt="Character"/>
+        <div id="scroll-icons">
+            <img class="icons" id="icon1" alt="icon" src="{% static 'images/icons/bw.png' %}"/>
+            <img class="icons" id="icon2" alt="icon" src="{% static 'images/icons/ltn.png' %}"/>
+            <img class="icons" id="icon3" alt="icon" src="{% static 'images/icons/ff.svg' %}"/>
+            <img class="icons" id="icon4" alt="icon" src="{% static 'images/icons/hydra.png' %}"/>
+            <img class="icons" id="icon5" alt="icon" src="{% static 'images/icons/shld.png' %}"/>
+            <img class="icons" id="icon6" alt="icon" src="{% static 'images/icons/im.png' %}"/>
+            <img class="icons" id="icon7" alt="icon" src="{% static 'images/icons/xmen.svg' %}"/>
+            <img class="icons" id="icon8" alt="icon" src="{% static 'images/icons/swr.svg' %}"/>
+        </div>
+    </div>
+
+    <div id="about">
+        <div id="abttext">
+            <h1 id="abthead">
+                ABOUT
+            </h1>
+            <p>
+                Abhisarga, the annual techno-cultural fest of IIIT Sri City, is an
+                equanimous fusion of energy, enthusiasm and talent. We welcome you all
+                to the 7th edition of Abhisarga to invigorate yourselves with a
+                spectacular showcase of talents. Code your way to exciting rewards.
+                Embrace yourself for another cultural extravaganza and join us this
+                year from 20th March- 22nd March at IIIT Sri City!!!
+                <br>
+                This year our theme is comic con. Over the years comics have given us a
+                world of imagination, emotions, thought, vibrant colors and fantasy
+                characters to dive into. It has widened our perspectives on social
+                conundrums motivating to conquer new heights in our scientific pursuits.
+                All of this is just about to get real. Right from DC to Marvel, from tinkle to
+                Manga we’ll unearth every secret the world has yet to confront.
+            </p>
+        </div>
+        <div id="abtimg">
+            <img src="{% static 'images/joker.jpg' %}" alt="Joker - Why So Serious?"/>
+        </div>
+    </div>
+
+    <div id="test">
+        <h1>
+            GET IN TOUCH
+        </h1>
+        <div id="columns">
+            <div class="column">
+                <p>
+                    <strong>MANASA GAVINI</strong>
+                    <br>
+                    President
+                    <br>Students' Council
+                    <br>7330860139
+                </p>
+            </div>
+            <div class="column">
+                <p>
+                    <strong>LAGADH MATSA</strong>
+                    <br>
+                    Secretary
+                    <br>Students' Council
+                    <br>7842149220
+                </p>
+            </div>
+            <div class="column">
+                <p>
+                    <strong>PRATYUSH RAJ</strong>
+                    <br>
+                    Vice President
+                    <br>Students' Council
+                    <br>9693314447
+                </p>
+            </div>
+            <div class="column">
+                <p>
+                    <strong>YASHWANTH KIKKURI</strong>
+                    <br>
+                    Technical Secretary
+                    <br>Students' Council
+                    <br>8074519192
+                </p>
+            </div>
+            <div class="column">
+                <p>
+                    <strong>ABHISHEK THRIPURANA</strong>
+                    <br>
+                    Cultural Secretary
+                    <br>Students' Council
+                    <br>9553522754
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
