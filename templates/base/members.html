@@ -16,8 +16,8 @@
                         <h2>{{ v.role }}</h2>
                     </div>
                     <div class="member-contact">
-                        <h3 contact="email"><a href="mailto:{{ v.email }}">{{ v.email }}</a></h3>
-                        <h3 contact="phone"><a href="tel:{{ v.phone_number }}">{{ v.phone_number }}</a></h3>
+                        <h3 data-contact="email"><a href="mailto:{{ v.email }}">{{ v.email }}</a></h3>
+                        <h3 data-contact="phone"><a href="tel:{{ v.phone_number }}">{{ v.phone_number }}</a></h3>
                     </div>
                     <div class="member-social">
                         {% if v.facebook|length > 0 %}
