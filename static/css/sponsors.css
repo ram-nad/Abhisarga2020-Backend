@@ -15,7 +15,7 @@ body {
 #sponsor-container {
     font-size: 3vw;
     width: 20em;
-    margin: 2.1em auto 0.3em;
+    margin: 1.8em auto 0.2em;
     height: 75vh;
     background: linear-gradient(to bottom right, #61c4ac, #45c7ea);
     border-radius: 0.5em;
@@ -53,7 +53,7 @@ body {
     margin: 0.1em 0 0.2em;
 }
 
-.sponsor-category h1::after{
+.sponsor-category h1::after {
     position: absolute;
     bottom: 0;
     content: "";
@@ -92,6 +92,7 @@ body {
     font-size: 0.5em;
     font-weight: 600;
     text-align: center;
+    font-family: "poppins";
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {

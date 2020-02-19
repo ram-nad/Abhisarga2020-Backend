@@ -22,6 +22,8 @@ body {
     width: 100%;
     padding: 0;
     overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
     font-family: "avenir-next";
 }
 
@@ -134,7 +136,16 @@ body {
     text-shadow: -0.1em 0 red;
 }
 
+#footer-base {
+    width: 100%;
+    font-size: 2vw;
+    height: 3.9em;
+    background: transparent;
+}
+
 #footer {
+    position: absolute;
+    bottom: 0;
     font-size: 2vw;
     background: #172130;
     display: flex;
@@ -178,6 +189,10 @@ body {
     #footer {
         font-size: 2.3vw;
     }
+
+    #footer-base {
+        font-size: 2.3vw;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -192,6 +207,10 @@ body {
     #footer {
         font-size: 3vw;
     }
+
+    #footer-base {
+        font-size: 3vw;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -204,6 +223,10 @@ body {
     }
 
     #footer {
+        font-size: 3.6vw;
+    }
+
+    #footer-base {
         font-size: 3.6vw;
     }
 }
@@ -224,6 +247,11 @@ body {
     #footer #address {
         text-align: center;
     }
+
+    #footer-base {
+        font-size: 4.3vw;
+        height: 5.8em;
+    }
 }
 
 @media (max-width: 320px) {
@@ -241,5 +269,10 @@ body {
 
     #footer #address {
         text-align: center;
+    }
+
+    #footer-base {
+        font-size: 4.8vw;
+        height: 5.8em;
     }
 }

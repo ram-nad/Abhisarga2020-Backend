@@ -1,0 +1,40 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% block title %}Our Team | Abhisarga 2020{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/members.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div id="members-container">
+        {% for v in volunteers %}
+            <div class="member-background">
+                <div class="member-info">
+                    <img src="{{ v.profile_pic.url }}">
+                    <div class="member-detail">
+                        <h1>{{ v.name }}</h1>
+                        <h2>{{ v.role }}</h2>
+                    </div>
+                    <div class="member-contact">
+                        <h3 contact="email"><a href="mailto:{{ v.email }}">{{ v.email }}</a></h3>
+                        <h3 contact="phone"><a href="tel:{{ v.phone_number }}">{{ v.phone_number }}</a></h3>
+                    </div>
+                    <div class="member-social">
+                        {% if v.facebook|length > 0 %}
+                            <a href="{{ v.facebook }}"><img src="{% static 'images/svg/facebook_color.svg' %}"/></a>
+                        {% endif %}
+                        {% if v.twitter|length > 0 %}
+                            <a href="{{ v.twitter }}"><img src="{% static 'images/svg/twitter_color.svg' %}"/></a>
+                        {% endif %}
+                        {% if v.linkedin|length > 0 %}
+                            <a href="{{ v.linkedin }}"><img src="{% static 'images/svg/linkedin_color.svg' %}"/></a>
+                        {% endif %}
+                        {% if v.instagram|length > 0 %}
+                            <a href="{{ v.instagram }}"><img src="{% static 'images/svg/instagram_color.svg' %}"/></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
