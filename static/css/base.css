@@ -23,7 +23,6 @@ body {
     padding: 0;
     overflow-x: hidden;
     position: relative;
-    min-height: 100vh;
     font-family: "avenir-next";
 }
 
@@ -136,18 +135,12 @@ body {
     text-shadow: -0.1em 0 red;
 }
 
-#footer-base {
-    width: 100%;
-    font-size: 2vw;
-    height: 3.9em;
-    background: transparent;
-}
-
 #footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     font-size: 2vw;
-    background: #172130;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+    box-shadow: 0 -0.01em 0.5em #000;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -156,7 +149,7 @@ body {
 }
 
 #footer #social {
-    width: 10em;
+    width: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,15 +157,15 @@ body {
 
 #footer #address {
     text-align: right;
-    padding: 0.5em 0;
+    padding: 0.1em 0;
     color: #fff;
-    font-size: 0.9em;
+    font-size: 0.7em;
     line-height: 1.1em;
 }
 
 #footer #social img {
-    height: 1.3em;
-    width: 1.3em;
+    height: 0.9em;
+    width: 0.9em;
     cursor: pointer;
     padding: 0.2em 0.5em;
 }
@@ -189,10 +182,6 @@ body {
     #footer {
         font-size: 2.3vw;
     }
-
-    #footer-base {
-        font-size: 2.3vw;
-    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -207,10 +196,6 @@ body {
     #footer {
         font-size: 3vw;
     }
-
-    #footer-base {
-        font-size: 3vw;
-    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -223,10 +208,6 @@ body {
     }
 
     #footer {
-        font-size: 3.6vw;
-    }
-
-    #footer-base {
         font-size: 3.6vw;
     }
 }
@@ -247,11 +228,6 @@ body {
     #footer #address {
         text-align: center;
     }
-
-    #footer-base {
-        font-size: 4.3vw;
-        height: 5.8em;
-    }
 }
 
 @media (max-width: 320px) {
@@ -269,10 +245,5 @@ body {
 
     #footer #address {
         text-align: center;
-    }
-
-    #footer-base {
-        font-size: 4.8vw;
-        height: 5.8em;
     }
 }
