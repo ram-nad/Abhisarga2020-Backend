@@ -40,7 +40,15 @@
         <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
     </a>
     <div id="nav-buttons">
-        <button type="button" id="register">Login</button>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">
+                <button type="button" id="register">Logout</button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" id="register">Login</button>
+            </a>
+        {% endif %}
         <div id="hamburger" value=""></div>
     </div>
 </nav>
