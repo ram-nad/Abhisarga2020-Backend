@@ -68,8 +68,8 @@ body {
 }
 
 #hamburger {
+    position: relative;
     background-color: #fff;
-    color: #f00;
     font-size: 1.3em;
     font-weight: 400;
     width: 1.3em;
@@ -81,8 +81,50 @@ body {
     align-items: center;
 }
 
-#hamburger::after {
-    content: attr(value);
+#hamburger.open::before{
+    content: "";
+    background: #141414;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.15em;
+    height: 0.9em;
+    transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+}
+
+#hamburger.open::after{
+    content: "";
+    background: #141414;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.15em;
+    height: 0.9em;
+    transform: translateX(-50%) translateY(-50%) rotateZ(-45deg);
+}
+
+#hamburger.close::before{
+    content: "";
+    background: #fff;
+    border-bottom: 0.1em solid #141414;
+    border-top: 0.1em solid #141414;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.9em;
+    height: 0.4em;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#hamburger.close::after{
+    content: "";
+    background: #141414;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 0.1em;
+    width: 0.9em;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 #register {

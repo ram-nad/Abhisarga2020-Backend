@@ -44,7 +44,7 @@
                 <button type="button" id="register">Login</button>
             </a>
         {% endif %}
-        <div id="hamburger" value=""></div>
+        <div id="hamburger" class="close"></div>
     </div>
 </nav>
 
@@ -73,24 +73,21 @@
 <script>
     let a = document.getElementById("hamburger");
     let b = document.getElementById("side-nav");
-    a.setAttribute("value", "\u2630");
     a.addEventListener("click", () => {
         toggleNav();
-        if (a.getAttribute("value") === "\u2630") {
-            a.setAttribute("value", "\u2715");
-        } else {
-            a.setAttribute("value", "\u2630");
-        }
     });
 
     function toggleNav() {
         b.classList.toggle("active");
+        a.classList.toggle("open");
+        a.classList.toggle("close");
     }
 
     document.body.addEventListener('click', function (e) {
         if (!(b.contains(e.target) || a.contains(e.target)) && b.classList.contains("active")) {
             b.classList.remove("active");
-            a.setAttribute("value", "\u2630");
+            a.classList.remove("open");
+            a.classList.add("close");
         }
     });
 </script>
