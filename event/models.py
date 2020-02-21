@@ -9,15 +9,15 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(to=EventCategory, related_name="events", on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=500)
-    vne = models.CharField(max_length=300, verbose_name="Venue", blank=True)
+    vne = models.CharField(max_length=300, verbose_name="Venue", blank=True, null=True)
     dt = models.DateField(verbose_name="Date", null=True, blank=True)
     rls = models.TextField(max_length=1000, verbose_name="Rules")
     poster = models.ImageField(upload_to="events", default="events/default_event_poster.jpg")
     contact_number = models.CharField(max_length=13, validators=[validate_phone])
     short_description = models.CharField(max_length=20, default="")
-    f_p = models.CharField(max_length=5, verbose_name="First Prize", blank=True)
-    s_p = models.CharField(max_length=5, verbose_name="Second Prize", blank=True)
-    t_p = models.CharField(max_length=5, verbose_name="Third Prize", blank=True)
+    f_p = models.CharField(max_length=5, verbose_name="First Prize", blank=True, null=True)
+    s_p = models.CharField(max_length=5, verbose_name="Second Prize", blank=True, null=True)
+    t_p = models.CharField(max_length=5, verbose_name="Third Prize", blank=True, null=True)
 
     # organiser = models.ForeignKey(to=Volunteer, related_name="organised_events", null=True, on_delete=models.SET_NULL)
     #
@@ -43,21 +43,21 @@ class Event(models.Model):
 
     @property
     def first_prize(self):
-        if self.f_p is '':
+        if self.f_p is None:
             return "---"
         a = int(self.f_p)
         return "₹ {:,d}".format(a)
 
     @property
     def second_prize(self):
-        if self.s_p is '':
+        if self.s_p is None:
             return "---"
         a = int(self.s_p)
         return "₹ {:,d}".format(a)
 
     @property
     def third_prize(self):
-        if self.t_p is '':
+        if self.t_p is None:
             return "---"
         a = int(self.t_p)
         return "₹ {:,d}".format(a)
@@ -68,7 +68,7 @@ class Event(models.Model):
 
     @property
     def venue(self):
-        if self.vne is '':
+        if self.vne is None:
             return "-----"
         return self.vne
 

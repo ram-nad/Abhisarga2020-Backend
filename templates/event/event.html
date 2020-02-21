@@ -35,3 +35,19 @@
         </div>
     </div>
 {% endblock %}
+
+{% block script %}
+    <script>
+        let rlb = document.getElementById("event-rule");
+        let btn = document.getElementById("rule-open-button");
+
+        function ruleToggle() {
+            rlb.classList.toggle("ruleopen");
+            btn.classList.toggle("ruleopen");
+        }
+
+        btn.onclick = function () {
+            ruleToggle();
+        }
+    </script>
+{% endblock %}
