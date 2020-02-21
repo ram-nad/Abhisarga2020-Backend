@@ -89,3 +89,6 @@ class Volunteer(models.Model):
     def clean(self):
         super().clean()
         self.phone_number = validate_phone(self.phone_number)
+
+    def __str__(self):
+        return self.name + " (" + self.email + ")"
