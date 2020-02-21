@@ -36,7 +36,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
     background: linear-gradient(
             to right,
             rgba(0, 0, 0, 0.6) 60%,
@@ -145,7 +144,6 @@ body {
     position: fixed;
     height: 100%;
     width: 12em;
-    z-index: 1;
     top: 0;
     right: -12em;
     background-color: #444;
@@ -254,7 +252,7 @@ body {
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 321px) and (max-width: 480px) {
     #navbar {
         font-size: 4.3vw;
     }

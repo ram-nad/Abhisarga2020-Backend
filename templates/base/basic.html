@@ -20,6 +20,10 @@
 </head>
 
 <body>
+
+{% block content %}
+{% endblock %}
+
 <div id="side-nav">
     <div class="hoverid">
         <a href="{% url 'home' %}#about">About</a>
@@ -47,10 +51,6 @@
         <div id="hamburger" class="close"></div>
     </div>
 </nav>
-
-{% block content %}
-{% endblock %}
-
 
 <div id="footer">
     <div id="social">

@@ -15,7 +15,7 @@ body {
 #sponsor-container {
     font-size: 3vw;
     width: 20em;
-    margin: 1.8em auto 0.2em;
+    margin: 2.1em auto 1.9em;
     height: 75vh;
     background: linear-gradient(to bottom right, #61c4ac, #45c7ea);
     border-radius: 0.5em;
@@ -122,16 +122,19 @@ body {
 
     #sponsor-container {
         font-size: 4.8vw;
+        margin: 2.2em auto 2em;
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 321px) and (max-width: 480px) {
     .sponsor-category {
         font-size: 6.2vw;
+        margin: 2.3em auto 2.1em;
     }
 
     #sponsor-container {
         font-size: 4.8vw;
+        margin: 3.1em auto 2.3em;
     }
 }
 
@@ -142,5 +145,6 @@ body {
 
     #sponsor-container {
         font-size: 4.8vw;
+        margin: 3.3em auto 2.5em;
     }
 }

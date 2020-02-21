@@ -16,7 +16,7 @@ body {
 #members-container {
     font-size: 1.8vw;
     width: 90%;
-    margin: 3em auto 1.3em;
+    margin: 3.5em auto 2.5em;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -136,7 +136,7 @@ body {
 
 .member-social a {
     text-decoration: none;
-    color: none;
+    color: unset;
 }
 
 .member-social a img {
@@ -162,7 +162,7 @@ body {
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 321px) and (max-width: 480px) {
     #members-container {
         font-size: 3.8vw;
     }
