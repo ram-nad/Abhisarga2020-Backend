@@ -135,7 +135,7 @@ body {
     font-weight: 700;
     line-height: 1.3em;
     height: 1.3em;
-    text-after-overflow: ellipsis;
+    word-wrap: break-word;
     overflow: hidden;
 }
 
