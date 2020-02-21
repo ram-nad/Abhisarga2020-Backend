@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/event.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <div id="event-container">
         <div id="event-image">
             <img src="{{ event.poster.url }}">
@@ -18,7 +18,7 @@
                 {{ event.description }}
             </p>
             <div id="ev-venue">Venue: {{ event.venue }}</div>
-            <div id="ev-time">Date: {{ event.date|date: "d F" }}</div>
+            <div id="ev-time">Date: {{ event.date|date:"d F" }}</div>
             <div id="ev-contact">Contact: {{ event.contact_number }}</div>
             <div id="ev-prize">
                 <span>1st Prize: {{ event.first_prize }}</span>
