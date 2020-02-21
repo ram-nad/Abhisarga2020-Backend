@@ -11,6 +11,7 @@ __pycache__
 
 !/media/profilepics/default_profile_pic.jpg
 !/media/volunteer/default_volunteer_pic.jpg
+!/media/events/default_event_poster.jpg
 
 
 Pipfile
