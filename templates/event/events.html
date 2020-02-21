@@ -5,19 +5,17 @@
     <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <div id="ev-categories">
         {% for ct in categories %}
-            {% if forloop.counter0 == 0 %}
-                <div class="ev-category ev-active" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
-            {% else %}
-                <div class="ev-category" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
-            {% endif %}
+
+            <div class="ev-category{% if forloop.counter0 is 0 %} ev-active{% endif %}" data-event="{{ ct.slug_name }}">
+                {{ ct.name }}</div>
         {% endfor %}
     </div>
 
     {% for ct in categories %}
-        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}">
+        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}"
             data-event="{{ ct.slug_name }}">
             {% for ev in ct.events.all %}
                 <div class="ev-event-card">
