@@ -8,11 +8,9 @@
 {% block content %}
     <div id="ev-categories">
         {% for ct in categories %}
-            {% if forloop.counter0 == 0 %}
-                <div class="ev-category ev-active" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
-            {% else %}
-                <div class="ev-category" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
-            {% endif %}
+
+            <div class="ev-category{% if forloop.counter0 is 0 %} ev-active{% endif %}" data-event="{{ ct.slug_name }}">
+                {{ ct.name }}</div>
         {% endfor %}
     </div>
 
