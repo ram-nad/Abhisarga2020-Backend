@@ -13,7 +13,7 @@ from base.models import College
 from base.views import bad_request
 from mail import send_mail
 from .forms import ProfileForm, LoginForm, gender_choices
-from .models import User
+from .models import User, Volunteer
 from .token import registration_token_generator, get_user_google, password_token_generator
 
 
@@ -292,3 +292,8 @@ class PasswordResetCompleteView(View):
                    "message": "Your password has been updated successfully.",
                    "next": {"url": reverse('login'), "name": 'Return to Login Page'}}
         return render(request, 'base/message.html', context=message)
+
+
+class VolunteerView(View):
+    def get(self, request):
+        return render(request, 'base/members.html', context={'volunteers': Volunteer.objects.all()})

@@ -20,16 +20,16 @@
                         <h3 data-contact="phone"><a href="tel:{{ v.phone_number }}">{{ v.phone_number }}</a></h3>
                     </div>
                     <div class="member-social">
-                        {% if v.facebook|length > 0 %}
+                        {% if v.facebook %}
                             <a href="{{ v.facebook }}"><img src="{% static 'images/svg/facebook_color.svg' %}"/></a>
                         {% endif %}
-                        {% if v.twitter|length > 0 %}
+                        {% if v.twitter %}
                             <a href="{{ v.twitter }}"><img src="{% static 'images/svg/twitter_color.svg' %}"/></a>
                         {% endif %}
-                        {% if v.linkedin|length > 0 %}
+                        {% if v.linkedin %}
                             <a href="{{ v.linkedin }}"><img src="{% static 'images/svg/linkedin_color.svg' %}"/></a>
                         {% endif %}
-                        {% if v.instagram|length > 0 %}
+                        {% if v.instagram %}
                             <a href="{{ v.instagram }}"><img src="{% static 'images/svg/instagram_color.svg' %}"/></a>
                         {% endif %}
                     </div>

@@ -17,6 +17,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
+    is_administrator = models.BooleanField(default=False)
 
     def has_perm(self, perm, obj=None):
         if self.is_superuser or self.is_staff:
@@ -39,13 +40,6 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.email
-
-    @property
-    def is_volunteer(self):
-        if hasattr(self, 'profile'):
-            return hasattr(self.profile, "volunteer")
-        else:
-            return False
 
     @property
     def name(self):
@@ -76,36 +70,22 @@ class Profile(models.Model):
     def name(self):
         return self.first_name + " " + self.last_name
 
-    @property
-    def is_volunteer(self):
-        return hasattr(self, 'volunteer')
-
     def clean(self):
         super().clean()
         self.phone_number = validate_phone(self.phone_number)
 
 
 class Volunteer(models.Model):
-    profile = models.OneToOneField(to=Profile, related_name="volunteer", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(blank=False)
+    phone_number = models.CharField(max_length=13, validators=[validate_phone])
+    profile_pic = models.ImageField(upload_to="volunteer", default="volunteer/default_volunteer_pic.jpg")
     role = models.CharField(max_length=50)
     facebook = models.URLField(verbose_name="Facebook Profile", blank=True)
     linkedin = models.URLField(verbose_name="LinkedIn Profile", blank=True)
     instagram = models.URLField(verbose_name="Instagram Profile", blank=True)
     twitter = models.URLField(verbose_name="Twitter Profile", blank=True)
-    is_administrator = models.BooleanField(default=False)
 
-    @property
-    def email(self):
-        return self.profile.user.email
-
-    @property
-    def phone_number(self):
-        return self.profile.phone_number
-
-    @property
-    def name(self):
-        return self.profile.first_name + " " + self.profile.last_name
-
-    @property
-    def profile_pic(self):
-        return self.profile.profile_pic
+    def clean(self):
+        super().clean()
+        self.phone_number = validate_phone(self.phone_number)

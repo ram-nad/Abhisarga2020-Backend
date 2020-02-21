@@ -10,6 +10,8 @@ __pycache__
 /media/
 
 !/media/profilepics/default_profile_pic.jpg
+!/media/volunteer/default_volunteer_pic.jpg
+
 
 Pipfile
 Pipfile.lock

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <div id="ev-categories">
         {% for ct in categories %}
             {% if forloop.counter0 == 0 %}
@@ -17,21 +17,21 @@
     </div>
 
     {% for ct in categories %}
-        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}">
-            data-event="{{ ct.slug_name }}">
-            {% for ev in ct.events.all %}
-                <div class="ev-event-card">
-                    <div class="ev-event-title">
-                        {{ ev.name }}
-                    </div>
-                    <div class="ev-event-content">
-                        {{ ev.description }}
-                    </div>
-                    <a class="ev-event-button" href="{% url 'event_detail' pk=ev.pk %}">
-                        Learn More
-                    </a>
+        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %} data-event="{{ ct.slug_name }}
+        ">
+        {% for ev in ct.events.all %}
+            <div class="ev-event-card">
+                <div class="ev-event-title">
+                    {{ ev.name }}
                 </div>
-            {% endfor %}
+                <div class="ev-event-content">
+                    {{ ev.description }}
+                </div>
+                <a class="ev-event-button" href="{% url 'event_detail' pk=ev.pk %}">
+                    Learn More
+                </a>
+            </div>
+        {% endfor %}
         </div>
     {% endfor %}
 
