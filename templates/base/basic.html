@@ -28,9 +28,9 @@
     <div class="hoverid">
         <a href="{% url 'home' %}#about">About</a>
         <a href="{% url 'events' %}">Events</a>
-        <a href="#">Registration</a>
+        {# <a href="#">Registration</a> #}
         <a href="{% url 'sponsors' %}">Sponsors</a>
-        <a href="#">Accommodation</a>
+        {# <a href="#">Accommodation</a> #}
         <a href="{% url 'home' %}#test">Contact</a>
     </div>
 </div>
@@ -40,11 +40,11 @@
     </a>
     <div id="nav-buttons">
         {% if request.user.is_authenticated %}
-            <a href="{% url 'logout' %}">
+            <a href="#">
                 <button type="button" id="register">Logout</button>
             </a>
         {% else %}
-            <a href="{% url 'login' %}">
+            <a href="#">
                 <button type="button" id="register">Login</button>
             </a>
         {% endif %}

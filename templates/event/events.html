@@ -17,9 +17,9 @@
     </div>
 
     {% for ct in categories %}
-        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}  }"
-             data-event="{{ ct.slug_name }}">
-            {% for ev in ct.events %}
+        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}">
+            data-event="{{ ct.slug_name }}">
+            {% for ev in ct.events.all %}
                 <div class="ev-event-card">
                     <div class="ev-event-title">
                         {{ ev.name }}
@@ -27,9 +27,9 @@
                     <div class="ev-event-content">
                         {{ ev.description }}
                     </div>
-                    <div class="ev-event-button">
+                    <a class="ev-event-button" href="{% url 'event_detail' pk=ev.pk %}">
                         Learn More
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
