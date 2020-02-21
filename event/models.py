@@ -16,8 +16,8 @@ class Event(models.Model):
     contact_number = models.CharField(max_length=13, validators=[validate_phone])
     short_description = models.CharField(max_length=20, default="")
     f_p = models.CharField(max_length=5, verbose_name="First Prize", blank=True)
-    s_p = models.CharField(max_length=5, verbose_name="First Prize", blank=True)
-    t_p = models.CharField(max_length=5, verbose_name="First Prize", blank=True)
+    s_p = models.CharField(max_length=5, verbose_name="Second Prize", blank=True)
+    t_p = models.CharField(max_length=5, verbose_name="Third Prize", blank=True)
 
     # organiser = models.ForeignKey(to=Volunteer, related_name="organised_events", null=True, on_delete=models.SET_NULL)
     #
@@ -46,21 +46,21 @@ class Event(models.Model):
         if self.f_p is None:
             "---"
         a = int(self.f_p)
-        return f"₹ {a:,d}"
+        return "₹ {:,d}".format(a)
 
     @property
     def second_prize(self):
         if self.s_p is None:
             "---"
         a = int(self.s_p)
-        return f"₹ {a:,d}"
+        return "₹ {:,d}".format(a)
 
     @property
     def third_prize(self):
         if self.t_p is None:
             "---"
         a = int(self.t_p)
-        return f"₹ {a:,d}"
+        return "₹ {:,d}".format(a)
 
     @property
     def rules(self):
