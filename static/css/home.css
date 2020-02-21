@@ -25,7 +25,7 @@ a {
 }
 
 #main #text {
-    margin-top: 1.2em;
+    margin-top: 0.5em;
     position: relative;
     height: 1.5em;
 }
@@ -37,61 +37,61 @@ a {
 }
 
 #main #text #A1 {
-    top: 1.82em;
-    left: -4.15em;
     animation: animateA1 2.5s infinite;
+    top: 1.85em;
+    left: -4.3em;
 }
 
 #main #text #B {
     animation: animateB 2.5s infinite;
-    top: 1em;
-    left: -3.6em;
+    top: 1.1em;
+    left: -3.73em;
 }
 
 #main #text #H {
     animation: animateH 2.5s infinite;
-    top: 0.25em;
-    left: -2.7em;
+    top: 0.62em;
+    left: -2.67em;
 }
 
 #main #text #I {
     animation: animateI 2.5s infinite;
-    top: 0.3em;
-    left: -1.4em;
+    top: 0.34em;
+    left: -1.55em;
 }
 
 #main #text #S {
     animation: animateS 2.5s infinite;
-    top: 0.1em;
-    left: -0.9em;
+    top: 0.15em;
+    left: -1em;
 }
 
 #main #text #A2 {
     animation: animateA2 2.5s infinite;
     transform: rotateZ(15deg);
-    top: 0.1em;
-    left: 0.3em;
+    top: 0.17em;
+    left: 0.2em;
 }
 
 #main #text #R {
     animation: animateR 2.5s infinite;
     transform: rotateZ(15deg);
-    top: 0em;
-    left: 1.5em;
+    top: 0.25em;
+    left: 1.3em;
 }
 
 #main #text #G {
     animation: animateG 2.5s infinite;
     transform: rotateZ(35deg);
-    top: 1.3em;
-    left: 2.2em;
+    top: 1.37em;
+    left: 1.98em;
 }
 
 #main #text #A3 {
     animation: animateA3 2.5s infinite;
     transform: rotateZ(45deg);
     top: 2.5em;
-    left: 2.8em;
+    left: 2.3em;
 }
 
 @keyframes animateA1 {
@@ -253,67 +253,6 @@ a {
     }
     100% {
         transform: scale(0.8) rotateZ(45deg);
-    }
-}
-
-#scroll-icons {
-    position: relative;
-    top: -0.5em;
-    font-size: 1em;
-    width: 100%;
-    height: 1em;
-    overflow: hidden;
-}
-
-.icons {
-    position: absolute;
-    margin: 0 0.5em;
-    width: 1em;
-    height: 100%;
-    left: 100%;
-}
-
-#icon1 {
-    animation: marquee 8s linear 0s infinite;
-}
-
-#icon2 {
-    animation: marquee 8s linear 1s infinite;
-}
-
-#icon3 {
-    animation: marquee 8s linear 2s infinite;
-}
-
-#icon4 {
-    animation: marquee 8s linear 3s infinite;
-}
-
-#icon5 {
-    animation: marquee 8s linear 4s infinite;
-}
-
-#icon6 {
-    animation: marquee 8s linear 5s infinite;
-}
-
-#icon7 {
-    animation: marquee 8s linear 6s infinite;
-}
-
-#icon8 {
-    animation: marquee 8s linear 7s infinite;
-}
-
-@keyframes marquee {
-    0% {
-        left: 100%;
-    }
-    80% {
-        left: 0%;
-    }
-    100% {
-        left: -25%;
     }
 }
 

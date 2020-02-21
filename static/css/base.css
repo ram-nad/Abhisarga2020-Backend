@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "reality-check";
-    src: url("../fonts/Reality_Check.otf") format("opentype");
+    font-family: "marker-felt";
+    src: url("../fonts/Marker_Felt_Wide.ttf") format("truetype");
 }
 
 @font-face {
@@ -80,7 +80,7 @@ body {
     align-items: center;
 }
 
-#hamburger.open::before{
+#hamburger.open::before {
     content: "";
     background: #141414;
     position: absolute;
@@ -91,7 +91,7 @@ body {
     transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
 }
 
-#hamburger.open::after{
+#hamburger.open::after {
     content: "";
     background: #141414;
     position: absolute;
@@ -102,7 +102,7 @@ body {
     transform: translateX(-50%) translateY(-50%) rotateZ(-45deg);
 }
 
-#hamburger.close::before{
+#hamburger.close::before {
     content: "";
     background: #fff;
     border-bottom: 0.1em solid #141414;
@@ -115,7 +115,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
 }
 
-#hamburger.close::after{
+#hamburger.close::after {
     content: "";
     background: #141414;
     position: absolute;
@@ -168,7 +168,7 @@ body {
 }
 
 .hoverid a:hover {
-    font-family: "reality-check";
+    font-family: "marker-felt";
     font-weight: 500;
     height: 0.7em;
     font-size: 1.4em;
