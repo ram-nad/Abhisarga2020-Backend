@@ -10,7 +10,7 @@ class Event(models.Model):
     category = models.ForeignKey(to=EventCategory, related_name="events", on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=500)
     vne = models.CharField(max_length=300, verbose_name="Venue", blank=True)
-    dt = models.DateField(verbose_name="Date", blank=True)
+    dt = models.DateField(verbose_name="Date", null=True, blank=True)
     rls = models.TextField(max_length=1000, verbose_name="Rules")
     poster = models.ImageField(upload_to="events", default="events/default_event_poster.jpg")
     contact_number = models.CharField(max_length=13, validators=[validate_phone])
@@ -43,22 +43,22 @@ class Event(models.Model):
 
     @property
     def first_prize(self):
-        if self.f_p is None:
-            "---"
+        if self.f_p is '':
+            return "---"
         a = int(self.f_p)
         return "₹ {:,d}".format(a)
 
     @property
     def second_prize(self):
-        if self.s_p is None:
-            "---"
+        if self.s_p is '':
+            return "---"
         a = int(self.s_p)
         return "₹ {:,d}".format(a)
 
     @property
     def third_prize(self):
-        if self.t_p is None:
-            "---"
+        if self.t_p is '':
+            return "---"
         a = int(self.t_p)
         return "₹ {:,d}".format(a)
 
@@ -68,7 +68,7 @@ class Event(models.Model):
 
     @property
     def venue(self):
-        if self.vne is None:
+        if self.vne is '':
             return "-----"
         return self.vne
 
