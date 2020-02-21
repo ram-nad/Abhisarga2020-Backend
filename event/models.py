@@ -20,8 +20,10 @@ class Event(models.Model):
     organiser = models.ForeignKey(to=Volunteer, related_name="organised_events", null=True, on_delete=models.SET_NULL)
     co_organiser = models.ForeignKey(to=Volunteer, related_name="co_organised_events", null=True, blank=True,
                                      on_delete=models.SET_NULL)
-    prizes = models.TextField(max_length=300)
-    rules = models.TextField(max_length=1000)
+    f_p = models.CharField(max_length=5, verbose_name="First Prize")
+    s_p = models.CharField(max_length=5, verbose_name="First Prize")
+    t_p = models.CharField(max_length=5, verbose_name="First Prize")
+    rls = models.TextField(max_length=1000, verbose_name="Rules")
     extra_param_1_name = models.CharField(max_length=40, blank=True, default="")
     extra_param_2_name = models.CharField(max_length=40, blank=True, default="")
     extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
@@ -31,3 +33,22 @@ class Event(models.Model):
 
     def get_extra_params(self):
         return [f for f in [self.extra_param_1_name, self.extra_param_2_name, self.extra_param_3_name] if f]
+
+    @property
+    def first_prize(self):
+        a = int(self.f_p)
+        return f"₹ {a:,d}"
+
+    @property
+    def second_prize(self):
+        a = int(self.s_p)
+        return f"₹ {a:,d}"
+
+    @property
+    def third_prize(self):
+        a = int(self.t_p)
+        return f"₹ {a:,d}"
+
+    @property
+    def rules(self):
+        return list(map(str.strip, filter(lambda x: len(x) > 0, self.rls.split("\n"))))
