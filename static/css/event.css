@@ -1,0 +1,240 @@
+body {
+  background: url("../images/event_bg.png");
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+}
+
+#event-container {
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  margin: 3.2em auto 2em;
+  flex-wrap: wrap-reverse;
+}
+
+#event-image {
+  height: 17em;
+  width: 11em;
+  background: linear-gradient(
+    to right,
+    rgba(136, 209, 210, 1),
+    rgba(185, 222, 195, 0.4),
+    rgba(136, 209, 210, 1)
+  );
+  border-radius: 1em;
+}
+
+#event-image > img {
+  width: 92%;
+  height: 96%;
+  position: relative;
+  top: 2%;
+  left: 4%;
+  border-radius: 1em;
+}
+
+#event-detail {
+  position: relative;
+  box-sizing: border-box;
+  height: 17em;
+  width: 13em;
+  background: linear-gradient(
+    to right,
+    rgba(185, 222, 195, 0.6),
+    rgba(136, 209, 210, 1)
+  );
+  border-radius: 1em;
+  padding: 1em 0.7em;
+  overflow: hidden;
+}
+
+#event-rule {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  border-radius: 1em;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, rgb(185, 222, 195), rgb(136, 209, 210));
+  overflow-y: scroll;
+  padding: 0.3em 1em 0.1em;
+  transition: right 0.5s;
+  -ms-overflow-style: none;
+}
+
+#event-rule::-webkit-scrollbar {
+  display: none;
+}
+
+#event-rule.ruleopen {
+  right: 0;
+}
+
+#event-rule > span {
+  position: relative;
+  display: block;
+  width: 95%;
+  margin: 0.3em auto;
+  font-size: 0.65em;
+  font-weight: 600;
+}
+
+#event-rule > span::before {
+  content: "";
+  position: absolute;
+  left: -0.75em;
+  top: 0.4em;
+  height: 0.25em;
+  width: 0.25em;
+  border-radius: 0.12em;
+  background: #000;
+}
+
+#rule-open-button {
+  background: rgb(28, 176, 184);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) translateX(-50%);
+  height: 1.6em;
+  width: 1.6em;
+  border-radius: 0.8em;
+  cursor: pointer;
+  transition: left 0.5s;
+}
+
+#rule-open-button.ruleopen {
+  left: 100%;
+}
+
+#rule-open-button::after {
+  background: url("../images/svg/info.svg");
+  background-size: 50% 50%;
+  background-position: right center;
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  width: 1.6em;
+  height: 1.6em;
+}
+
+#rule-open-button.ruleopen::after {
+  background: url("../images/svg/left-close.svg");
+  background-size: 50% 50%;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+#event-detail > h1 {
+  font-family: "poppins";
+  padding: 0;
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+
+#event-detail > h2 {
+  font-family: "poppins";
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  line-height: 1.1em;
+  color: #585858;
+}
+
+#event-detail > p {
+  margin: 1em;
+  padding: 0;
+  font-size: 0.6em;
+  text-align: justify;
+  font-weight: 800;
+  color: #383838;
+  height: 10em;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+#event-detail > p::-webkit-scrollbar {
+  display: none;
+}
+
+#ev-venue,
+#ev-time,
+#ev-contact {
+  padding: 0;
+  margin: 0.2em 0;
+  width: 100%;
+  font-size: 0.65em;
+  letter-spacing: 0.07em;
+}
+
+#ev-prize {
+  padding: 0;
+  margin: 0.5em 0;
+  font-size: 0.65em;
+  font-weight: bold;
+  line-height: 1.1em;
+}
+
+#ev-prize > span {
+  display: block;
+  padding: 0.1em 0;
+}
+
+#event-register {
+  box-sizing: border-box;
+  position: absolute;
+  width: 5em;
+  height: 2em;
+  bottom: 1em;
+  right: 1em;
+  background: rgb(28, 176, 184);
+  transform: skew(-20deg);
+  box-shadow: 0.2em 0.2em rgb(74, 189, 196);
+  text-align: center;
+  line-height: 1em;
+  padding: 0.5em 0;
+  color: #fff;
+  font-weight: 900;
+}
+
+#event-register:hover {
+  transform: skew(-20deg) translateX(-0.4em);
+  box-shadow: 0.4em 0.2em rgb(6, 100, 105);
+  text-shadow: 0.02em 0.02em #000;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  #event-container {
+    font-size: 2.4vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #event-container {
+    font-size: 3.1vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  #event-container {
+    font-size: 3.8vw;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+  #event-container {
+    font-size: 4.6vw;
+  }
+}
+
+@media (max-width: 320px) {
+  #event-container {
+    font-size: 5.3vw;
+  }
+}

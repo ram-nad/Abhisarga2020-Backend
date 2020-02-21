@@ -1,35 +1,68 @@
 {% extends 'base/basic.html' %}
 {% load static %}
-{% block title %}Events | Abhisarga 2020{% endblock %}
+{% block title %}Events | Abisarga 2020{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
-{% block content %}
-    <div id="categories">
-        <div class="category active">All</div>
-        <div class="category">Technical</div>
-        <div class="category">Cultural</div>
-        <div class="category">Music</div>
-        <div class="category">Dance</div>
-        <div class="category">Workshops</div>
-        <div class="category">Hackathon</div>
-    </div>
 
-    <div id="all-events">
-        {% for e in events %}
-            <div class="event-card">
-                <div class="event-title">
-                    {{ e.name }}
-                </div>
-                <div class="event-content">
-                    {{ e.description }}
-                </div>
-                <div class="event-register">
-                    Register
-                </div>
-            </div>
+{% block body %}
+    <div id="ev-categories">
+        {% for ct in categories %}
+            {% if forloop.counter0 == 0 %}
+                <div class="ev-category ev-active" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
+            {% else %}
+                <div class="ev-category" data-event="{{ ct.slug_name }}">{{ ct.name }}</div>
+            {% endif %}
         {% endfor %}
     </div>
 
-    <div class="space"></div>
+    {% for ct in categories %}
+        <div class="ev-all-events{% if forloop.counter0 == 0 %} selected-event{% endif %}  }"
+             data-event="{{ ct.slug_name }}">
+            {% for ev in ct.events %}
+                <div class="ev-event-card">
+                    <div class="ev-event-title">
+                        {{ ev.name }}
+                    </div>
+                    <div class="ev-event-content">
+                        {{ ev.description }}
+                    </div>
+                    <div class="ev-event-button">
+                        Learn More
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        let btns = document.getElementsByClassName("ev-category");
+        let displays = document.getElementsByClassName("ev-all-events");
+        for (let i = 0; i < btns.length; i++) {
+            let src = btns[i].getAttribute("data-event");
+            btns[i].addEventListener("click", function () {
+                switch_event(src);
+            });
+
+            function switch_event(src) {
+                for (let i = 0; i < btns.length; i++) {
+                    if (btns[i].getAttribute("data-event") != src) {
+                        btns[i].classList.remove("ev-active");
+                    } else {
+                        btns[i].classList.add("ev-active");
+                    }
+                }
+                for (let i = 0; i < displays.length; i++) {
+                    if (displays[i].getAttribute("data-event") != src) {
+                        displays[i].classList.remove("selected-event");
+                    } else {
+                        displays[i].classList.add("selected-event");
+                    }
+                }
+            }
+        }
+    </script>
 {% endblock %}

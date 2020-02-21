@@ -21,3 +21,7 @@ class EventCategory(models.Model):
 
     class Meta:
         verbose_name_plural = "Event Categories"
+
+    @property
+    def slug_name(self):
+        return self.name.replace(" ", "-").lower()

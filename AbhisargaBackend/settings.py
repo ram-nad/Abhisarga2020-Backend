@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'base',
     'registration',
     'event',
-    'event_registration',
-    'payment',
+    # 'event_registration',
+    # 'payment',
     'sponsorship',
 
 ]
@@ -142,8 +142,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/profile/login'
-
-INLINECSS_CSS_LOADER = 'django_inlinecss.css_loaders.StaticfilesFinderCSSLoader'
 
 # Paytm Settings
 

@@ -1,0 +1,37 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+
+{% block title %}{{ event.name }} | Abhisarga 2020{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/event.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div id="event-container">
+        <div id="event-image">
+            <img src="{{ event.poster.url }}">
+        </div>
+        <div id="event-detail">
+            <h1>{{ event.name }}</h1>
+            <h2>{{ short_description }}</h2>
+            <p>
+                {{ event.description }}
+            </p>
+            <div id="ev-venue">Venue: {{ event.venue }}</div>
+            <div id="ev-time">Date: {{ event.date|date: "d F" }}</div>
+            <div id="ev-contact">Contact: ----</div>
+            <div id="ev-prize">
+                <span>1st Prize: --</span>
+                <span>2nd Prize: --</span>
+                <span>3rd Prize: --</span>
+            </div>
+            <a id="event-register" href="">Register</a>
+            <div id="event-rule" class="">
+                <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit amet </span>
+                <span> dolore quisquam ullam iste reprehenderit! Nihil, asperiores doloremque minima natus </span>
+                <span>tenetur atque suscipit obcaecati corporis ut ipsa in perspiciatis.</span>
+            </div>
+            <div id="rule-open-button" title="Rules"></div>
+        </div>
+    </div>
+{% endblock %}

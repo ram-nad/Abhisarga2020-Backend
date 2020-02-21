@@ -1,86 +1,236 @@
 body {
-    background: url("../images/members_bg.png") 100vw 100vh fixed;
+    background: url("../images/events_bg.png");
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
 }
 
-#categories {
-    background: #56ab95;
-    position: sticky;
-    top: 15vh;
-    margin: 0 50vw;
-    transform: translateX(-50%);
-    border: solid 0.6em #63c4ab;
+#ev-categories {
+    box-sizing: border-box;
+    position: relative;
+    font-size: 2vw;
+    margin: 3.2em auto 0;
+    border: solid 0.3em #63c4ab;
     border-radius: 0.6em;
-    width: max-content;
-    height: max-content;
-    overflow: hidden;
-}
-
-.category {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #ffffff;
-    display: block;
-    float: left;
-    padding: 0.6em 2em;
-    text-shadow: 2px 0 0 black;
-    border-radius: 0.1em;
-    cursor: pointer;
-}
-
-.category:nth-of-type(even) {
-    background: linear-gradient(#003232, #007268 20%, #5db8a4);
-}
-
-.category:nth-of-type(odd) {
-    background: linear-gradient(#305c50, #4f9d8c 20%, #007268);
-}
-
-.active {
-    border: solid white 2px;
-}
-
-#all-events {
-    margin-left: 10vw;
-    padding-top: 20vh;
-    width: 80vw;
+    background: #49e7c0;
     display: flex;
     flex-wrap: wrap;
+    width: max-content;
+    max-width: 100%;
     justify-content: space-evenly;
 }
 
-.event-card {
-    background: url("../images/event_8.png") no-repeat;
-    background-size: cover;
-    margin: 1em 0.5em;
-    height: 24em;
-    width: 12em;
-    float: left;
+#ev-categories::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0.05em 0.05em 0.2em 0 #000 inset;
 }
 
-.event-card .event-title {
-    text-align: center;
-    margin-top: 4em;
-    font-size: 1.2em;
+.ev-category {
+    box-sizing: border-box;
+    width: 5.5em;
+    height: 2em;
     font-weight: bold;
-    text-shadow: 1px 1px 0 yellow, 2px 1px 0 red;
-}
-
-.event-card .event-content {
-    margin-top: 4em;
-    padding: 1em;
-    font-size: 0.75em;
-}
-
-.event-card .event-register {
-    padding: 0.4em 2em;
-    background: linear-gradient(to top, #007771, #61c2aa);
-    width: min-content;
-    margin: auto;
-    border-radius: 1em;
-    box-shadow: 0.25em 0.25em 0.5em black;
+    font-family: "marker-felt";
+    color: #ffffff;
+    padding: 0.5em 0;
+    line-height: 1em;
+    text-align: center;
+    text-shadow: 0.08em 0 0 black;
+    border-radius: 0.2em;
     cursor: pointer;
+    position: relative;
+    border-radius: 0.2em;
 }
 
-.space {
-    height: 15vh;
+.ev-active.ev-category {
+    z-index: 1;
+}
+
+.ev-category:nth-of-type(even) {
+    background: linear-gradient(#003232, #007268 20%, #5db8a4);
+}
+
+.ev-category:nth-of-type(odd) {
+    background: linear-gradient(#305c50, #4f9d8c 20%, #007268);
+}
+
+.ev-active::after {
+    box-sizing: border-box;
+    content: "";
+    position: absolute;
+    top: -0.05em;
+    left: -0.09em;
+    height: calc(100% + 0.6em);
+    width: calc(100% + 0.1em);
+    background: url("../images/event-select.png");
+    background-size: 100% 100%;
+}
+
+.ev-all-events {
+    font-size: 1.9vw;
+    display: none;
+}
+
+.ev-all-events.selected-event {
+    width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 2em auto 5em;
+}
+
+.ev-event-card {
+    position: relative;
+    height: 16em;
+    width: 8em;
+    box-shadow: 0.3em 0.3em 0.4em #000;
+    margin-bottom: 1em;
+}
+
+.ev-event-card .ev-event-title {
+    font-family: "marker-felt";
+    text-align: center;
+    width: 4.5em;
+    position: absolute;
+    font-size: 1em;
+    font-weight: bold;
+    text-shadow: 0.05em 0.01em 0 yellow, 0.1em 0.01em 0 red;
+    color: #008376;
+    letter-spacing: 0.05em;
+}
+
+.ev-event-card:nth-of-type(8n + 1) {
+    background: url("../images/events/e1.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.ev-event-card:nth-of-type(8n + 1) .ev-event-title {
+    top: 2.9em;
+    left: 1.5em;
+}
+
+.ev-event-card:nth-of-type(8n + 2) {
+    background: url("../images/events/e2.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.ev-event-card:nth-of-type(8n + 2) .ev-event-title {
+    top: 2.9em;
+    left: 1.6em;
+}
+
+.ev-event-card:nth-of-type(8n + 3) {
+    background: url("../images/events/e3.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.ev-event-card:nth-of-type(8n + 3) .ev-event-title {
+    top: 3.6em;
+    left: 1.4em;
+}
+
+.ev-event-card:nth-of-type(8n + 4) {
+    background: url("../images/events/e4.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.ev-event-card:nth-of-type(8n + 4) .ev-event-title {
+    top: 2.4em;
+    left: 1.4em;
+}
+
+.ev-event-card:nth-of-type(8n + 5) {
+    background: url("../images/events/e5.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.ev-event-card:nth-of-type(8n + 5) .ev-event-title {
+    top: 3.1em;
+    left: 1.55em;
+}
+
+.ev-event-card .ev-event-content {
+    margin-top: 18em;
+    padding: 0 1em;
+    font-size: 0.5em;
+    height: 7em;
+    text-align: justify;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+.ev-event-card .ev-event-content::-webkit-scrollbar {
+    display: none;
+}
+
+.ev-event-card .ev-event-button {
+    padding: 0.2em 0 0.1em;
+    background: linear-gradient(to top, #007771 10%, #61c2aa);
+    width: 7em;
+    margin: 1.5em auto 0;
+    border-radius: 1em;
+    box-shadow: 0.2em 0.2em 0.35em black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    line-height: 1.2em;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #ev-categories {
+        font-size: 2.6vw;
+    }
+
+    .ev-all-events {
+        font-size: 2.4vw;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #ev-categories {
+        font-size: 3.1vw;
+    }
+
+    .ev-all-events {
+        font-size: 3.1vw;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    #ev-categories {
+        font-size: 4vw;
+    }
+
+    .ev-all-events {
+        font-size: 3.8vw;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+    #ev-categories {
+        font-size: 5vw;
+    }
+
+    .ev-all-events {
+        font-size: 4.6vw;
+    }
+}
+
+@media (max-width: 320px) {
+    #ev-categories {
+        font-size: 5.9vw;
+    }
+
+    .ev-all-events {
+        font-size: 5.3vw;
+    }
 }

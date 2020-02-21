@@ -21,14 +21,12 @@ class User(AbstractBaseUser):
     def has_perm(self, perm, obj=None):
         if self.is_superuser or self.is_staff:
             return True
-            # return self.profile.volunteer.is_administrator
         else:
             return False
 
     def has_module_perms(self, app_label):
         if self.is_superuser or self.is_staff:
             return True
-            # return self.profile.volunteer.is_administrator
         else:
             return False
 
