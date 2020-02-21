@@ -12,7 +12,7 @@
                 <div class="member-info">
                     <img src="{{ v.profile_pic.url }}">
                     <div class="member-detail">
-                        <h1>{{ v.name }}</h1>
+                        <h1 title="{{ v.name }}">{{ v.name }}</h1>
                         <h2>{{ v.role }}</h2>
                     </div>
                     <div class="member-contact">
@@ -21,16 +21,20 @@
                     </div>
                     <div class="member-social">
                         {% if v.facebook %}
-                            <a href="{{ v.facebook }}"><img src="{% static 'images/svg/facebook_color.svg' %}"/></a>
+                            <a href="{{ v.facebook }}"><img src="{% static 'images/svg/facebook_color.svg' %}"
+                                                            alt="Facebook"/></a>
                         {% endif %}
                         {% if v.twitter %}
-                            <a href="{{ v.twitter }}"><img src="{% static 'images/svg/twitter_color.svg' %}"/></a>
+                            <a href="{{ v.twitter }}"><img src="{% static 'images/svg/twitter_color.svg' %}"
+                                                           alt="Twitter"/></a>
                         {% endif %}
                         {% if v.linkedin %}
-                            <a href="{{ v.linkedin }}"><img src="{% static 'images/svg/linkedin_color.svg' %}"/></a>
+                            <a href="{{ v.linkedin }}"><img src="{% static 'images/svg/linkedin_color.svg' %}"
+                                                            alt="LinkedIn"/></a>
                         {% endif %}
                         {% if v.instagram %}
-                            <a href="{{ v.instagram }}"><img src="{% static 'images/svg/instagram_color.svg' %}"/></a>
+                            <a href="{{ v.instagram }}"><img src="{% static 'images/svg/instagram_color.svg' %}"
+                                                             alt="Instagram"/></a>
                         {% endif %}
                     </div>
                 </div>

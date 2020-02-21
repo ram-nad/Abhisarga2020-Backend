@@ -92,6 +92,7 @@ body {
 }
 
 .ev-event-card .ev-event-title {
+    word-wrap: break-word;
     font-family: "marker-felt";
     text-align: center;
     width: 4.5em;
@@ -184,6 +185,7 @@ body {
     cursor: pointer;
     font-size: 0.8em;
     line-height: 1.2em;
+    color: #000;
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {

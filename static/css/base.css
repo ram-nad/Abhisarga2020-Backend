@@ -27,6 +27,7 @@ body {
 }
 
 #navbar {
+    z-index: 11;
     position: fixed;
     top: 0;
     left: 0;
@@ -140,6 +141,7 @@ body {
 }
 
 #side-nav {
+    z-index: 10;
     font-size: 2vw;
     position: fixed;
     height: 100%;
