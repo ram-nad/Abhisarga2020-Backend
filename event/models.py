@@ -45,22 +45,31 @@ class Event(models.Model):
     def first_prize(self):
         if self.f_p is None:
             return "---"
-        a = int(self.f_p)
-        return "₹ {:,d}".format(a)
+        try:
+            a = int(self.f_p)
+            return "₹ {:,d}".format(a)
+        except ValueError:
+            return "₹"
 
     @property
     def second_prize(self):
         if self.s_p is None:
             return "---"
-        a = int(self.s_p)
-        return "₹ {:,d}".format(a)
+        try:
+            a = int(self.s_p)
+            return "₹ {:,d}".format(a)
+        except ValueError:
+            return "₹"
 
     @property
     def third_prize(self):
         if self.t_p is None:
             return "---"
-        a = int(self.t_p)
-        return "₹ {:,d}".format(a)
+        try:
+            a = int(self.t_p)
+            return "₹ {:,d}".format(a)
+        except ValueError:
+            return "₹"
 
     @property
     def rules(self):
