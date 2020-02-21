@@ -12,6 +12,7 @@ urlpatterns = [
                   path('staff/', custom_admin_site.urls),
                   path('payments/', include('payment.urls')),
                   path('sponsors/', include('sponsorship.urls')),
+                  path('events/', include('event.urls')),
                   path('profile/', include('registration.urls')),
                   path('event/<int:pk>/', include('event_registration.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

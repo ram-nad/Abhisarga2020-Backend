@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | Abhisarga 2020</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/events.css' %}">
+    <style>
+        body {
+            background: url("{% static 'images/bg1.png' %}") 100vw 100vh fixed;
+        }
+
+        .event-card {
+            background: url("{% static 'images/e8.png' %}") no-repeat;
+            background-size: cover;
+            margin: 1em 0.5em;
+            height: 24em;
+            width: 12em;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+<div id="side-nav">
+    <div class="hoverid">
+        <a href="{% url 'home' %}#about">About</a>
+        <a href="#">Events</a>
+        <a href="#">Registration</a>
+        <a href="{% url 'sponsors' %}">Sponsors</a>
+        <a href="#">Accommodation</a>
+        <a href="{% url 'home' %}#test">Contact</a>
+    </div>
+</div>
+<nav id="navbar">
+    <a href="{% url 'home' %}" id="logoimg">
+        <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
+    </a>
+    <div id="nav-buttons">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">
+                <button type="button" id="register">Logout</button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" id="register">Login</button>
+            </a>
+        {% endif %}
+        <div id="hamburger" value=""></div>
+    </div>
+</nav>
+<!-- Body -->
+<div id="categories">
+    <div class="category active">All</div>
+    <div class="category">Technical</div>
+    <div class="category">Cultural</div>
+    <div class="category">Music</div>
+    <div class="category">Dance</div>
+    <div class="category">Workshops</div>
+    <div class="category">Hackathon</div>
+</div>
+
+<div id="all-events">
+    {% for e in events %}
+        <div class="event-card">
+            <div class="event-title">
+                {{ e.name }}
+            </div>
+            <div class="event-content">
+                {{ e.description }}
+            </div>
+            <div class="event-register">
+                Register
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="space"></div>
+
+
+<div id="footer-base"></div>
+<div id="footer">
+    <div id="social">
+        <a href="https://www.facebook.com/abhisarga/">
+            <img src="{% static 'images/svg/facebook.svg' %}"/>
+        </a>
+        <a href="https://www.youtube.com/channel/UCf1DbeeTKGzpwRv9X7YECfg">
+            <img src="{% static 'images/svg/youtube.svg' %}"/>
+        </a>
+        <a href="https://www.instagram.com/abhisarga/">
+            <img src="{% static 'images/svg/instagram.svg' %}"/>
+        </a>
+    </div>
+    <div id="address">
+        Indian Institute of Information Technology<br/>
+        630 Gnan Marg, Sri City<br/>Andhra Pradesh 517646
+    </div>
+</div>
+
+<script>
+    let a = document.getElementById("hamburger");
+    a.setAttribute("value", "\u2630");
+    a.addEventListener("click", () => {
+        toggleNav();
+        if (a.getAttribute("value") === "\u2630") {
+            a.setAttribute("value", "\u2715");
+        } else {
+            a.setAttribute("value", "\u2630");
+        }
+    });
+
+    function toggleNav() {
+        document.getElementById("side-nav").classList.toggle("active");
+    }
+
+    document.body.addEventListener('click', function (e) {
+        if (!(document.getElementById("side-nav").contains(e.target) || a.contains(e.target))) {
+            document.getElementById("side-nav").classList.remove("active");
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -8,6 +8,9 @@ class EventListView(View):
         return render(request, 'event/events.html', context={'events': Event.objects.all()})
 
 
+# class EventListView(View):
+
+
 class EventDetailView(View):
     def get(self, request, pk):
         try:
