@@ -8,6 +8,7 @@ __pycache__
 /venv/
 /env/
 /media/
+/staticfiles/
 
 !/media/profilepics/default_profile_pic.jpg
 !/media/volunteer/default_volunteer_pic.jpg
