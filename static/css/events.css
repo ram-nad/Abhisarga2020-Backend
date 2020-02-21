@@ -1,3 +1,7 @@
+body {
+    background: url("../images/members_bg.png") 100vw 100vh fixed;
+}
+
 #categories {
     background: #56ab95;
     position: sticky;
@@ -44,13 +48,14 @@
     justify-content: space-evenly;
 }
 
-/*.event-card {*/
-/*    background-size: cover;*/
-/*    margin: 1em 0.5em;*/
-/*    height: 24em;*/
-/*    width: 12em;*/
-/*    float: left;*/
-/*}*/
+.event-card {
+    background: url("../images/event_8.png") no-repeat;
+    background-size: cover;
+    margin: 1em 0.5em;
+    height: 24em;
+    width: 12em;
+    float: left;
+}
 
 .event-card .event-title {
     text-align: center;
