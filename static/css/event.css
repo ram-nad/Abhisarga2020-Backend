@@ -131,12 +131,10 @@ body {
     font-family: "poppins";
     padding: 0;
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 700;
     line-height: 1.3em;
     height: 1.3em;
-    word-wrap: break-word;
-    overflow: hidden;
 }
 
 #event-detail > h2 {
