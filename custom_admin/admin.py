@@ -10,6 +10,7 @@ from registration.models import User
 
 class AdministratorAuthForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
+        super().confirm_login_allowed(user)
         if user.is_staff or user.is_administrator:
             pass
         else:
@@ -56,6 +57,7 @@ class CustomUserAdmin(ModelAdmin):
         password = obj.password
         obj.set_password(password)
         obj.is_administrator = True
+        obj.is_active = True
         super().save_model(request, obj, form, change)
 
 
