@@ -75,7 +75,7 @@ class EventOrganiserSite(AdminSite):
         if request.user.is_anonymous:
             return False
         else:
-            return request.user.is_active and (request.user.is_staff or request.user.is_administrator)
+            return request.user.is_staff or request.user.is_administrator
 
 
 event_admin_site = EventOrganiserSite(name='event_organiser')

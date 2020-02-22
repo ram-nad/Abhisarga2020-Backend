@@ -20,7 +20,7 @@ class Event(models.Model):
     t_p = models.CharField(max_length=5, verbose_name="Third Prize", blank=True, null=True)
 
     organiser = models.ForeignKey(to=User, related_name="organised_events", null=True, on_delete=models.SET_NULL,
-                                  limit_choices_to={'is_administrator': True}, default=None)
+                                  limit_choices_to={'is_administrator': True}, blank=True)
 
     # team_event = models.BooleanField(default=False)
     # max_participant = models.PositiveIntegerField()
