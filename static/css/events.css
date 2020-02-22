@@ -155,8 +155,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 5) .ev-event-title {
-    top: 3.1em;
-    left: 1.55em;
+    top: 3.3em;
+    left: 1.45em;
 }
 
 .ev-event-card .ev-event-content {
