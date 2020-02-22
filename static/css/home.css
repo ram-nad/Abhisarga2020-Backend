@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    background: url("../images/bg.svg");
+}
+
 a {
     text-decoration: none;
 }

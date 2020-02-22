@@ -80,7 +80,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin: 2em auto 5em;
+    margin: 2em auto 0;
 }
 
 .ev-event-card {

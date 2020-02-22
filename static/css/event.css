@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     width: 95%;
-    margin: 3.2em auto 2em;
+    margin: 3.2em auto 0.1em;
     flex-wrap: wrap-reverse;
 }
 

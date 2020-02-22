@@ -10,7 +10,6 @@ from registration.models import User
 
 class AdministratorAuthForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
-        super().confirm_login_allowed(user)
         if user.is_staff or user.is_administrator:
             pass
         else:
@@ -28,7 +27,7 @@ class CustomAdminSite(AdminSite):
         if request.user.is_anonymous:
             return False
         else:
-            return request.user.is_active and (request.user.is_staff or request.user.is_administrator)
+            return request.user.is_active and request.user.is_staff
 
 
 custom_admin_site = CustomAdminSite(name='custom_admin')
@@ -57,7 +56,6 @@ class CustomUserAdmin(ModelAdmin):
         password = obj.password
         obj.set_password(password)
         obj.is_administrator = True
-        obj.is_active = True
         super().save_model(request, obj, form, change)
 
 
@@ -86,7 +84,8 @@ event_admin_site = EventOrganiserSite(name='event_organiser')
 class CustomEventAdmin(ModelAdmin):
     fields = (
         'name', 'category', 'description', 'vne', 'dt', 'rls', 'poster', 'contact_number', 'short_description', 'f_p',
-        's_p', 't_p')
+        's_p', 't_p', 'organiser')
+    readonly_fields = ('organiser',)
 
     def has_view_permission(self, request, obj=None):
         return True

@@ -16,7 +16,7 @@ body {
 #members-container {
     font-size: 1.8vw;
     width: 90%;
-    margin: 3.5em auto 2.5em;
+    margin: 3.5em auto 0.2em;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

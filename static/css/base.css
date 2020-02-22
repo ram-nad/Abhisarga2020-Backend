@@ -177,6 +177,13 @@ body {
     text-shadow: -0.1em 0 red;
 }
 
+#footer-base {
+    font-size: 2vw;
+    width: 100%;
+    background: transparent;
+    height: 2.3em;
+}
+
 #footer {
     position: fixed;
     bottom: 0;
@@ -224,6 +231,10 @@ body {
     #footer {
         font-size: 2.3vw;
     }
+
+    #footer-base {
+        font-size: 2.3vw;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -238,6 +249,10 @@ body {
     #footer {
         font-size: 3vw;
     }
+
+    #footer-base {
+        font-size: 3vw;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -250,6 +265,10 @@ body {
     }
 
     #footer {
+        font-size: 3.6vw;
+    }
+
+    #footer-base {
         font-size: 3.6vw;
     }
 }
@@ -270,6 +289,11 @@ body {
     #footer #address {
         text-align: center;
     }
+
+    #footer-base {
+        font-size: 4.3vw;
+        height: 4em;
+    }
 }
 
 @media (max-width: 320px) {
@@ -287,5 +311,10 @@ body {
 
     #footer #address {
         text-align: center;
+    }
+
+    #footer-base {
+        font-size: 4.8vw;
+        height: 4em;
     }
 }
