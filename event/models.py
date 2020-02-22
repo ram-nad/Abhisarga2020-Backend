@@ -77,7 +77,7 @@ class Event(models.Model):
 
     @property
     def venue(self):
-        if self.vne in [None, '']:
+        if self.vne is None or self.vne is '':
             return "-----"
         return self.vne
 
