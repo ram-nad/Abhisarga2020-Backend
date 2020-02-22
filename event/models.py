@@ -1,7 +1,7 @@
 from django.db import models
 
 from base.models import EventCategory
-from registration.models import Volunteer
+from registration.models import User
 from registration.validators import validate_phone
 
 
@@ -19,8 +19,9 @@ class Event(models.Model):
     s_p = models.CharField(max_length=5, verbose_name="Second Prize", blank=True, null=True)
     t_p = models.CharField(max_length=5, verbose_name="Third Prize", blank=True, null=True)
 
-    # organiser = models.ForeignKey(to=Volunteer, related_name="organised_events", null=True, on_delete=models.SET_NULL)
-    #
+    organiser = models.ForeignKey(to=User, related_name="organised_events", null=True, on_delete=models.SET_NULL,
+                                  limit_choices_to={'is_administrator': True}, default=None)
+
     # team_event = models.BooleanField(default=False)
     # max_participant = models.PositiveIntegerField()
     # team_min_size = models.PositiveIntegerField(default=1)
@@ -77,7 +78,7 @@ class Event(models.Model):
 
     @property
     def venue(self):
-        if self.vne is None or self.vne is '':
+        if self.vne is None or self.vne == '':
             return "-----"
         return self.vne
 

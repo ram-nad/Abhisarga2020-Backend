@@ -20,13 +20,13 @@ class User(AbstractBaseUser):
     is_administrator = models.BooleanField(default=False)
 
     def has_perm(self, perm, obj=None):
-        if self.is_superuser or self.is_staff or self.is_administrator:
+        if self.is_superuser or self.is_staff:
             return True
         else:
             return False
 
     def has_module_perms(self, app_label):
-        if self.is_superuser or self.is_staff or self.is_administrator:
+        if self.is_superuser or self.is_staff:
             return True
         else:
             return False
