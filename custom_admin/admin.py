@@ -13,7 +13,7 @@ class CustomAdminSite(AdminSite):
         if request.user.is_anonymous:
             return False
         else:
-            return request.user.is_active and (request.user.is_staff or request.user.is_administrator)
+            return request.user.is_active and request.user.is_staff
 
 
 custom_admin_site = CustomAdminSite(name='custom_admin')

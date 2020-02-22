@@ -7,4 +7,3 @@ admin.site.register(Profile)
 admin.site.register(User)
 
 custom_admin_site.register(Volunteer)
-custom_admin_site.register(User)
