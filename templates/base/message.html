@@ -1,13 +1,20 @@
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-<p>
-    {{ message }}
-</p>
-{% if next %}
-    <a href="{{ next.url }}">{{ next.name }}</a>
-{% endif %}
-</body>
-</html>
+{% extends 'base/basic.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/message.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="message-container">
+        <div id="message-box">
+            <div id="message-heading"><span></span><span>Message</span><span></span></div>
+            <p>
+                {{ message }}
+            </p>
+            {% if next %}
+                <span>Click Here</span>
+                <span><a href="{{ next.url }}">{{ next.name }}</a></span>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

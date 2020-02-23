@@ -1,0 +1,121 @@
+a {
+  color: unset;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  background: url("../images/message_bg.png");
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+}
+
+#message-container {
+  font-size: 3vw;
+  width: 20em;
+  margin: 2em auto 0.1em;
+  height: 70vh;
+  background: url("../images/message-box.png");
+  background-size: 100% 100%;
+}
+
+#message-box {
+  font-size: 3.6vw;
+  width: 10em;
+  margin: 0 auto;
+  padding-top: 1.5em;
+  color: #3c7a8d;
+}
+
+#message-heading {
+  display: flex;
+  justify-content: center;
+  margin: 0.1em 0;
+  align-items: center;
+}
+
+#message-heading span:nth-of-type(1),
+#message-heading span:nth-of-type(3) {
+  display: block;
+  height: 0.08em;
+  flex: 1;
+  background: #3c7a8d;
+  position: relative;
+  top: -0.03em;
+}
+
+#message-heading span:nth-of-type(2) {
+  font-size: 0.35em;
+  display: inline;
+  padding: 0.1em 2em;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+#message-box > p {
+  margin: 0;
+  font-size: 0.35em;
+  padding: 0 0 1.5em;
+  text-align: center;
+}
+
+#message-box > span {
+  font-size: 0.35em;
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#message-box > span > a {
+  font-weight: 500;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  #message-box {
+    font-size: 4.3vw;
+  }
+  #message-container {
+    font-size: 3.6vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #message-box {
+    font-size: 5vw;
+  }
+  #message-container {
+    font-size: 4.2vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  #message-box {
+    font-size: 5.7vw;
+  }
+  #message-container {
+    font-size: 4.8vw;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #message-box {
+    font-size: 6.5vw;
+  }
+  #message-container {
+    font-size: 4.8vw;
+  }
+}
+
+@media (max-width: 320px) {
+  #message-box {
+    font-size: 7.1vw;
+  }
+  #message-container {
+    font-size: 5vw;
+  }
+}

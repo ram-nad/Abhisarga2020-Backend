@@ -25,7 +25,8 @@ def create_user_return_token(email):
         new_user.full_clean()
         new_user.save()
         user_token = registration_token_generator.make_token(new_user)
-        return user_token
+        b64id = b64_encode(bytes(str(new_user.pk).encode()))
+        return [user_token, b64id]
     elif not u.is_active:
         user_token = registration_token_generator.make_token(u)
         b64id = b64_encode(bytes(str(u.pk).encode()))
@@ -111,17 +112,21 @@ def profile_create_get(request, b64id, token):
 
 
 def profile_create_post(request):
-    email = request.POST['email']
-    token = request.POST['token']
+    email = request.POST.get('email', None)
+    token = request.POST.get('token', None)
+    if email is None or token is None:
+        return bad_request(request, None)
     u = User.objects.get_or_none(email=email)
     if u is None or u.is_active or not registration_token_generator.check_token(u, token):
         return bad_request(request, None)
     else:
         pf = ProfileForm(request.POST, request.FILES)
         if pf.is_valid():
+            password = pf.cleaned_data.get('password')
             try:
                 pf.save()
-                return login_and_redirect(request, u)
+                new_user = authenticate(email=email, password=password)
+                return login_and_redirect(request, new_user)
             except ValidationError as e:
                 return render(request, 'registration/signup_full.html',
                               context={'email': email, 'token': token, 'colleges': College.objects.all(),
@@ -191,25 +196,17 @@ class PasswordChangeView(LoginRequiredMixin, View):
         if request.user.check_password(old_pass):
             if new_pass == conf_new_pass:
                 request.user.set_password(new_pass)
-                return redirect(to="password_change_done")
+                context = {"title": "Password Updated",
+                           "message": "Password Changed Successful",
+                           "next": {"url": reverse('home'), "name": 'Go back to home'}}
+                return render(request, 'base/message.html',
+                              context=context)
             else:
                 error = "New passwords do not match."
                 return render(request, 'registration/change_password.html', context={'error': error})
         else:
             error = "Old password is wrong."
             return render(request, 'registration/change_password.html', context={'error': error})
-
-
-class PasswordChangeDoneView(LoginRequiredMixin, View):
-    login_url = reverse_lazy('login')
-    redirect_field_name = NEXT_PARAMETER
-
-    def get(self, request):
-        context = {"title": "Password Updated",
-                   "message": "Password Changed Successful",
-                   "next": {"url": reverse('home'), "name": 'Go back to home'}}
-        return render(request, 'base/message.html',
-                      context=context)
 
 
 class PasswordResetView(View):
@@ -254,7 +251,6 @@ class PasswordResetDoneView(View):
 
 class PasswordResetConfirmView(View):
     def get(self, request, idb64, token):
-        print(token)
         dtg = password_token_generator
         user = User.objects.get_or_none(pk=b64_decode(idb64).decode())
         if user is None:
@@ -297,3 +293,11 @@ class PasswordResetCompleteView(View):
 class VolunteerView(View):
     def get(self, request):
         return render(request, 'base/members.html', context={'volunteers': Volunteer.objects.all()})
+
+
+class UserProfile(LoginRequiredMixin, View):
+    login_url = reverse_lazy('login')
+    redirect_field_name = NEXT_PARAMETER
+
+    def get(self, request):
+        return render(request, 'registration/profile.html', context={'profile': request.user.profile})

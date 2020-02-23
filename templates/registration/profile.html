@@ -1,0 +1,26 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% block title %}{{ profile.name }}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="profile-container">
+        <div id="profile-info">
+            <img src="{{ profile.profile_pic.url }}">
+            <h1>{{ profile.name }}</h1>
+            <h2>{{ profile.email }}</h2>
+            <a href="{% url 'password_change' %}">Change Password</a>
+            {% if profile.phone_numer %}
+                <span>{{ profile.phone_number }}</span>
+            {% endif %}
+            <span>{{ profile.college.name }}</span>
+        </div>
+        <div id="profile-event-info">
+            <h1>Event registration haven't started yet.</h1>
+            <a href="{% url 'events' %}">
+                <button>View all events</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

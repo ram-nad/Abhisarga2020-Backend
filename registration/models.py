@@ -70,6 +70,10 @@ class Profile(models.Model):
     def name(self):
         return self.first_name + " " + self.last_name
 
+    @property
+    def email(self):
+        return self.user.email
+
     def clean(self):
         super().clean()
         self.phone_number = validate_phone(self.phone_number)

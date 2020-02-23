@@ -15,5 +15,7 @@ function googleSignIn(googleUser) {
 }
 
 function signInFailed(error) {
-    alert(`Google Sign-In Failed. (${error.error})`)
+    let a = document.getElementById("google-sign-in-error");
+    a.style.display = "block";
+    a.innerHTML = `Google Signin Failed.(${error.error})`;
 }

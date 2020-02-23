@@ -13,7 +13,7 @@ class ProfileForm(forms.Form):
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50, required=False)
     college = forms.ModelChoiceField(queryset=College.objects)
-    phone_number = forms.CharField(max_length=13, required=False, validators=[validate_phone])
+    phone_number = forms.CharField(max_length=13, validators=[validate_phone])
     gender = forms.ChoiceField(choices=gender_choices)
     profile_pic = forms.ImageField(required=False)
 

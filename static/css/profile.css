@@ -1,0 +1,178 @@
+body {
+  background: url("../images/profile_bg.png");
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+}
+a {
+  color: unset;
+  text-decoration: unset;
+}
+
+#profile-container {
+  font-size: 3vw;
+  margin: 2.4em auto 0.1em;
+  width: fit-content;
+  max-width: 90%;
+  background: #fff;
+  border: 0.2em solid #00b3a3;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: "poppins";
+}
+
+#profile-info {
+  margin: 0;
+  width: 7em;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 8em;
+}
+
+#profile-info > img {
+  margin: 0 0 1em;
+  height: 2.7em;
+  width: 2.7em;
+  border-radius: 1.35em;
+  overflow: hidden;
+}
+
+#profile-info > h1 {
+  font-size: 0.7em;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-weight: 500;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+#profile-info > h2 {
+  font-size: 0.4em;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-weight: 400;
+}
+
+#profile-info > a {
+  font-size: 0.4em;
+  margin: 0 0 1.5em;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  text-decoration: underline;
+  color: #00b3a3;
+}
+
+#profile-info > span {
+  display: block;
+  font-size: 0.55em;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-weight: 600;
+  line-height: 1.3em;
+}
+
+#profile-event-info {
+  background: #a1e3dd;
+  padding: 0.5em;
+  width: 14em;
+  min-height: 8em;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#profile-event-info .event-data-info {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 0;
+}
+
+#profile-event-info button {
+  display: block;
+  font-size: 0.5em;
+  background: #00b3a3;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  width: 9em;
+  height: 1.8em;
+  border-radius: 1em;
+  box-shadow: 0.1em 0.1em 0.15em #555;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0.06em 0.06em 0.02em #000;
+}
+
+#profile-event-info button:hover {
+  background: #04beaf;
+  transform: translateX(0.06em) translateY(0.06em);
+  box-shadow: 0.07em 0.07em 0.15em #555;
+}
+
+#profile-event-info h2 {
+  display: inline;
+  font-size: 0.65em;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.05em;
+  line-height: 1.4em;
+}
+
+#profile-event-info h1 {
+  display: block;
+  font-size: 0.6em;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.08em;
+  line-height: 1.4em;
+  text-align: center;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  #profile-container {
+    font-size: 3.4vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #profile-container {
+    font-size: 3.9vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  #profile-container {
+    font-size: 4.5vw;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #profile-container {
+    font-size: 5.2vw;
+  }
+}
+
+@media (max-width: 320px) {
+  #profile-container {
+    font-size: 6vw;
+  }
+}

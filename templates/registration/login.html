@@ -1,0 +1,46 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% load error_show %}
+{% block title %}Login | Abhisarga 2020{% endblock %}
+{% block head %}
+    <meta name="GOOGLE_CLIENT_ID" content="{{ google_client_id }}">
+    <script src="{% static 'js/google-signin.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="form-container">
+        <img src="{% static 'images/login_top.png' %}">
+        <div id="main-form">
+            <form method="post">
+                {% csrf_token %}
+                <input type="email" placeholder="Email" data-box="text" name="email" id="user_email"><i
+                    class="email"></i>
+                {% if error.email %}
+                    <div class="form-error-message">{{ error.email|error_list }}</div>
+                {% endif %}
+                <input type="password" placeholder="Password" data-box="text" name="password" id="user_password"><i
+                    class="password"></i>
+                {% if error.password %}
+                    <div class="form-error-message">{{ error.password|error_list }}</div>
+                {% endif %}
+                <input type="submit" value="Submit" data-box="button">
+                {% if error|error_object %}
+                    <div class="form-error-message">{{ error|error_object }}</div>
+                {% endif %}
+            </form>
+            <div class="center"><a href="{% url 'password_reset' %}">Forgot Password</a></div>
+            <div class="divider"><span></span><span>OR</span><span></span></div>
+            <input type="button" value="Login with Google" data-box="button" id="google-sign-in-button">
+            <div class="form-error-message" id="google-sign-in-error" style="display: none"></div>
+        </div>
+        <hr>
+        <p id="form-redirect"><a href="{% url 'signup' %}">Don't have an account?</a></p>
+    </div>
+    <form style="display: none" id="google-sign-in-submit-form" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="" name="google-id-token">
+    </form>
+{% endblock %}
+{% block script %}
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+{% endblock %}

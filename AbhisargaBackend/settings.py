@@ -81,8 +81,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',
-                           'django.contrib.auth.backends.ModelBackend']
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 WSGI_APPLICATION = 'AbhisargaBackend.wsgi.application'
 
