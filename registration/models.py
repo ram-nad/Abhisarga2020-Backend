@@ -13,7 +13,7 @@ gender_choices = (
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(blank=False, unique=True)
+    email = models.EmailField(blank=False, unique=True, verbose_name="E-mail")
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -56,12 +56,14 @@ class User(AbstractBaseUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(to=User, related_name="profile", on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50, blank=True)
-    college = models.ForeignKey(to=College, related_name='students', on_delete=models.SET_NULL, null=True)
-    phone_number = models.CharField(max_length=13, blank=True, validators=[validate_phone], unique=True)
+    first_name = models.CharField(max_length=50, verbose_name="First Name")
+    last_name = models.CharField(max_length=50, blank=True, verbose_name="Last Name")
+    college = models.ForeignKey(to=College, related_name='students', on_delete=models.SET_NULL, null=True,
+                                verbose_name="College")
+    phone_number = models.CharField(max_length=13, validators=[validate_phone], unique=True,
+                                    verbose_name="Phone Number")
     profile_pic = models.ImageField(upload_to="profilepics", default="profilepics/default_profile_pic.jpg")
-    gender = models.CharField(max_length=1, choices=gender_choices)
+    gender = models.CharField(max_length=1, choices=gender_choices, verbose_name="Gender")
 
     def __str__(self):
         return self.first_name + " " + self.last_name + "(" + self.user.email + ")"
@@ -77,6 +79,10 @@ class Profile(models.Model):
     def clean(self):
         super().clean()
         self.phone_number = validate_phone(self.phone_number)
+
+    class Meta:
+        verbose_name = "Registrant"
+        verbose_name_plural = "Registrants"
 
 
 class Volunteer(models.Model):

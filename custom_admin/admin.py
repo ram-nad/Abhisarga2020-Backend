@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy
 
 from event.models import Event
-from registration.models import User
+from registration.models import User, Profile
 
 
 class AdministratorAuthForm(AuthenticationForm):
@@ -60,6 +60,32 @@ class CustomUserAdmin(ModelAdmin):
 
 
 custom_admin_site.register(User, CustomUserAdmin)
+
+
+class CustomerProfileAdmin(ModelAdmin):
+    fields = ('email', 'first_name', 'last_name', 'college', 'phone_number', 'gender')
+    readonly_fields = ('email', 'name', 'college', 'phone_number', 'gender')
+
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+    list_display = ('email', 'name', 'college', 'phone_number')
+    list_display_links = ('email',)
+    list_filter = ('gender',)
+    search_fields = ('email', 'first_name', 'last_name', 'phone_number', 'college')
+    list_per_page = 20
+
+
+custom_admin_site.register(Profile, CustomerProfileAdmin)
 
 
 class EventOrganiserSite(AdminSite):
