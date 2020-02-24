@@ -68,16 +68,13 @@ class ProfileMakeView(View):
                     text = "Please open the link given below to verify your email for Abhisarga 2020. \n" + url + \
                            "\nIf you did not request registration for Abhisarga 2020 then please ignore this email." + \
                            "\nRegards,\nAbhisarga 2020 Team"
-                    if send_mail("Email Verification for Abhisarga 2020", text, html, [email]) is not None:
-                        return render(request, 'base/message.html',
-                                      context={'title': "Verification Link sent",
-                                               'message': 'Email Verification link sent, please check your email. '
-                                                          'The link is valid for next 1 hour.',
-                                               'next': {'url': reverse('home'), 'name': "Go Back Home"}})
-                    else:
-                        return render(request, 'registration/signup.html',
-                                      context={'error': 'Registration Failed, please try again later.',
-                                               'google_client_id': GOOGLE_CLIENT_ID})
+                    send_mail("Email Verification for Abhisarga 2020", text, html, [email])
+                    return render(request, 'base/message.html',
+                                  context={'title': "Verification Link sent",
+                                           'message': 'Email Verification link will be sent shortly, please '
+                                                      'check your email. '
+                                                      'The link is valid for next 1 hour.',
+                                           'next': {'url': reverse('home'), 'name': "Go Back Home"}})
                 else:
                     return render(request, 'registration/signup.html',
                                   context={'error': 'User already registered',
@@ -238,15 +235,12 @@ class PasswordResetDoneView(View):
         text = "Please open the link given below to reset password for your Abhisarga 2020 account. \n" + url + \
                "\nIf you did not request password reset then please ignore this email." + \
                "\nRegards,\nAbhisarga 2020 Team"
-        if send_mail("Email Verification for Abhisarga 2020", text, html, [email]) is not None:
-            message = {"title": "Password Reset Confirmation",
-                       "message": "An mail has been sent to your registered email with further link to reset"
-                                  " your password.",
-                       "next": {"url": reverse('login'), "name": 'Return to Login Page'}}
-            return render(request, 'base/message.html', context=message)
-        else:
-            return render(request, 'registration/forgot_password.html',
-                          context={'error': 'Temporary error. Please try again.'})
+        send_mail("Email Verification for Abhisarga 2020", text, html, [email])
+        message = {"title": "Password Reset Confirmation",
+                   "message": "An mail will be sent to your registered email with the link to reset"
+                              " your password, shortly.",
+                   "next": {"url": reverse('login'), "name": 'Return to Login Page'}}
+        return render(request, 'base/message.html', context=message)
 
 
 class PasswordResetConfirmView(View):

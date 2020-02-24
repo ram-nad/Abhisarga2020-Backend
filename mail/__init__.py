@@ -3,6 +3,7 @@ from smtplib import SMTPException
 from django.core.mail import send_mail as django_smtp_send_mail, get_connection, EmailMultiAlternatives
 
 from AbhisargaBackend.settings import EMAIL_HOST_USER, USE_MAILGUN, MAILGUN_HOST_USER
+from base.decorators import run_in_background
 from .mailgun import send_mail as mailgun_send_mail, send_mass_mail as mailgun_send_mass_mail
 
 
@@ -47,6 +48,7 @@ def smtp_send_mass_mail(data_tuples, fail_silently=True):
         return None
 
 
+@run_in_background
 def send_mail(subject, message, html_message, recipient_list, from_email=None, fail_silently=True):
     """
         Send a Single mail to one or more users
@@ -71,6 +73,7 @@ def send_mail(subject, message, html_message, recipient_list, from_email=None, f
         return smtp_send_mail(subject, message, html_message, recipient_list, from_email, fail_silently)
 
 
+@run_in_background
 def send_mass_mail(data_tuples, fail_silently=True):
     """
     Send a Collection of mails

@@ -42,7 +42,7 @@
                 <div class="form-error-message" id="password_confirm_error" style="display: none"></div>
                 <label>Gender*</label>
                 <select name="gender" id="user_gender">
-                    <option value="" disabled selected></option>
+                    <option value="---" disabled selected></option>
                     {% for i in gender %}
                         <option value="{{ i.0 }}">{{ i.1 }}</option>
                     {% endfor %}
@@ -50,13 +50,9 @@
                 {% if error.gender %}
                     <div class="form-error-message">{{ error.gender|error_list }}</div>
                 {% endif %}
-                <label>College*</label>
-                <select name="college" id="user_college">
-                    <option value="" disabled selected></option>
-                    {% for i in colleges %}
-                        <option value="{{ i.pk }}">{{ i.name }}</option>
-                    {% endfor %}
-                </select>
+                <label>College*</label><input type="search" name="college" id="user_college" data-box="text"
+                                              placeholder="Your College" list="user_college_list"
+                                              oninput="update_list()">
                 {% if error.college %}
                     <div class="form-error-message">{{ error.college|error_list }}</div>
                 {% endif %}
@@ -72,6 +68,8 @@
             <div class="center"><a href="{% url 'login' %}">I'm already a member</a></div>
         </div>
     </div>
+    <datalist id="user_college_list">
+    </datalist>
 {% endblock %}
 {% block script %}
     <script>
@@ -85,6 +83,38 @@
             } else {
                 document.getElementById('user_registration_form').submit();
             }
+        }
+
+        let college_list = document.getElementById('user_college_list');
+        let college_input = document.getElementById('user_college');
+
+        function clear_list() {
+            let el = college_list.lastChild;
+            while (el) {
+                el.remove();
+                el = college_list.lastChild;
+            }
+        }
+
+        function add_list(list) {
+            for (let i = 0; i < list.length; i++) {
+                let child = document.createElement('option');
+                child.setAttribute('value', list[i]);
+                college_list.appendChild(child);
+            }
+        }
+
+        function update_list() {
+            clear_list();
+            let college = college_input.value;
+            fetch("{% url 'college_list' %}" + "?college=" + college)
+                .then((response) => {
+                    response.text().then(list => {
+                        let colleges = list.split("\n");
+                        add_list(colleges);
+                    });
+                }).catch((error) => {
+            })
         }
     </script>
 {% endblock %}

@@ -14,6 +14,7 @@ custom_admin_site.register(EventCategory)
 
 class CustomCollege(ModelAdmin):
     list_display = ('name', 'registrants_list')
+    search_fields = ('name',)
 
     def registrants_list(self, obj):
         a = '<a href="' + reverse("custom_admin:registration_profile_changelist") + "?college__id__exact=" + str(

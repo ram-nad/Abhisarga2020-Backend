@@ -12,7 +12,7 @@ class ProfileForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50, required=False)
-    college = forms.ModelChoiceField(queryset=College.objects)
+    college = forms.CharField(max_length=100, required=True)
     phone_number = forms.CharField(max_length=13, validators=[validate_phone])
     gender = forms.ChoiceField(choices=gender_choices)
     profile_pic = forms.ImageField(required=False)
@@ -27,9 +27,12 @@ class ProfileForm(forms.Form):
             user.save()
             self.cleaned_data.pop('email')
             self.cleaned_data.pop('password')
+            college_name = self.cleaned_data.get('college')
+            self.cleaned_data.pop('college')
+            college = College.objects.get_or_create(name=college_name)[0]
             if self.cleaned_data.get('profile_pic') is None:
                 self.cleaned_data.pop('profile_pic')
-            profile = Profile(user=user, **self.cleaned_data)
+            profile = Profile(user=user, college=college, **self.cleaned_data)
             profile.full_clean()
             profile.save()
             return profile

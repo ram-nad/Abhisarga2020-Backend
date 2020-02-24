@@ -1,4 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+
+from .models import College
 
 
 def home(request):
@@ -24,3 +27,12 @@ def not_found(request, exception, *args, **kwargs):
 
 def bad_request(request, exception, *args, **kwargs):
     return render(request, 'error/400.html', status=400)
+
+
+def get_college_list(request):
+    college = request.GET.get('college', None)
+    if college is None or str(college).strip() == '':
+        return HttpResponse("", content_type="text/plain")
+    colleges = College.objects.filter(name__icontains=college)[:8]
+    text = "\n".join(list(map(lambda x: x.name, colleges)))
+    return HttpResponse(text, content_type="text/plain")
