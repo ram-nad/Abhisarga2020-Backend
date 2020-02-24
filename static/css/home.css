@@ -6,6 +6,11 @@ a {
     text-decoration: none;
 }
 
+.header {
+    height: 100vh;
+    background: transparent;
+}
+
 #main {
     background: url("../images/bg.svg");
     background-size: cover;
@@ -93,6 +98,104 @@ a {
     top: 2.5em;
     left: 2.3em;
 }
+
+.weapons {
+    width: 100%;
+    height: 100%;
+}
+
+.weapons img {
+    height: 30px;
+    width: auto;
+}
+
+.img-hammer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: moveObjRightDown 48s linear infinite;
+}
+
+.img-shield {
+    position: absolute;
+    right: -5%;
+    top: -5%;
+    animation: moveObjLeftDown 48s linear infinite 11s;
+}
+
+.img-trident {
+    width: 50px;
+    height: auto;
+    position: absolute;
+    left: -5%;
+    top: 50%;
+    animation: moveObjRightDown 48s linear infinite 16s;
+}
+
+
+.img-ring{
+    height: 100px;
+    width: auto;
+    position: absolute;
+    left: -17%;
+    top: 50%;
+    animation: moveObjRightDown 48s linear infinite 16s;
+    background: transparent;
+}
+
+.img-claws {
+    height: 100px;
+    width: auto;
+    position: absolute;
+    right: -17%;
+    top: 50%;
+    animation: moveObjLeftTop 48s linear infinite 29s;
+    background: transparent;
+}
+
+#main {
+    position: relative;
+}
+
+.page-thunder-to-text {
+	position: relative;
+	overflow: hidden;
+    background: transparent;
+}
+
+
+canvas {
+    display: block;
+}
+
+
+@keyframes moveObjRightDown {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(2000px, 1600px) rotate(360deg);
+    }
+}
+
+@keyframes moveObjLeftTop {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(-2000px, -1600px) rotate(360deg);
+    }
+}
+
+@keyframes moveObjLeftDown {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(-2000px, 1600px) rotate(360deg);
+    }
+}
+
 
 @keyframes animateA1 {
     0% {
