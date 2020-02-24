@@ -31,7 +31,7 @@ body {
 
 .ev-category {
     box-sizing: border-box;
-    width: 5.5em;
+    width: 5.9em;
     height: 2em;
     font-weight: bold;
     font-family: "marker-felt";
@@ -95,9 +95,9 @@ body {
     word-wrap: break-word;
     font-family: "marker-felt";
     text-align: center;
-    width: 5em;
+    width: 7em;
     position: absolute;
-    font-size: 1em;
+    font-size: 0.75em;
     font-weight: bold;
     text-shadow: 0.05em 0.01em 0 yellow, 0.1em 0.01em 0 red;
     color: #008376;
@@ -112,7 +112,7 @@ body {
 
 .ev-event-card:nth-of-type(8n + 1) .ev-event-title {
     top: 2.9em;
-    left: 1.5em;
+    left: 1.3em;
 }
 
 .ev-event-card:nth-of-type(8n + 2) {
@@ -122,8 +122,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 2) .ev-event-title {
-    top: 2.9em;
-    left: 1.6em;
+    top: 3.1em;
+    left: 1.5em;
 }
 
 .ev-event-card:nth-of-type(8n + 3) {
@@ -133,7 +133,7 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 3) .ev-event-title {
-    top: 3.6em;
+    top: 4.2em;
     left: 1.4em;
 }
 
@@ -144,7 +144,7 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 4) .ev-event-title {
-    top: 2.4em;
+    top: 3.2em;
     left: 1.4em;
 }
 
@@ -155,8 +155,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 5) .ev-event-title {
-    top: 3.3em;
-    left: 1.45em;
+    top: 3.6em;
+    left: 1.7em;
 }
 
 .ev-event-card .ev-event-content {

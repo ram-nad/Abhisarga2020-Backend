@@ -226,16 +226,16 @@ class PasswordResetDoneView(View):
         token = dtg.make_token(user)
         idb64 = b64_encode(bytes(str(user.pk).encode()))
         url = URL + reverse('password_reset_confirm', args=[idb64, token])
-        html = render_to_string('email/account_generation.html', context={'title': "Reset Password",
-                                                                          'head': "Reset Password",
-                                                                          'name': user.name,
-                                                                          'action': {
-                                                                              'name': "Reset my Password",
-                                                                              'href': url}})
+        html = render_to_string('email/password_reset.html', context={'title': "Reset Password",
+                                                                      'head': "Reset Password",
+                                                                      'name': user.name,
+                                                                      'action': {
+                                                                          'name': "Reset my Password",
+                                                                          'href': url}})
         text = "Please open the link given below to reset password for your Abhisarga 2020 account. \n" + url + \
                "\nIf you did not request password reset then please ignore this email." + \
                "\nRegards,\nAbhisarga 2020 Team"
-        send_mail("Email Verification for Abhisarga 2020", text, html, [email])
+        send_mail("Password Reset for Abhisarga 2020", text, html, [email])
         message = {"title": "Password Reset Confirmation",
                    "message": "An mail will be sent to your registered email with the link to reset"
                               " your password, shortly.",

@@ -110,7 +110,7 @@ body {
 }
 
 #rule-open-button::after {
-    background: url("../images/svg/info.svg");
+    background: url("../images/svg/right_open.svg");
     background-size: 50% 50%;
     background-position: right center;
     background-repeat: no-repeat;
@@ -121,7 +121,7 @@ body {
 }
 
 #rule-open-button.ruleopen::after {
-    background: url("../images/svg/left-close.svg");
+    background: url("../images/svg/left_close.svg");
     background-size: 50% 50%;
     background-position: left center;
     background-repeat: no-repeat;
