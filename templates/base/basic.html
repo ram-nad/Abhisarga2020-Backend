@@ -15,6 +15,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="32x32" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
     {% block head %}
     {% endblock %}
 </head>
@@ -24,22 +25,23 @@
 {% block content %}
 {% endblock %}
 
+<nav id="navbar">
+    <a href="{% url 'home' %}#" id="logoimg">
+        <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
+    </a>
+    <div id="nav-buttons">
+        <div id="hamburger" class="close"></div>
+    </div>
+</nav>
+
 <div id="side-nav">
     <div class="hoverid">
         <a href="{% url 'home' %}#about">About</a>
         <a href="{% url 'events' %}">Events</a>
         {# <a href="{% url 'signup' %}">Registration</a> #}
         <a href="{% url 'sponsors' %}">Sponsors</a>
-        {# <a href="#">Accommodation</a> #}
         <a href="{% url 'volunteers' %}">Our Team</a>
         <a href="{% url 'home' %}#test">Contact</a>
-    </div>
-</div>
-<nav id="navbar">
-    <a href="{% url 'home' %}#" id="logoimg">
-        <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
-    </a>
-    <div id="nav-buttons">
         {% if request.user.is_authenticated %}
             <a href="{#% url 'logout' %#}">
                 <button type="button" id="register">Logout</button>
@@ -49,9 +51,9 @@
                 <button type="button" id="register">Login</button>
             </a>
         {% endif %}
-        <div id="hamburger" class="close"></div>
     </div>
-</nav>
+</div>
+
 
 <div id="footer">
     <div id="social">

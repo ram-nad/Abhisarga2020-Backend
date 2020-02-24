@@ -37,13 +37,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0.6) 60%,
-            rgba(0, 0, 0, 0.8) 80%,
-            rgba(0, 0, 0, 0.9)
-    );
-    box-shadow: 0 0.01em 0.5em #000;
+    background: none;
+    box-shadow: none;
 }
 
 #logoimg {
@@ -62,8 +57,8 @@ body {
     display: flex;
     box-sizing: border-box;
     width: 10em;
-    padding: 0 1em;
-    justify-content: space-between;
+    padding: 1em 1em;
+    justify-content: end;
     align-items: center;
 }
 
@@ -87,8 +82,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0.15em;
-    height: 0.9em;
+    width: 0.10em;
+    height: 0.7em;
     transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
 }
 
@@ -98,8 +93,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0.15em;
-    height: 0.9em;
+    width: 0.10em;
+    height: 0.7em;
     transform: translateX(-50%) translateY(-50%) rotateZ(-45deg);
 }
 
@@ -111,7 +106,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0.9em;
+    width: 0.7em;
     height: 0.4em;
     transform: translateX(-50%) translateY(-50%);
 }
@@ -159,21 +154,22 @@ body {
 }
 
 .hoverid a {
+    font-family: 'Lacquer';
     color: #fff;
     font-size: 1.3em;
     display: block;
     width: 100%;
     text-align: center;
-    height: 1em;
+    height: 60px;
     margin: 0.6em 0;
     font-weight: 700;
 }
 
 .hoverid a:hover {
-    font-family: "marker-felt";
+    font-family: 'Lacquer';
     font-weight: 500;
-    height: 0.7em;
-    font-size: 1.4em;
+    height: 60px;
+    transform: scale(1.1);
     text-shadow: -0.1em 0 red;
 }
 
