@@ -1,0 +1,14 @@
+{% extends 'email/base.html' %}
+
+{% block body %}
+    {{ salutation }} successfully registered for the <strong>{{ head }}</strong>. We hope that you will enjoy the event.
+    Thank you for participating in Abhisarga 2020.
+{% endblock %}
+
+{% block subbody %}
+    If you have any questions regarding the event, please feel free to revert back to us at
+    <a href="mailto:abhisarga.core@iiits.in">abhisarga.core@iiits.in</a>.
+{% endblock %}
+
+{% block endbody %}
+{% endblock %}

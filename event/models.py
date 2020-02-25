@@ -29,11 +29,11 @@ class Event(models.Model):
     max_participant = models.PositiveIntegerField(default=50)
     registration_open = models.BooleanField(default=False)
     extra_param_1_name = models.CharField(max_length=40, blank=True, default="")
-    extra_param_1_optional = models.BooleanField(default=False)
+    extra_param_1_optional = models.BooleanField(default=False, verbose_name="Extra parameter 1 is optional")
     extra_param_2_name = models.CharField(max_length=40, blank=True, default="")
-    extra_param_2_optional = models.BooleanField(default=False)
+    extra_param_2_optional = models.BooleanField(default=False, verbose_name="Extra parameter 2 is optional")
     extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
-    extra_param_3_optional = models.BooleanField(default=False)
+    extra_param_3_optional = models.BooleanField(default=False, verbose_name="Extra parameter 3 is optional")
 
     def clean(self):
         super().clean()

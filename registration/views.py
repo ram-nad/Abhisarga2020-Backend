@@ -65,7 +65,8 @@ class ProfileMakeView(View):
                                                                                       'action': {
                                                                                           'name': "Verify My Email",
                                                                                           'href': url}})
-                    text = "Please open the link given below to verify your email for Abhisarga 2020. \n" + url + \
+                    text = "Dear User,\n" + \
+                           "Please open the link given below to verify your email for Abhisarga 2020. \n" + url + \
                            "\nIf you did not request registration for Abhisarga 2020 then please ignore this email." + \
                            "\nRegards,\nAbhisarga 2020 Team"
                     send_mail("Email Verification for Abhisarga 2020", text, html, [email])
@@ -232,7 +233,8 @@ class PasswordResetDoneView(View):
                                                                       'action': {
                                                                           'name': "Reset my Password",
                                                                           'href': url}})
-        text = "Please open the link given below to reset password for your Abhisarga 2020 account. \n" + url + \
+        text = "Dear " + user.name + ",\n" + \
+               "Please open the link given below to reset password for your Abhisarga 2020 account. \n" + url + \
                "\nIf you did not request password reset then please ignore this email." + \
                "\nRegards,\nAbhisarga 2020 Team"
         send_mail("Password Reset for Abhisarga 2020", text, html, [email])

@@ -83,7 +83,6 @@ class CustomEventRegOrganiser(ModelAdmin):
             return super().get_queryset(request)
         else:
             qs = super().get_queryset(request)
-            print(qs)
             return qs.filter(event__organiser__pk=request.user.pk)
 
     def has_module_permission(self, request):

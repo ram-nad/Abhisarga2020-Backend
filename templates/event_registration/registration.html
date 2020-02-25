@@ -28,7 +28,7 @@
             <div id="reg-fields">
                 {% if registration %}
                     {% for f in registration.get_extra_params %}
-                        <label>{{ f.0 }}{% if f.1 %}*{% endif %}</label>
+                        <label>{{ f.0 }}{% if not f.1 %}*{% endif %}</label>
                         <input type="text" name="{{ f.0 }}" value="{{ f.2 }}" {% if view %}readonly{% endif %}/>
                         {% if error|has_attr:f.0 %}
                             <div class="reg-form-error">{{ error|get_obj_attr:f.0|error_list }}</div>
@@ -36,7 +36,7 @@
                     {% endfor %}
                 {% else %}
                     {% for f in event.get_extra_params %}
-                        <label>{{ f.0 }}{% if f.1 %}*{% endif %}</label>
+                        <label>{{ f.0 }}{% if not f.1 %}*{% endif %}</label>
                         <input type="text" name="{{ f.0 }}"/>
                         {% if error|has_attr:f.0 %}
                             <div class="reg-form-error">{{ error|get_obj_attr:f.0|error_list }}</div>

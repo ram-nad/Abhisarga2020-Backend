@@ -2,12 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy, reverse
 from django.views import View
 
-from AbhisargaBackend.settings import NEXT_PARAMETER
+from AbhisargaBackend.settings import NEXT_PARAMETER, URL
 from base.views import bad_request, not_found
 from event.models import Event
+from mail import send_mail
 from .models import EventRegistration
 
 already_full_message = {'title': 'Registration Full',
@@ -103,10 +105,23 @@ class EventRegisterView(LoginRequiredMixin, View):
                           context={'event': event, 'error': error})
         else:
             registration.save()
-
         salutation = "You have"
         if registration.is_team_event:
             salutation = "Your Team has been"
+        html = render_to_string('email/event.html', context={'title': "Event Registration",
+                                                             'head': event.name,
+                                                             'name': request.user.name,
+                                                             'salutation': salutation,
+                                                             'action': {
+                                                                 'name': "Go to my profile",
+                                                                 'href': URL + reverse('profile')},
+                                                             'contact': event.contact_number})
+        text = "Dear " + request.user.name + ",\n" + salutation + " successfully registered for " + event.name + \
+               ".\nWe hope that you will enjoy the event. For any enquiries regarding the event, " + \
+               "please revert back to us at abhisarga.core@iiits.in." + "\nRegards,\nAbhisarga 2020 Team"
+
+        send_mail("Event registration successful", text, html, [request.user.email])
+
         message = {'title': 'Registration Successful',
                    'message': salutation + " successfully registered for " + event.name + " at Abhisarga 2020.",
                    'next': {'name': "Explore other events", 'url': reverse('events')}}
