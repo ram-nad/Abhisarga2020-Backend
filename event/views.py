@@ -1,8 +1,8 @@
-from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.views import View
 
 from base.models import EventCategory
+from base.views import not_found
 from .models import Event
 
 
@@ -16,5 +16,5 @@ class EventDetailView(View):
         try:
             event = Event.objects.get(pk=pk)
         except Event.DoesNotExist:
-            return HttpResponseNotFound()
+            return not_found(request)
         return render(request, 'event/event.html', context={'event': event})

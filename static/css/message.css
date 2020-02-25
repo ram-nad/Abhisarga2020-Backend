@@ -15,8 +15,8 @@ body {
 #message-container {
   font-size: 3vw;
   width: 20em;
-  margin: 2em auto 0.1em;
-  height: 70vh;
+  margin: 2.2em auto 0.1em;
+  height: 60vh;
   background: url("../images/message-box.png");
   background-size: 100% 100%;
 }
@@ -24,7 +24,7 @@ body {
 #message-box {
   font-size: 3.6vw;
   width: 10em;
-  margin: 0 auto;
+  margin: 1.5em auto;
   padding-top: 1.5em;
   color: #3c7a8d;
 }

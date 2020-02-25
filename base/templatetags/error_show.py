@@ -19,7 +19,7 @@ def error_object(value):
         return value
     elif isinstance(value, dict):
         if NON_FIELD_ERRORS in value:
-            return error_list(value)
+            return error_list(value[NON_FIELD_ERRORS])
         else:
             return ""
     else:

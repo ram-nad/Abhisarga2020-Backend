@@ -104,7 +104,7 @@ def profile_create_get(request, b64id, token):
         return bad_request(request, None)
     else:
         return render(request, 'registration/signup_full.html',
-                      context={'email': u.email, 'token': token, 'colleges': College.objects.all(),
+                      context={'email': u.email, 'token': token, 'colleges': College.objects.all()[:8],
                                'gender': gender_choices})
 
 
@@ -126,12 +126,12 @@ def profile_create_post(request):
                 return login_and_redirect(request, new_user)
             except ValidationError as e:
                 return render(request, 'registration/signup_full.html',
-                              context={'email': email, 'token': token, 'colleges': College.objects.all(),
+                              context={'email': email, 'token': token, 'colleges': College.objects.all()[:8],
                                        'gender': gender_choices,
                                        'error': e.message_dict})
         else:
             return render(request, 'registration/signup_full.html',
-                          context={'email': email, 'token': token, 'colleges': College.objects.all(),
+                          context={'email': email, 'token': token, 'colleges': College.objects.all()[:8],
                                    'gender': gender_choices,
                                    'error': pf.errors})
 

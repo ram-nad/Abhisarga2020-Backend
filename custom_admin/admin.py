@@ -2,7 +2,8 @@ from django.contrib.admin import ModelAdmin
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy
+from django.urls import reverse
+from django.utils.safestring import SafeString
 
 from event.models import Event
 from registration.models import User, Profile
@@ -17,11 +18,11 @@ class AdministratorAuthForm(AuthenticationForm):
 
 
 class CustomAdminSite(AdminSite):
-    site_title = gettext_lazy('Admin | Abhisarga 2020')
+    site_title = 'Admin | Abhisarga 2020'
 
     index_title = 'Dashboard'
 
-    site_header = gettext_lazy('Abhisarga Dashboard')
+    site_header = 'Abhisarga Dashboard'
 
     def has_permission(self, request):
         if request.user.is_anonymous:
@@ -31,6 +32,27 @@ class CustomAdminSite(AdminSite):
 
 
 custom_admin_site = CustomAdminSite(name='custom_admin')
+
+
+class CustomEventAdmin(ModelAdmin):
+    list_display = ('name', 'category', 'organiser', 'participants_list', 'is_team_event')
+
+    def is_team_event(self, obj):
+        if obj is None:
+            return False
+        else:
+            return obj.team_event
+
+    is_team_event.boolean = True
+
+    def participants_list(self, obj):
+        a = '<a href="' + reverse(
+            "custom_admin:event_registration_eventregistration_changelist") + "?event__exact=" + str(
+            obj.pk) + '">View Participants</a>'
+        return SafeString(a)
+
+
+custom_admin_site.register(Event, CustomEventAdmin)
 
 
 class CustomUserAdmin(ModelAdmin):
@@ -53,18 +75,26 @@ class CustomUserAdmin(ModelAdmin):
         return True
 
     def save_model(self, request, obj, form, change):
-        password = obj.password
-        obj.set_password(password)
-        obj.is_administrator = True
-        super().save_model(request, obj, form, change)
+        user = User.objects.get_or_none(email=obj.email)
+        if user is None:
+            password = obj.password
+            obj.set_password(password)
+            obj.is_administrator = True
+            obj.save()
+        else:
+            user.is_administrator = True
+            user.save()
 
 
 custom_admin_site.register(User, CustomUserAdmin)
 
 
-class CustomerProfileAdmin(ModelAdmin):
-    fields = ('email', 'first_name', 'last_name', 'college', 'phone_number', 'gender')
-    readonly_fields = ('email', 'name', 'college', 'phone_number', 'gender')
+class CustomProfileAdmin(ModelAdmin):
+    fields = ('email', 'first_name', 'last_name', 'college_name', 'phone_number', 'gender', 'event_list_display')
+    readonly_fields = ('email', 'name', 'college_name', 'phone_number', 'gender')
+
+    def college_name(self, obj):
+        return obj.college.name
 
     def has_view_permission(self, request, obj=None):
         return True
@@ -78,22 +108,31 @@ class CustomerProfileAdmin(ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-    list_display = ('email', 'name', 'college', 'phone_number')
+    list_display = ('email', 'name', 'college_name', 'phone_number', 'events_list')
     list_display_links = ('email',)
     list_filter = ('gender',)
-    search_fields = ('email', 'first_name', 'last_name', 'phone_number', 'college')
+    search_fields = ('user__email', 'first_name', 'last_name', 'phone_number', 'college__name')
     list_per_page = 20
 
+    def events_list(self, obj):
+        a = '<a href="' + reverse(
+            "custom_admin:event_registration_eventregistration_changelist") + "?user__exact=" + str(
+            obj.pk) + '">View Registered Events</a>'
+        return SafeString(a)
 
-custom_admin_site.register(Profile, CustomerProfileAdmin)
+    def event_list_display(self, obj):
+        return "\n".join(map(lambda x: x.name, obj.registrations.all()))
+
+
+custom_admin_site.register(Profile, CustomProfileAdmin)
 
 
 class EventOrganiserSite(AdminSite):
-    site_title = gettext_lazy('Event Organisers | Abhisarga 2020')
+    site_title = 'Event Organisers | Abhisarga 2020'
 
     index_title = 'Dashboard'
 
-    site_header = gettext_lazy('Abhisarga Dashboard')
+    site_header = 'Abhisarga Dashboard'
 
     login_form = AdministratorAuthForm
 
@@ -108,9 +147,7 @@ event_admin_site = EventOrganiserSite(name='event_organiser')
 
 
 class CustomEventAdmin(ModelAdmin):
-    fields = (
-        'name', 'category', 'description', 'vne', 'dt', 'rls', 'poster', 'contact_number', 'short_description', 'f_p',
-        's_p', 't_p', 'organiser')
+    list_display = ('name', 'category', 'organiser', 'participants_list')
     readonly_fields = ('organiser',)
 
     def has_view_permission(self, request, obj=None):
@@ -131,6 +168,12 @@ class CustomEventAdmin(ModelAdmin):
 
     def has_module_permission(self, request):
         return True
+
+    def participants_list(self, obj):
+        a = '<a href="' + reverse(
+            "event_organiser:event_registration_eventregistration_changelist") + "?event__exact=" + str(
+            obj.pk) + '">View Participants</a>'
+        return SafeString(a)
 
 
 event_admin_site.register(Event, CustomEventAdmin)

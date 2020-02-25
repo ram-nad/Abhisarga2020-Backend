@@ -12,7 +12,7 @@ urlpatterns = [
     path('sponsors/', include('sponsorship.urls')),
     path('events/', include('event.urls')),
     path('profile/', include('registration.urls')),
-    # path('register/<int:pk>/', include('event_registration.urls')),
+    path('participate/<int:pk>/', include('event_registration.urls')),
 ]
 
 handler403 = permission_denied

@@ -1,0 +1,170 @@
+body {
+    background: url("../images/eventreg_bg.png");
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+}
+
+#event-reg-form-container {
+    font-size: 2vw;
+    margin: 3.4em auto 0.1em;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0.5em 0.5em 2em 0.2em rgb(39, 40, 41);
+    padding: 1.2em 0.9em;
+    width: 11em;
+}
+
+#reg-form-text {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em;
+    font-family: "poppins";
+    font-size: 0.5em;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+#reg-fields {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0.35em auto;
+    width: 90%;
+}
+
+#reg-fields form {
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+input[type="text"] {
+    box-sizing: border-box;
+    margin: 0.3em 0;
+    border: 0;
+    outline: 0;
+    border-bottom: 0.1em solid #7fffd4;
+    padding: 0.2em 0.4em 0.6em;
+    width: 100%;
+}
+
+input[type="text"]:focus {
+    border-bottom: 0.15em solid #7fffd4;
+}
+
+#reg-fields label {
+    margin-top: 0.5em;
+    font-size: 0.4em;
+    display: block;
+    height: 1em;
+    width: 100%;
+    overflow: visible;
+}
+
+#team-member-heading {
+    font-size: 0.5em;
+    display: block;
+    margin: 0.4em 0 0.2em;
+    color: #0c8d62;
+}
+
+#members-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.members-button {
+    font-size: 0.45em;
+    background: transparent;
+    font-weight: bold;
+    width: max-content;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    color: #0c8d62;
+}
+
+.members-button:focus:hover {
+    color: rgba(12, 141, 98, 0.7);
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(1em);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#team-members input[type="text"] {
+    animation: slide-up 0.4s ease;
+}
+
+form input[type="submit"],
+a.data-submit {
+    font-size: 0.6em;
+    box-sizing: content-box;
+    margin: 1.2em auto 0;
+    border: 0;
+    outline: 0;
+    display: block;
+    text-align: center;
+    padding: 0.8em 1em;
+    width: 7em;
+    color: white;
+    background: linear-gradient(0deg, #0575e6, #34ffbb);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reg-form-error {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 0.4em;
+    line-height: 1em;
+    height: 1.2em;
+    padding-top: 0.2em;
+    color: black;
+    padding-left: 1.2em;
+    background: url("../images/svg/warning.svg");
+    background-size: 1em 1em;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #event-reg-form-container {
+        font-size: 2.4vw;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #event-reg-form-container {
+        font-size: 2.9vw;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    #event-reg-form-container {
+        font-size: 3.5vw;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    #event-reg-form-container {
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 320px) {
+    #event-reg-form-container {
+        font-size: 4.5vw;
+    }
+}

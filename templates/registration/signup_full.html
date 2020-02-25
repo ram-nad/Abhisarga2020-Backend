@@ -16,7 +16,7 @@
                 <label>Email<sup>*</sup></label><input type="email" name="email" data-box="text" value="{{ email }}"
                                                        readonly>
                 <label>First Name*</label><input type="text" name="first_name" id="user_fname" data-box="text"
-                                                 placeholder="First Name">
+                                                 placeholder="First Name" required>
                 {% if error.first_name %}
                     <div class="form-error-message">{{ error.first_name|error_list }}</div>
                 {% endif %}
@@ -26,22 +26,22 @@
                     <div class="form-error-message">{{ error.last_name|error_list }}</div>
                 {% endif %}
                 <label>Phone Number*</label><input type="text" name="phone_number" id="user_phone" data-box="text"
-                                                   placeholder="Phone Number">
+                                                   placeholder="Phone Number" required>
                 {% if error.phone_number %}
                     <div class="form-error-message">{{ error.phone_number|error_list }}</div>
                 {% endif %}
                 <label>Password*</label><input type="password" name="password" id="user_password" data-box="text"
-                                               placeholder="*******">
+                                               placeholder="*******" required>
                 {% if error.password %}
                     <div class="form-error-message">{{ error.password|error_list }}</div>
                 {% endif %}
                 <label>Confirm Password*</label><input type="password" name="password_confirm"
                                                        id="user_password_confirm"
                                                        data-box="text"
-                                                       placeholder="*******">
+                                                       placeholder="*******" required>
                 <div class="form-error-message" id="password_confirm_error" style="display: none"></div>
                 <label>Gender*</label>
-                <select name="gender" id="user_gender">
+                <select name="gender" id="user_gender" required>
                     <option value="---" disabled selected></option>
                     {% for i in gender %}
                         <option value="{{ i.0 }}">{{ i.1 }}</option>
@@ -52,11 +52,11 @@
                 {% endif %}
                 <label>College*</label><input type="search" name="college" id="user_college" data-box="text"
                                               placeholder="Your College" list="user_college_list"
-                                              oninput="update_list()">
+                                              oninput="update_list()" required>
                 {% if error.college %}
                     <div class="form-error-message">{{ error.college|error_list }}</div>
                 {% endif %}
-                <label>Profile Pic</label><input type="file" name="profile_pic" id="user_profile_pic">
+                <label>Profile Pic</label><input type="file" name="profile_pic" id="user_profile_pic" accept="image/*">
                 {% if error.profile_pic %}
                     <div class="form-error-message">{{ error.profile_pic|error_list }}</div>
                 {% endif %}
@@ -69,6 +69,9 @@
         </div>
     </div>
     <datalist id="user_college_list">
+        {% for c in colleges %}
+            <option value="{{ c.name }}">
+        {% endfor %}
     </datalist>
 {% endblock %}
 {% block script %}

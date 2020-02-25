@@ -18,8 +18,5 @@ class CustomCollege(ModelAdmin):
 
     def registrants_list(self, obj):
         a = '<a href="' + reverse("custom_admin:registration_profile_changelist") + "?college__id__exact=" + str(
-            obj.pk) + '">View ' + str(obj.students.count() if obj.students else 0) + ' Registrants</a>'
+            obj.pk) + '">View ' + str(obj.students.count()) + ' Registrants</a>'
         return SafeString(a)
-
-
-custom_admin_site.register(College, CustomCollege)

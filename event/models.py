@@ -1,4 +1,5 @@
-from django.db import models
+from django.core.exceptions import ValidationError
+from django.db import models, transaction
 
 from base.models import EventCategory
 from registration.models import User
@@ -22,25 +23,53 @@ class Event(models.Model):
     organiser = models.ForeignKey(to=User, related_name="organised_events", null=True, on_delete=models.SET_NULL,
                                   limit_choices_to={'is_administrator': True}, blank=True)
 
-    # team_event = models.BooleanField(default=False)
-    # max_participant = models.PositiveIntegerField()
-    # team_min_size = models.PositiveIntegerField(default=1)
-    # team_max_size = models.PositiveIntegerField(default=1)
-    # registration_open = models.BooleanField(default=True)
-    # amount = models.IntegerField(default=0)
-    # extra_param_1_name = models.CharField(max_length=40, blank=True, default="")
-    # extra_param_2_name = models.CharField(max_length=40, blank=True, default="")
-    # extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
+    team_event = models.BooleanField(default=False)
+    team_min_size = models.PositiveIntegerField(default=1)
+    team_max_size = models.PositiveIntegerField(default=1)
+    max_participant = models.PositiveIntegerField(default=50)
+    registration_open = models.BooleanField(default=False)
+    extra_param_1_name = models.CharField(max_length=40, blank=True, default="")
+    extra_param_1_optional = models.BooleanField(default=False)
+    extra_param_2_name = models.CharField(max_length=40, blank=True, default="")
+    extra_param_2_optional = models.BooleanField(default=False)
+    extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
+    extra_param_3_optional = models.BooleanField(default=False)
 
     def clean(self):
         super().clean()
+        if self.team_event:
+            if self.team_min_size > self.team_max_size:
+                raise ValidationError("Min team size must be greater than Max team size")
         self.contact_number = validate_phone(self.contact_number)
+        if not self.team_event:
+            self.team_max_size = 1
+            self.team_max_size = 1
 
     def __str__(self):
         return self.name
 
-    # def get_extra_params(self):
-    #     return [f for f in [self.extra_param_1_name, self.extra_param_2_name, self.extra_param_3_name] if f]
+    @property
+    def get_extra_params(self):
+        return [f for f in [(self.extra_param_1_name, self.extra_param_1_optional),
+                            (self.extra_param_2_name, self.extra_param_2_optional),
+                            (self.extra_param_3_name, self.extra_param_3_optional)] if f[0]]
+
+    @property
+    def has_extra_params(self):
+        return self.extra_param_1_name != '' or self.extra_param_2_name != '' or self.extra_param_3_name != ''
+
+    @property
+    @transaction.atomic
+    def max_limit_reached(self):
+        event = Event.objects.select_for_update(of=()).get(pk=self.pk)
+        count = event.participants.count()
+        return count == event.max_participant
+
+    @property
+    def simple_max_limit_reached(self):
+        event = Event.objects.get(pk=self.pk)
+        count = event.participants.count()
+        return count == event.max_participant
 
     @property
     def first_prize(self):

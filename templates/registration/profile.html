@@ -1,5 +1,6 @@
 {% extends 'base/basic.html' %}
 {% load static %}
+{% load event_registration %}
 {% block title %}{{ profile.name }}{% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}"/>
@@ -17,10 +18,26 @@
             <span>{{ profile.college.name }}</span>
         </div>
         <div id="profile-event-info">
-            <h1>Event registration haven't started yet.</h1>
-            <a href="{% url 'events' %}">
-                <button>View all events</button>
-            </a>
+            {% if not request.user.is_authenticated or not request.user|is_registered_any %}
+                <h1>You haven't registered for any event.</h1>
+                <a href="{% url 'events' %}">
+                    <button>View all events</button>
+                </a>
+            {% else %}
+                {% for r in request.user.profile.registrations.all %}
+                    <div class="event-data-info">
+                        <h2>{{ r.event.name }}</h2>
+                        <div class="button-together">
+                            <a href="{% url 'event_registration' r.event.pk %}">
+                                <button>View</button>
+                            </a>
+                            <a href="{% url 'event_registration_edit' r.event.pk %}">
+                                <button>Edit</button>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

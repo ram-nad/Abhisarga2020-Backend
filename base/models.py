@@ -13,7 +13,7 @@ class EventCategory(models.Model):
     description = models.TextField(max_length=200, blank=True)
 
     def __str__(self):
-        return "Event Category: " + self.name
+        return self.name
 
     class Meta:
         verbose_name_plural = "Event Categories"

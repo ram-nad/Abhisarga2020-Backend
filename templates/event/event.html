@@ -1,6 +1,6 @@
 {% extends 'base/basic.html' %}
 {% load static %}
-
+{% load event_registration %}
 {% block title %}{{ event.name }} | Abhisarga 2020{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/event.css' %}">
@@ -25,7 +25,17 @@
                 <span>2nd Prize: {{ event.second_prize }}</span>
                 <span>3rd Prize: {{ event.third_prize }}</span>
             </div>
-            <a id="event-register" href="">Register</a>
+            {% if request.user.is_authenticated and request.user|is_registered:event %}
+                <a id="event-register">Registered</a>
+            {% else %}
+                {% if not event.registration_open %}
+                    <a id="event-register">Closed</a>
+                {% elif event.simple_max_limit_reached %}
+                    <a id="event-register">Full</a>
+                {% else %}
+                    <a id="event-register" href="{% url 'event_register_view' event.pk %}">Register</a>
+                {% endif %}
+            {% endif %}
             <div id="event-rule" class="">
                 {% for rls in event.rules %}
                     <span>{{ rls }}</span>

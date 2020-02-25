@@ -1,0 +1,111 @@
+{% extends 'base/basic.html' %}
+{% load static %}
+{% load helpers %}
+{% load error_show %}
+{% block title %}{{ event.name }} Registration{% if registration and view %} View{% else %} Edit
+{% endif %}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/event_reg.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="event-reg-form-container">
+        <div id="reg-form-text">
+            {% if not registration %}
+                Event Registration for <strong>{{ event.name }}</strong>
+            {% else %}
+                {% if view %}
+                    <strong>Event: </strong>{{ event.name }}
+                {% else %}
+                    Edit and submit the details for <strong>{{ event.name }}</strong>.
+                {% endif %}
+            {% endif %}
+        </div>
+        {% if not view %}
+            <form method="post">
+            {% csrf_token %}
+        {% endif %}
+        {% if event.has_extra_params %}
+            <div id="reg-fields">
+                {% if registration %}
+                    {% for f in registration.get_extra_params %}
+                        <label>{{ f.0 }}{% if f.1 %}*{% endif %}</label>
+                        <input type="text" name="{{ f.0 }}" value="{{ f.2 }}" {% if view %}readonly{% endif %}/>
+                        {% if error|has_attr:f.0 %}
+                            <div class="reg-form-error">{{ error|get_obj_attr:f.0|error_list }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for f in event.get_extra_params %}
+                        <label>{{ f.0 }}{% if f.1 %}*{% endif %}</label>
+                        <input type="text" name="{{ f.0 }}"/>
+                        {% if error|has_attr:f.0 %}
+                            <div class="reg-form-error">{{ error|get_obj_attr:f.0|error_list }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if event.team_event %}
+            <strong id="team-member-heading">{% if not view %}Enter name of your team members
+                ({{ event.team_min_size }}-{{ event.team_max_size }}){% else %}Team members{% endif %}</strong>
+            <div id="team-members">
+                {% if not registration %}
+                    {% for _ in event.team_min_size|times %}
+                        <input type="text" placeholder="Member Name" name="members"/>
+                    {% endfor %}
+                {% else %}
+                    {% for m in registration.member_list %}
+                        <input type="text" placeholder="Member Name" name="members" value="{{ m }}"
+                               {% if view %}readonly{% endif %}>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% if error.members %}
+                <div class="reg-form-error">{{ error.members|error_list }}</div>
+            {% endif %}
+            {% if not view %}
+                <div id="members-button-container">
+                    <input id="add-members" class="members-button" type="button" value="+ Add team member">
+                    <input id="remove-members" class="members-button" type="button" value="- Remove team member">
+                </div>
+            {% endif %}
+        {% endif %}
+        {% if not view %}
+            <input type="submit" value="{% if registration %}Submit{% else %}Register{% endif %}">
+            </form>
+        {% else %}
+            <a href="{% url 'event_deregistration' event.pk %}" class="data-submit">De-Register</a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block script %}
+    {% if event.team_event %}
+        <script>
+            let minSize = {{ event.team_min_size }};
+            let maxSize = {{ event.team_max_size }};
+            let teamList = document.getElementById("team-members");
+
+            function addMem() {
+                if (teamList.childElementCount === maxSize) {
+                    return;
+                }
+                let x = document.createElement("input");
+                x.setAttribute("type", "text");
+                x.setAttribute("placeholder", "Member Name");
+                x.setAttribute("name", "members");
+                teamList.appendChild(x);
+            }
+
+            function remMem() {
+                if (teamList.childElementCount === minSize) {
+                    return;
+                }
+                let x = teamList.lastChild;
+                x.remove();
+            }
+
+            document.getElementById('add-members').onclick = addMem;
+            document.getElementById('remove-members').onclick = remMem;
+        </script>
+    {% endif %}
+{% endblock %}

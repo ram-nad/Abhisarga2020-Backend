@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'base',
     'registration',
     'event',
-    # 'event_registration',
-    # 'payment',
+    'event_registration',
     'sponsorship',
+    # 'payment',
 
 ]
 

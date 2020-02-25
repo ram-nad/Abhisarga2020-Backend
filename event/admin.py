@@ -1,7 +1,5 @@
-from django.contrib.admin import ModelAdmin
+from django.contrib.admin import site as admin_site
 
-from custom_admin.admin import custom_admin_site
-from .models import *
+from .models import Event
 
-
-custom_admin_site.register(Event)
+admin_site.register(Event)

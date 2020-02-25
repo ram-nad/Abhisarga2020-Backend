@@ -8,10 +8,6 @@ def home(request):
     return render(request, 'base/home.html')
 
 
-def contact(request):
-    return render(request, 'home/contact.html')
-
-
 def permission_denied(request, exception, *args, **kwargs):
     return render(request, 'error/403.html', status=403, context={'details': str(exception)})
 
