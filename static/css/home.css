@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Amaranth|Berkshire+Swash|Bungee+Shade|Courgette|Fredericka+the+Great|Marck+Script|Monoton|Pangolin|Rye|Sacramento|Satisfy|Sue+Ellen+Francisco|Tangerine|Ultra|Unkempt&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
 html {
     scroll-behavior: smooth;
 }
@@ -11,34 +15,65 @@ a {
     background: transparent;
 }
 
+body {
+    /*background: #030321;*/
+    background: black;
+    font-family: "avenir-next";
+}
+
+svg {
+    padding-top: 10%;
+    display: block;
+    font: 150px 'Montserrat';
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+}
+
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1) {
+    stroke: #4D163D;
+    animation-delay: -1;
+}
+
+.text-copy:nth-child(2) {
+    stroke: #840037;
+    animation-delay: -2s;
+}
+
+.text-copy:nth-child(3) {
+    stroke: #BD0034;
+    animation-delay: -3s;
+}
+
+.text-copy:nth-child(4) {
+    stroke: #BD0034;
+    animation-delay: -4s;
+}
+
+.text-copy:nth-child(5) {
+    stroke: #FDB731;
+    animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+    100% {
+        stroke-dashoffset: -35%;
+    }
+}
+
 #main {
-    background: url("../images/bg.svg");
-    background-size: cover;
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 5vw;
-    background-attachment: fixed;
-}
-
-#main #character {
-    width: 10em;
-    height: auto;
-}
-
-#main #text {
-    margin-top: 0.5em;
+    height: 100vh;
     position: relative;
-    height: 1.5em;
-}
-
-#main #text img {
-    position: absolute;
-    height: 100%;
-    width: auto;
 }
 
 #main #text #A1 {
@@ -99,14 +134,20 @@ a {
     left: 2.3em;
 }
 
+.heading-text-main {
+    white-space: pre;
+}
+
 .weapons {
     width: 100%;
     height: 100%;
+    position: absolute;
 }
 
 .weapons img {
     height: 30px;
     width: auto;
+    max-width: 100%;
 }
 
 .img-hammer {
@@ -114,6 +155,34 @@ a {
     top: 0;
     left: 0;
     animation: moveObjRightDown 48s linear infinite;
+}
+
+
+#theme {
+    width: 100vw;
+    min-height: 80vh;
+    font-size: 2vw;
+    background-color: #000000;
+    box-sizing: border-box;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#themehead {
+    margin: 0;
+    padding: 0;
+    font-size: 140px;
+    text-align: center;
+    font-family: 'Bangers', cursive;
+    color: #f28f25;
+    text-shadow: 2px 2px 5px #000;
+    cursor: default;
+    /*   background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; */
 }
 
 .img-shield {
@@ -133,7 +202,7 @@ a {
 }
 
 
-.img-ring{
+.img-ring {
     height: 100px;
     width: auto;
     position: absolute;
@@ -151,21 +220,6 @@ a {
     top: 50%;
     animation: moveObjLeftTop 48s linear infinite 29s;
     background: transparent;
-}
-
-#main {
-    position: relative;
-}
-
-.page-thunder-to-text {
-	position: relative;
-	overflow: hidden;
-    background: transparent;
-}
-
-
-canvas {
-    display: block;
 }
 
 
@@ -363,9 +417,9 @@ canvas {
     width: 100vw;
     min-height: 100vh;
     font-size: 2vw;
-    background-color: #111;
+    background-color: #000000;
     box-sizing: border-box;
-    padding: 0.7em 0 0.5em;
+    padding: 1em 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -379,19 +433,20 @@ canvas {
 }
 
 #abttext p {
-    font-size: 0.75em;
-    padding: 0.2em;
+    padding: 0.15em;
     font-weight: 500;
     margin: 0;
+    font-family: 'Fredericka the Great' !important;
 }
 
 #abthead {
     font-size: 2em;
     font-weight: bold;
-    font-family: "poppins";
+    font-family: 'Bungee Shade' !important;
     padding: 0;
     margin: 0;
     padding-bottom: 0.3em;
+    color: #00b3a3;
 }
 
 #abtimg {
@@ -401,6 +456,7 @@ canvas {
 #abtimg img {
     height: 100%;
     width: auto;
+    max-width: 100%;
 }
 
 #test {
@@ -489,6 +545,12 @@ canvas {
     #test {
         font-size: 3vw;
     }
+    svg {
+        font: 100px 'Montserrat';
+    }
+    #themehead {
+        font-size: 140px;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -502,6 +564,12 @@ canvas {
 
     #test {
         font-size: 3.6vw;
+    }
+    svg {
+        font: 125px 'Montserrat';
+    }
+     #themehead {
+        font-size: 120px;
     }
 }
 
@@ -517,6 +585,13 @@ canvas {
     #test {
         font-size: 4.3vw;
     }
+    svg {
+        font: 125px 'Montserrat';
+    }
+    #themehead {
+        font-size: 70px;
+    }
+
 }
 
 @media (max-width: 320px) {
@@ -530,5 +605,11 @@ canvas {
 
     #test {
         font-size: 4.8vw;
+    }
+    svg {
+        font: 100px 'Montserrat';
+    }
+     #themehead {
+        font-size: 60px;
     }
 }
