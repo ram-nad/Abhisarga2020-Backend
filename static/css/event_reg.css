@@ -88,6 +88,16 @@ input[type="text"]:focus {
     color: #0c8d62;
 }
 
+#reg-form-link {
+  font-size: 0.5em;
+  color: rgb(66, 139, 202);
+  text-decoration: none;
+  border-bottom: 0.05em solid rgb(66, 139, 202);
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  padding-bottom: 0.1em;
+}
+
 .members-button:focus:hover {
     color: rgba(12, 141, 98, 0.7);
 }

@@ -20,7 +20,7 @@
                 {% endif %}
             {% endif %}
         </div>
-        {% if not view %}
+        {% if not view and event.has_extra_params or event.team_event and not view %}
             <form method="post">
             {% csrf_token %}
         {% endif %}
@@ -70,12 +70,16 @@
                 </div>
             {% endif %}
         {% endif %}
-        {% if not view %}
+        {% if not view and not event.has_extra_params and not event.team_event %}
+            <strong id="team-member-heading">There is nothing to edit here.</strong>
+        {% elif not view %}
             <input type="submit" value="{% if registration %}Submit{% else %}Register{% endif %}">
             </form>
         {% else %}
             <a href="{% url 'event_deregistration' event.pk %}" class="data-submit">De-Register</a>
         {% endif %}
+        <div style="text-align: center; margin-top: 0.15em"><a id="reg-form-link" href="{% url 'profile' %}">Go back to
+            profile</a></div>
     </div>
 {% endblock %}
 {% block script %}

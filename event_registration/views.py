@@ -106,7 +106,7 @@ class EventRegisterView(LoginRequiredMixin, View):
 
         salutation = "You have"
         if registration.is_team_event:
-            salutation = "Your Team has"
+            salutation = "Your Team has been"
         message = {'title': 'Registration Successful',
                    'message': salutation + " successfully registered for " + event.name + " at Abhisarga 2020.",
                    'next': {'name': "Explore other events", 'url': reverse('events')}}
