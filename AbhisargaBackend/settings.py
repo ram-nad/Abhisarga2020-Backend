@@ -185,3 +185,5 @@ PASSWORD_RESET_TIMEOUT = 30 * 60
 USE_MAILGUN = os.getenv('USE_MAILGUN') == 'True'
 
 URL = "http://localhost:8000" if DEBUG else "https://abhisarga.iiits.in"
+
+SEND_MAIL_ON_REGISTRATION = os.getenv('SEND_MAIL_ON_REGISTRATION') != 'False'

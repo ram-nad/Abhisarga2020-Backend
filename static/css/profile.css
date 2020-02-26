@@ -109,19 +109,21 @@ body {
 .button-together {
     display: flex;
     flex-direction: row;
-    width: 4.5em;
+    width: 3.9em;
     height: 1em;
     justify-content: space-between;
 }
 
 #profile-event-info button {
+    box-sizing: content-box;
     display: block;
     font-size: 0.5em;
     background: #00b3a3;
     margin: 0;
     outline: 0;
     border: 0;
-    width: 4.2em;
+    width: max-content;
+    padding: 0 0.8em;
     height: 1.8em;
     border-radius: 1em;
     box-shadow: 0.1em 0.1em 0.15em #555;

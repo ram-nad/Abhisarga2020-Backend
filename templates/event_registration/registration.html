@@ -47,10 +47,11 @@
         {% endif %}
         {% if event.team_event %}
             <strong id="team-member-heading">{% if not view %}Enter name of your team members
-                ({{ event.team_min_size }}-{{ event.team_max_size }}){% else %}Team members{% endif %}</strong>
+                ({{ event.team_min_size|subtract1 }}-{{ event.team_max_size|subtract1 }}){% else %}Team
+                members{% endif %}</strong>
             <div id="team-members">
                 {% if not registration %}
-                    {% for _ in event.team_min_size|times %}
+                    {% for _ in event.team_min_size|subtract1|times %}
                         <input type="text" placeholder="Member Name" name="members"/>
                     {% endfor %}
                 {% else %}
@@ -72,7 +73,8 @@
         {% endif %}
         {% if not view and not event.has_extra_params and not event.team_event %}
             <strong id="team-member-heading">There is nothing to edit here.</strong>
-        {% elif not view %}
+        {% endif %}
+        {% if not view %}
             <input type="submit" value="{% if registration %}Submit{% else %}Register{% endif %}">
             </form>
         {% else %}
@@ -85,8 +87,8 @@
 {% block script %}
     {% if event.team_event %}
         <script>
-            let minSize = {{ event.team_min_size }};
-            let maxSize = {{ event.team_max_size }};
+            let minSize = {{ event.team_min_size|subtract1 }};
+            let maxSize = {{ event.team_max_size|subtract1 }};
             let teamList = document.getElementById("team-members");
 
             function addMem() {
