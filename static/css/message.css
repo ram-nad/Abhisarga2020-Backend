@@ -1,8 +1,8 @@
-a {
+#message-container a {
   color: unset;
 }
 
-a:hover {
+#message-container  a:hover {
   text-decoration: underline;
 }
 

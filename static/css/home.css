@@ -27,6 +27,7 @@ svg {
     font: 2em "Montserrat";
     width: 95%;
     margin: 0 auto;
+    position: relative;
 }
 
 .g-ants {
@@ -35,9 +36,9 @@ svg {
 }
 
 .text-copy {
-    fill: none;
+    fill: black;
     stroke-dasharray: 6% 29%;
-    stroke-width: 5px;
+    stroke-width: 0.45rem;
     stroke-dashoffset: 0;
     animation: stroke-offset 5.5s infinite linear;
 }
@@ -79,7 +80,7 @@ svg {
     }
 
     50% {
-        transform: scale(1);
+        transform: scale(1.1);
     }
 
     100% {

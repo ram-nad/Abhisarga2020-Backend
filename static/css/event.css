@@ -59,7 +59,7 @@ body {
     width: 100%;
     background: linear-gradient(to right, rgb(185, 222, 195), rgb(136, 209, 210));
     overflow-y: scroll;
-    padding: 0.3em 1em 0.1em;
+    padding: 0.5em 1em;
     transition: right 0.5s;
     -ms-overflow-style: none;
 }

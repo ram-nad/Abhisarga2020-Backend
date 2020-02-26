@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser
+from django.core.validators import validate_email
 from django.db import models
 
 from base.models import College
@@ -52,6 +53,10 @@ class User(AbstractBaseUser):
     @property
     def gender(self):
         return self.profile.gender
+
+    def full_clean(self, exclude=None, validate_unique=True):
+        validate_email(self.email)
+        super().full_clean(exclude=exclude, validate_unique=validate_unique)
 
 
 class Profile(models.Model):

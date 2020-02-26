@@ -1,8 +1,8 @@
-a {
+#sponsor-container a {
     color: unset;
 }
 
-.sponsors :hover {
+#sponsor-container a:hover {
     text-decoration: underline;
 }
 

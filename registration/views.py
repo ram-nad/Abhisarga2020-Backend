@@ -20,7 +20,7 @@ from .token import registration_token_generator, get_user_google, password_token
 def create_user_return_token(email):
     u = User.objects.get_or_none(email=email)
     if u is None:
-        new_user = User.objects.create(email=email)
+        new_user = User(email=email)
         new_user.set_password(None)
         new_user.full_clean()
         new_user.save()

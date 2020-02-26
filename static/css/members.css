@@ -3,7 +3,7 @@
     src: url("../fonts/Jungle_Land.ttf") format("truetype");
 }
 
-a {
+#members-container a {
     color: unset;
 }
 
