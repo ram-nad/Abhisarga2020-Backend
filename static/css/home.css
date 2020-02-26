@@ -1,272 +1,133 @@
+@import url("https://fonts.googleapis.com/css?family=Bangers|Bungee+Shade|Fredericka+the+Great|Montserrat&display=swap");
+
 html {
     scroll-behavior: smooth;
-}
-
-body {
-    background: url("../images/bg.svg");
 }
 
 a {
     text-decoration: none;
 }
 
+body {
+    background: black;
+    font-family: "avenir-next";
+}
+
 #main {
-    background: url("../images/bg.svg");
-    background-size: cover;
     width: 100vw;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-size: 5vw;
-    background-attachment: fixed;
+    font-size: 5rem;
 }
 
-#main #character {
-    width: 10em;
-    height: auto;
+svg {
+    display: block;
+    font: 2em "Montserrat";
+    width: 95%;
+    margin: 0 auto;
 }
 
-#main #text {
-    margin-top: 0.5em;
-    position: relative;
-    height: 1.5em;
+.g-ants {
+    margin: 0;
+    padding: 0;
 }
 
-#main #text img {
-    position: absolute;
-    height: 100%;
-    width: auto;
+.text-copy {
+    fill: none;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0;
+    animation: stroke-offset 5.5s infinite linear;
 }
 
-#main #text #A1 {
-    animation: animateA1 2.5s infinite;
-    top: 1.85em;
-    left: -4.3em;
+.text-copy:nth-child(1) {
+    stroke: #4d163d;
+    animation-delay: -1s;
 }
 
-#main #text #B {
-    animation: animateB 2.5s infinite;
-    top: 1.1em;
-    left: -3.73em;
+.text-copy:nth-child(2) {
+    stroke: #840037;
+    animation-delay: -2s;
 }
 
-#main #text #H {
-    animation: animateH 2.5s infinite;
-    top: 0.62em;
-    left: -2.67em;
+.text-copy:nth-child(3) {
+    stroke: #bd0034;
+    animation-delay: -3s;
 }
 
-#main #text #I {
-    animation: animateI 2.5s infinite;
-    top: 0.34em;
-    left: -1.55em;
+.text-copy:nth-child(4) {
+    stroke: #bd0034;
+    animation-delay: -4s;
 }
 
-#main #text #S {
-    animation: animateS 2.5s infinite;
-    top: 0.15em;
-    left: -1em;
+.text-copy:nth-child(5) {
+    stroke: #fdb731;
+    animation-delay: -5s;
 }
 
-#main #text #A2 {
-    animation: animateA2 2.5s infinite;
-    transform: rotateZ(15deg);
-    top: 0.17em;
-    left: 0.2em;
-}
-
-#main #text #R {
-    animation: animateR 2.5s infinite;
-    transform: rotateZ(15deg);
-    top: 0.25em;
-    left: 1.3em;
-}
-
-#main #text #G {
-    animation: animateG 2.5s infinite;
-    transform: rotateZ(35deg);
-    top: 1.37em;
-    left: 1.98em;
-}
-
-#main #text #A3 {
-    animation: animateA3 2.5s infinite;
-    transform: rotateZ(45deg);
-    top: 2.5em;
-    left: 2.3em;
-}
-
-@keyframes animateA1 {
-    0% {
-        transform: scale(0.8);
+@keyframes stroke-offset {
+    100% {
+        stroke-dashoffset: -35%;
     }
-    25% {
+}
+
+@keyframes pulse {
+    0% {
         transform: scale(0.9);
     }
+
     50% {
         transform: scale(1);
     }
-    75% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(0.8);
-    }
-}
 
-@keyframes animateB {
-    0% {
-        transform: scale(0.9);
-    }
-    25% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.9);
-    }
-    75% {
-        transform: scale(0.8);
-    }
     100% {
         transform: scale(0.9);
     }
 }
 
-@keyframes animateH {
-    0% {
-        transform: scale(1);
-    }
-    25% {
-        transform: scale(0.9);
-    }
-    50% {
-        transform: scale(0.8);
-    }
-    75% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(1);
-    }
+#theme {
+    width: 100vw;
+    min-height: 100vh;
+    font-size: 2vw;
+    background-color: #000000;
+    box-sizing: border-box;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
-@keyframes animateI {
-    0% {
-        transform: scale(0.9);
-    }
-    25% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.9);
-    }
-    75% {
-        transform: scale(0.8);
-    }
-    100% {
-        transform: scale(0.9);
-    }
+#themehead {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    text-align: center;
+    font-family: "Bangers", cursive;
+    color: #f28f25;
+    text-shadow: 0.1em 0.1em 0.25em #000;
+    cursor: default;
+    display: block;
+    animation: pulse 1.5s infinite;
 }
 
-@keyframes animateS {
-    0% {
-        transform: scale(0.8);
-    }
-    25% {
-        transform: scale(0.9);
-    }
-    50% {
-        transform: scale(1);
-    }
-    75% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(0.8);
-    }
-}
-
-@keyframes animateA2 {
-    0% {
-        transform: scale(0.9) rotateZ(15deg);
-    }
-    25% {
-        transform: scale(1) rotateZ(15deg);
-    }
-    50% {
-        transform: scale(0.9) rotateZ(15deg);
-    }
-    75% {
-        transform: scale(0.8) rotateZ(15deg);
-    }
-    100% {
-        transform: scale(0.9) rotateZ(15deg);
-    }
-}
-
-@keyframes animateR {
-    0% {
-        transform: scale(1) rotateZ(15deg);
-    }
-    25% {
-        transform: scale(0.9) rotateZ(15deg);
-    }
-    50% {
-        transform: scale(0.8) rotateZ(15deg);
-    }
-    75% {
-        transform: scale(0.9) rotateZ(15deg);
-    }
-    100% {
-        transform: scale(1) rotateZ(15deg);
-    }
-}
-
-@keyframes animateG {
-    0% {
-        transform: scale(0.9) rotateZ(30deg);
-    }
-    25% {
-        transform: scale(1) rotateZ(30deg);
-    }
-    50% {
-        transform: scale(0.9) rotateZ(30deg);
-    }
-    75% {
-        transform: scale(0.8) rotateZ(30deg);
-    }
-    100% {
-        transform: scale(0.9) rotateZ(30deg);
-    }
-}
-
-@keyframes animateA3 {
-    0% {
-        transform: scale(0.8) rotateZ(45deg);
-    }
-    25% {
-        transform: scale(0.9) rotateZ(45deg);
-    }
-    50% {
-        transform: scale(1) rotateZ(45deg);
-    }
-    75% {
-        transform: scale(0.9) rotateZ(45deg);
-    }
-    100% {
-        transform: scale(0.8) rotateZ(45deg);
-    }
+#theme-data {
+    box-sizing: border-box;
+    padding: 0 1.2em;
+    font-size: 1.2em;
+    width: 20em;
+    color: #fff;
 }
 
 #about {
     width: 100vw;
     min-height: 100vh;
     font-size: 2vw;
-    background-color: #111;
+    background-color: #000000;
     box-sizing: border-box;
-    padding: 0.7em 0 0.5em;
+    padding: 1em 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -279,20 +140,22 @@ a {
     color: #fff;
 }
 
-#abttext p {
-    font-size: 0.75em;
-    padding: 0.2em;
+#abttext > p {
+    font-size: 1.18em;
+    padding: 0.15em;
     font-weight: 500;
     margin: 0;
+    font-family: "Fredericka the Great";
 }
 
 #abthead {
     font-size: 2em;
     font-weight: bold;
-    font-family: "poppins";
+    font-family: "Bungee Shade";
     padding: 0;
     margin: 0;
-    padding-bottom: 0.3em;
+    padding-bottom: 0.4em;
+    color: #00b3a3;
 }
 
 #abtimg {
@@ -302,6 +165,7 @@ a {
 #abtimg img {
     height: 100%;
     width: auto;
+    max-width: 100%;
 }
 
 #test {
@@ -365,11 +229,11 @@ a {
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    #main {
-        font-size: 5.7vw;
+    #about {
+        font-size: 2.3vw;
     }
 
-    #about {
+    #theme {
         font-size: 2.3vw;
     }
 
@@ -379,11 +243,11 @@ a {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    #main {
-        font-size: 6.3vw;
+    #about {
+        font-size: 3vw;
     }
 
-    #about {
+    #theme {
         font-size: 3vw;
     }
 
@@ -393,12 +257,12 @@ a {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-    #main {
-        font-size: 7.8vw;
-    }
-
     #about {
         font-size: 3.6vw;
+    }
+
+    #theme {
+        font-size: 2.3vw;
     }
 
     #test {
@@ -407,11 +271,11 @@ a {
 }
 
 @media (min-width: 321px) and (max-width: 480px) {
-    #main {
-        font-size: 8.8vw;
+    #about {
+        font-size: 4.3vw;
     }
 
-    #about {
+    #theme {
         font-size: 4.3vw;
     }
 
@@ -421,11 +285,11 @@ a {
 }
 
 @media (max-width: 320px) {
-    #main {
-        font-size: 9.8vw;
+    #about {
+        font-size: 4.8vw;
     }
 
-    #about {
+    #theme {
         font-size: 4.8vw;
     }
 

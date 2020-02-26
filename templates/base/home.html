@@ -1,23 +1,26 @@
 {% extends 'base/basic.html' %}
 {% load static %}
-{% block title %}Home | Abhisarga 2020{% endblock %}
+{% block title %}Abhisarga 2020{% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
 {% endblock %}
+
 {% block content %}
     <div id="main">
-        <div id="text">
-            <img src="{% static 'images/text/A1.svg' %}" alt="A" id="A1"/>
-            <img src="{% static 'images/text/B.svg' %}" alt="B" id="B"/>
-            <img src="{% static 'images/text/H.svg' %}" alt="H" id="H"/>
-            <img src="{% static 'images/text/I.svg' %}" alt="I" id="I"/>
-            <img src="{% static 'images/text/S.svg' %}" alt="S" id="S"/>
-            <img src="{% static 'images/text/A2.svg' %}" alt="A" id="A2"/>
-            <img src="{% static 'images/text/R.svg' %}" alt="R" id="R"/>
-            <img src="{% static 'images/text/G.svg' %}" alt="G" id="G"/>
-            <img src="{% static 'images/text/A3.svg' %}" alt="A" id="A3"/>
-        </div>
-        <img id="character" src="{% static 'images/char.svg' %}" alt="Character"/>
+        <svg viewBox="0 0 1000 180">
+            <symbol id="s-text">
+                <text class="heading-text-main" text-anchor="middle" alignment-baseline="central" x="50%" y="50%">
+                    ABHISARGA
+                </text>
+            </symbol>
+            <g class="g-ants">
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+            </g>
+        </svg>
     </div>
 
     <div id="about">
@@ -26,25 +29,34 @@
                 ABOUT
             </h1>
             <p>
-                Abhisarga, the annual techno-cultural fest of IIIT Sri City, is an
+                Abhisarga, the annual techno-cultural fest of <span style="color: yellow">IIIT Sri City</span>, is an
                 equanimous fusion of energy, enthusiasm and talent. We welcome you all
-                to the 7th edition of Abhisarga to invigorate yourselves with a
+                to Abhisarga to invigorate yourselves with a
                 spectacular showcase of talents. Code your way to exciting rewards.
                 Embrace yourself for another cultural extravaganza and join us this
-                year from 20th March- 22nd March at IIIT Sri City!!!
-                <br>
-                This year our theme is comic con. Over the years comics have given us a
-                world of imagination, emotions, thought, vibrant colors and fantasy
-                characters to dive into. It has widened our perspectives on social
-                conundrums motivating to conquer new heights in our scientific pursuits.
-                All of this is just about to get real. Right from DC to Marvel, from tinkle to
-                Manga we’ll unearth every secret the world has yet to confront.
+                year from <span style="color: yellow; display: block;">20th - 22nd March</span> at IIIT Sri City!!!
+
             </p>
         </div>
         <div id="abtimg">
-            <img src="{% static 'images/joker.jpg' %}" alt="Joker - Why So Serious?"/>
+            <img src="{% static 'gifs/herogif-original.gif' %}" alt="Animated Heros"/>
         </div>
     </div>
+
+    <div id="theme">
+        <h1 id="themehead">
+            Comic Con
+        </h1>
+        <div id="theme-data">
+            This year our theme is comic con. Over the years comics have given us a
+            world of imagination, emotions, thought, vibrant colors and fantasy
+            characters to dive into. It has widened our perspectives on social
+            conundrums motivating to conquer new heights in our scientific pursuits.
+            All of this is just about to get real. Right from DC to Marvel, from tinkle to
+            Manga we’ll unearth every secret the world has yet to confront.
+        </div>
+    </div>
+
 
     <div id="test">
         <h1>

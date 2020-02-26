@@ -25,6 +25,14 @@
 {% endblock %}
 
 <div id="footer-base"></div>
+<nav id="navbar">
+    <a href="{% url 'home' %}#" id="logoimg">
+        <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
+    </a>
+    <div id="nav-buttons">
+        <div id="hamburger" class="close"></div>
+    </div>
+</nav>
 
 <div id="side-nav">
     <div class="hoverid">
@@ -36,16 +44,8 @@
             <a href="{% url 'signup' %}">Registration</a>
         {% endif %}
         <a href="{% url 'sponsors' %}">Sponsors</a>
-        {# <a href="#">Accommodation</a> #}
         <a href="{% url 'volunteers' %}">Our Team</a>
         <a href="{% url 'home' %}#test">Contact</a>
-    </div>
-</div>
-<nav id="navbar">
-    <a href="{% url 'home' %}#" id="logoimg">
-        <img src="{% static 'images/logo.png' %}" alt="Abhisarga Logo"/>
-    </a>
-    <div id="nav-buttons">
         {% if request.user.is_authenticated %}
             <a href="{% url 'logout' %}">
                 <button type="button" id="register">Logout</button>
@@ -55,9 +55,9 @@
                 <button type="button" id="register">Login</button>
             </a>
         {% endif %}
-        <div id="hamburger" class="close"></div>
     </div>
-</nav>
+</div>
+
 
 <div id="footer">
     <div id="social">
