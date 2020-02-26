@@ -20,7 +20,7 @@
                 {% endif %}
             {% endif %}
         </div>
-        {% if not view and event.has_extra_params or event.team_event and not view %}
+        {% if not view %}
             <form method="post">
             {% csrf_token %}
         {% endif %}

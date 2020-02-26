@@ -10,7 +10,8 @@
         <img id="form-image" src="{% static 'images/galactus.png' %}" alt="Register">
         <div id="main-form">
             <h1>Register</h1>
-            <form method="post" action="{% url 'profile_create_post' %}" id="user_registration_form">
+            <form method="post" action="{% url 'profile_create_post' %}" id="user_registration_form"
+                  enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="token" value="{{ token }}">
                 <label>Email<sup>*</sup></label><input type="email" name="email" data-box="text" value="{{ email }}"
