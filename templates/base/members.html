@@ -10,7 +10,7 @@
         {% for v in volunteers %}
             <div class="member-background">
                 <div class="member-info">
-                    <img src="{{ v.profile_pic.url }}">
+                    <img src="{{ v.profile_pic.url }}" alt="{{ v.name }}">
                     <div class="member-detail">
                         <h1 title="{{ v.name }}">{{ v.name }}</h1>
                         <h2>{{ v.role }}</h2>

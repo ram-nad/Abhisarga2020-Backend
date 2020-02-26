@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
     <div id="form-container">
-        <img id="form-image" src="{% static 'images/galactus.png' %}">
+        <img id="form-image" src="{% static 'images/galactus.png' %}" alt="Register">
         <div id="main-form">
             <h1>Register</h1>
             <form method="post" action="{% url 'profile_create_post' %}" id="user_registration_form">
