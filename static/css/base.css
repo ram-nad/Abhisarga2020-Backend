@@ -46,13 +46,21 @@ body {
     box-shadow: none;
 }
 
-#logoimg {
-    width: auto;
-    height: 2.4em;
-    margin: 0.1em 0.3em;
+#navbar-images-container {
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    justify-content: space-evenly;
 }
 
-#logoimg img {
+#navbar-images-container .logoimg {
+    width: auto;
+    height: 2.4em;
+    margin: 0.05em 0.2em;
+}
+
+#navbar-images-container .logoimg img {
     width: auto;
     height: 100%;
 }
