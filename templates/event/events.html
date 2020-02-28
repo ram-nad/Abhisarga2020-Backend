@@ -44,23 +44,30 @@
             btns[i].addEventListener("click", function () {
                 switch_event(src);
             });
+        }
 
-            function switch_event(src) {
-                for (let i = 0; i < btns.length; i++) {
-                    if (btns[i].getAttribute("data-event") != src) {
-                        btns[i].classList.remove("ev-active");
-                    } else {
-                        btns[i].classList.add("ev-active");
-                    }
-                }
-                for (let i = 0; i < displays.length; i++) {
-                    if (displays[i].getAttribute("data-event") != src) {
-                        displays[i].classList.remove("selected-event");
-                    } else {
-                        displays[i].classList.add("selected-event");
-                    }
+        function switch_event(src) {
+            location.href = "#" + src;
+            for (let i = 0; i < btns.length; i++) {
+                if (btns[i].getAttribute("data-event") != src) {
+                    btns[i].classList.remove("ev-active");
+                } else {
+                    btns[i].classList.add("ev-active");
                 }
             }
+            for (let i = 0; i < displays.length; i++) {
+                if (displays[i].getAttribute("data-event") != src) {
+                    displays[i].classList.remove("selected-event");
+                } else {
+                    displays[i].classList.add("selected-event");
+                }
+            }
+        }
+
+        let h = location.hash;
+
+        if(h.length > 1){
+            switch_event(h.slice(1));
         }
     </script>
 {% endblock %}
