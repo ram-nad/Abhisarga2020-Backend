@@ -47,7 +47,7 @@
         }
 
         function switch_event(src) {
-            location.href = "#" + src;
+            location.href = "#" + encodeURI(src);
             for (let i = 0; i < btns.length; i++) {
                 if (btns[i].getAttribute("data-event") != src) {
                     btns[i].classList.remove("ev-active");
@@ -67,7 +67,7 @@
         let h = location.hash;
 
         if(h.length > 1){
-            switch_event(h.slice(1));
+            switch_event(decodeURI(h.slice(1)));
         }
     </script>
 {% endblock %}
