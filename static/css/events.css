@@ -30,15 +30,16 @@ body {
 }
 
 .ev-category {
+    font-size: 0.9em;
     box-sizing: border-box;
-    width: 5.9em;
-    height: 2em;
+    width: 6.5em;
+    height: 1.85em;
     font-family: "marker-felt";
     color: #ffffff;
     padding: 0.5em 0;
     line-height: 1em;
     text-align: center;
-    text-shadow: 0.08em 0 0 black;
+    text-shadow: 0.07em 0 0 black;
     border-radius: 0.2em;
     cursor: pointer;
     position: relative;
@@ -93,14 +94,22 @@ body {
 .ev-event-card .ev-event-title {
     word-wrap: break-word;
     font-family: "marker-felt";
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 7em;
+    height: 3.5em;
     position: absolute;
     font-size: 0.75em;
     font-weight: bold;
     text-shadow: 0.05em 0.01em 0 yellow, 0.1em 0.01em 0 red;
     color: #008376;
     letter-spacing: 0.05em;
+}
+
+.ev-event-title span {
+    vertical-align: middle;
+    text-align: center;
 }
 
 .ev-event-card:nth-of-type(8n + 1) {
@@ -110,8 +119,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 1) .ev-event-title {
-    top: 3.7em;
-    left: 1.3em;
+    top: 4.2em;
+    left: 1.4em;
 }
 
 .ev-event-card:nth-of-type(8n + 2) {
@@ -121,8 +130,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 2) .ev-event-title {
-    top: 3.5em;
-    left: 1.6em;
+    top: 3.8em;
+    left: 1.9em;
 }
 
 .ev-event-card:nth-of-type(8n + 3) {
@@ -132,8 +141,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 3) .ev-event-title {
-    top: 4.5em;
-    left: 1.5em;
+    top: 4.8em;
+    left: 1.65em;
 }
 
 .ev-event-card:nth-of-type(8n + 4) {
@@ -143,8 +152,8 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 4) .ev-event-title {
-    top: 3.4em;
-    left: 1.5em;
+    top: 3.7em;
+    left: 1.65em;
 }
 
 .ev-event-card:nth-of-type(8n + 5) {
@@ -154,15 +163,15 @@ body {
 }
 
 .ev-event-card:nth-of-type(8n + 5) .ev-event-title {
-    top: 4.1em;
-    left: 1.7em;
+    top: 4.4em;
+    left: 1.8em;
 }
 
 .ev-event-card .ev-event-content {
-    margin-top: 18em;
+    margin-top: 19em;
     padding: 0 1em;
     font-size: 0.5em;
-    height: 7em;
+    height: 6.5em;
     text-align: justify;
     overflow-y: scroll;
     -ms-overflow-style: none;

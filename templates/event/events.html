@@ -20,7 +20,9 @@
             {% for ev in ct.events.all %}
                 <div class="ev-event-card">
                     <div class="ev-event-title">
+                        <span>
                         {{ ev.name }}
+                        </span>
                     </div>
                     <div class="ev-event-content">
                         {{ ev.description }}
@@ -66,7 +68,7 @@
 
         let h = location.hash;
 
-        if(h.length > 1){
+        if (h.length > 1) {
             switch_event(decodeURI(h.slice(1)));
         }
     </script>
