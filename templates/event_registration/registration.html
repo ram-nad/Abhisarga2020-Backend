@@ -47,7 +47,8 @@
         {% endif %}
         {% if event.team_event %}
             <strong id="team-member-heading">{% if not view %}Enter name of your team members
-                ({{ event.team_min_size|subtract1 }}-{{ event.team_max_size|subtract1 }}){% else %}Team
+                ({{ event.team_min_size|subtract1 }}-{{ event.team_max_size|subtract1 }})<br>(Except for your
+                name){% else %}Team
                 members{% endif %}</strong>
             <div id="team-members">
                 {% if not registration %}
