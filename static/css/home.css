@@ -177,7 +177,9 @@ svg {
     min-height: 100vh;
     box-sizing: border-box;
     padding-top: 0.5em;
-    background: url("../images/bg.svg");
+    background: url("../images/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #test h1 {
