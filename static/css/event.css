@@ -161,7 +161,6 @@ body {
     height: 10em;
     overflow-y: scroll;
     -ms-overflow-style: none;
-    border: 1px solid black;
 }
 
 #event-detail > p::-webkit-scrollbar {
