@@ -17,6 +17,9 @@
             <p>
                 {{ event.description }}
             </p>
+            <a {% if event.rule_pdf %}href="{{ event.rule_pdf.url }}"{% endif %} download="{{ event.name }} Rules"
+               id="ev-download-button" class="{% if not event.rule_pdf %}unavailable{% endif %}">Download
+                Rules</a>
             <div id="ev-venue">Venue: {{ event.venue }}</div>
             <div id="ev-time">Date: {{ event.date }}</div>
             <div id="ev-contact">Contact: {{ event.contact_number }}</div>

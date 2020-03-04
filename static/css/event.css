@@ -14,8 +14,8 @@ body {
 }
 
 #event-image {
-    height: 17em;
-    width: 11em;
+    height: 18em;
+    width: 11.3em;
     background: linear-gradient(
             to right,
             rgba(136, 209, 210, 1),
@@ -37,7 +37,7 @@ body {
 #event-detail {
     position: relative;
     box-sizing: border-box;
-    height: 17em;
+    height: 18em;
     width: 13em;
     background: linear-gradient(
             to right,
@@ -161,10 +161,32 @@ body {
     height: 10em;
     overflow-y: scroll;
     -ms-overflow-style: none;
+    border: 1px solid black;
 }
 
 #event-detail > p::-webkit-scrollbar {
     display: none;
+}
+
+#event-detail > #ev-download-button {
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0.2em 0;
+    color: black;
+    text-decoration: none;
+}
+
+#event-detail > #ev-download-button:hover {
+    text-decoration: underline;
+}
+
+#event-detail > #ev-download-button.unavailable {
+    color: #aaa;
+}
+
+#event-detail > #ev-download-button.unavailable:hover {
+    text-decoration: none;
 }
 
 #ev-venue,

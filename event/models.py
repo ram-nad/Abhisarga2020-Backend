@@ -35,6 +35,8 @@ class Event(models.Model):
     extra_param_3_name = models.CharField(max_length=40, blank=True, default="")
     extra_param_3_optional = models.BooleanField(default=False, verbose_name="Extra parameter 3 is optional")
 
+    rule_pdf = models.FileField(upload_to="rules_pdf", verbose_name="Rules(PDF)", blank=True, null=True)
+
     def clean(self):
         super().clean()
         if self.team_event:
