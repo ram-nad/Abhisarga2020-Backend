@@ -6,10 +6,10 @@ from .models import EventRegistration
 
 
 class CustomEventReg(ModelAdmin):
-    list_display = ('email', 'name', 'category', 'participant', 'reg_time')
-    search_fields = ('event__name', 'user__email', 'user__first_name', 'user__last_name')
+    list_display = ('email', 'name', 'category', 'participant', 'reg_time', 'college')
+    search_fields = ('event__name', 'user__user__email', 'user__first_name', 'user__last_name', 'user__college__name')
 
-    fields = ('name', 'email', 'reg_time', 'last_update')
+    fields = ('name', 'email', 'reg_time', 'last_update', 'college')
     readonly_fields = ('name', 'email')
 
     ordering = ('registration_time',)
@@ -44,10 +44,10 @@ custom_admin_site.register(EventRegistration, CustomEventReg)
 
 
 class CustomEventRegOrganiser(ModelAdmin):
-    list_display = ('email', 'name', 'reg_time')
-    search_fields = ('user__email', 'user__first_name', 'user__last_name')
+    list_display = ('email', 'name', 'reg_time', 'college')
+    search_fields = ('user__user__email', 'user__first_name', 'user__last_name', 'user__college__name')
 
-    fields = ('name', 'email', 'reg_time', 'last_update')
+    fields = ('name', 'email', 'reg_time', 'last_update', 'college')
     readonly_fields = ('name', 'email')
 
     ordering = ('registration_time',)

@@ -72,6 +72,10 @@ class EventRegistration(models.Model):
         return self.user.email
 
     @property
+    def college(self):
+        return self.user.college.name
+
+    @property
     def team_leader(self):
         return self.user.name
 
