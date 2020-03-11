@@ -25,6 +25,10 @@ def bad_request(request, exception, *args, **kwargs):
     return render(request, 'error/400.html', status=400)
 
 
+def cancelled(request):
+    return render(request, 'error/cancelled.html')
+
+
 def get_college_list(request):
     college = request.GET.get('college', None)
     if college is None or str(college).strip() == '':
